@@ -15,8 +15,6 @@ public class WatchCaret implements CaretListener {
         boolean caretMovedToNewLine = hasCaretMovedToNewLine(oldPosition, newPosition);
         if (caretMovedToNewLine) {
             annotationLocatorUpdateHelper(event);
-        } else {
-            // Do not overwhelm the user by reacting to caret movement on the same line.
         }
 
     }

@@ -69,6 +69,7 @@ public class LineHighlightLocator {
         if (hasDocumentChanged(this.document, event.getEditor().getDocument())) {
             this.document = event.getEditor().getDocument();
         }
+        getHighlightHelper();
     }
 
     /**
@@ -84,9 +85,20 @@ public class LineHighlightLocator {
 
     /**
      * Primitive storage of highlights for the current line.
-     * This may or may not be used in a release version; we have to test it first.
-     * The API that I am using to obtain {@link HighlightInfo} objects {@link DaemonCodeAnalyzerEx#processHighlights(Document, Project, HighlightSeverity, int, int, Processor)}, is marked as experimental, but it was the only API that exposed the information that AudioBug requires.
-     * This is acknowledgement that this may break in the future.
+     * <p>
+     * AudioBug currently ignores any highlights below
+     * {@link HighlightSeverity#WARNING}.
+     *
+     * <p>This implementation currently relies on
+     * {@link DaemonCodeAnalyzerEx#processHighlights(Document, Project,
+     * HighlightSeverity, int, int, Processor)} because it is the only API
+     * that exposes the {@link HighlightInfo} objects required by AudioBug.
+     *
+     * <p>Note:
+     * {@code processHighlights()} is currently marked
+     * {@code @ApiStatus.Experimental}. Future IntelliJ Platform releases
+     * may replace or remove this API. If a stable replacement becomes
+     * available, this method should be updated accordingly.
      */
     private void getHighlightHelper() {
         Processor<HighlightInfo> highlightProcessor = (HighlightInfo info) -> {
