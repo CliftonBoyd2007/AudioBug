@@ -14,7 +14,7 @@ public class WatchCaret implements CaretListener {
         LogicalPosition newPosition = event.getNewPosition();
         boolean caretMovedToNewLine = hasCaretMovedToNewLine(oldPosition, newPosition);
         if (caretMovedToNewLine) {
-            annotationLocatorUpdateHelper(event);
+            highlightLocatorUpdateHelper(event);
         }
 
     }
@@ -35,7 +35,7 @@ public class WatchCaret implements CaretListener {
      *
      * @param event Event containing information about the caret.
      */
-    private void annotationLocatorUpdateHelper(@NotNull CaretEvent event) {
+    private void highlightLocatorUpdateHelper(@NotNull CaretEvent event) {
         if (this.locator == null) {
             this.locator = new LineHighlightLocator(event);
         } else {

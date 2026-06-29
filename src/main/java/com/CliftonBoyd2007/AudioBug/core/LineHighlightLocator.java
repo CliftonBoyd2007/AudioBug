@@ -20,6 +20,7 @@ public class LineHighlightLocator {
      * The document the user is currently working with.
      */
     private Document document;
+
     /**
      * The project in which the current document is located.
      */
@@ -31,17 +32,20 @@ public class LineHighlightLocator {
     private LineOffsets lineOffsets;
 
     /**
-     * Cache backing store for {@link HighlightInfo} objects.
-     * It must be cleared when the caret moves to a new line because the information within the list refer to errors and/or warnings from the previous line of the caret.
+     * Backing store for error highlights.
      */
-    private ArrayList<HighlightInfo> highlights;
+    private ArrayList<HighlightInfo> errors;
+    /**
+     * Backing store for warning highlights.
+     */
+    private ArrayList<HighlightInfo> warnings;
 
     public LineHighlightLocator(@NotNull CaretEvent event) {
-        this.highlights = new ArrayList<>();
-        update(event);
+        this.errors = new ArrayList<>();
+        this.warnings = new ArrayList<>();
         this.project = event.getEditor().getProject();
         this.document = event.getEditor().getDocument();
-
+        update(event);
 
     }
 
@@ -59,13 +63,14 @@ public class LineHighlightLocator {
     }
 
     /**
-     * Updates line offsets when the caret is moved to a new line.
+     * Updates and removes stale information when the caret moves to a new line.
      *
      * @param event The event containing information about the caret.
      */
     public void update(@NotNull CaretEvent event) {
         this.lineOffsets = getLineOffsets(event);
-        this.highlights.clear();
+        this.errors.clear();
+        this.warnings.clear();
         if (hasDocumentChanged(this.document, event.getEditor().getDocument())) {
             this.document = event.getEditor().getDocument();
         }
@@ -102,7 +107,11 @@ public class LineHighlightLocator {
      */
     private void getHighlightHelper() {
         Processor<HighlightInfo> highlightProcessor = (HighlightInfo info) -> {
-            this.highlights.add(info);
+            if (info.getSeverity() == HighlightSeverity.WARNING) {
+                this.warnings.add(info);
+            } else if (info.getSeverity() == HighlightSeverity.ERROR) {
+                this.errors.add(info);
+            }
             return true;
         };
 
