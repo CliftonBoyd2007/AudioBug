@@ -65,17 +65,17 @@ public class AudioBugCuePlayer {
         } catch (LineUnavailableException ex) {
             System.err.println("Audio line unavailable.");
             System.err.println(ex.getMessage());
-            // Avoid audio playback to prevent inconsistent feedback.
+
             allFilesAvailable = false;
         } catch (IOException ex) {
             System.err.println("I/O error occurred.");
             System.err.println(ex.getMessage());
-            // Avoid audio playback to prevent inconsistent feedback.
+
             allFilesAvailable = false;
         } catch (Exception ex) {
             System.err.println("Unknown error occurred.");
             System.err.println(ex.getMessage());
-            // Avoid audio playback to prevent inconsistent feedback.
+
             allFilesAvailable = false;
         }
 
