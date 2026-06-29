@@ -10,23 +10,37 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.event.CaretEvent;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
+import com.intellij.util.Processor;
 
 public class LineHighlightLocator {
     private record LineOffsets(int startOffset, int endOffset) {
     }
 
     /**
+     * The document the user is currently working with.
+     */
+    private Document document;
+    /**
+     * The project in which the current document is located.
+     */
+    private final Project project;
+
+    /**
      * Record containing the start and end offsets for the current line of the caret.
      */
     private LineOffsets lineOffsets;
+
     /**
      * Cache backing store for {@link HighlightInfo} objects.
+     * It must be cleared when the caret moves to a new line because the information within the list refer to errors and/or warnings from the previous line of the caret.
      */
     private ArrayList<HighlightInfo> highlights;
 
     public LineHighlightLocator(@NotNull CaretEvent event) {
         this.highlights = new ArrayList<>();
         update(event);
+        this.project = event.getEditor().getProject();
+        this.document = event.getEditor().getDocument();
 
 
     }
@@ -34,40 +48,53 @@ public class LineHighlightLocator {
     /**
      * Gets the start and end offsets for the caret's current line.
      *
-     * @param event Event containing information about the caret.
+     * @param event Event containing relevant information about the caret.
      * @return start and end offsets for the line of the caret.
      */
     private LineOffsets getLineOffsets(@NotNull CaretEvent event) {
         int line = event.getNewPosition().line;
-        Document document = event.getEditor().getDocument();
-        int startOffset = document.getLineStartOffset(line);
-        int endOffset = document.getLineEndOffset(line);
+        int startOffset = this.document.getLineStartOffset(line);
+        int endOffset = this.document.getLineEndOffset(line);
         return new LineOffsets(startOffset, endOffset);
     }
 
     /**
-     * Updates the line offsets field when the caret is moved to a new line.
+     * Updates line offsets when the caret is moved to a new line.
      *
      * @param event The event containing information about the caret.
      */
     public void update(@NotNull CaretEvent event) {
         this.lineOffsets = getLineOffsets(event);
-        this.highlights.clear(); // Highlights become stale when the caret moves to a new line; remove them to avoid giving the user inaccurate information.
+        this.highlights.clear();
+        if (hasDocumentChanged(this.document, event.getEditor().getDocument())) {
+            this.document = event.getEditor().getDocument();
+        }
+    }
+
+    /**
+     * Indicates whether the current {@link Document} has changed.
+     *
+     * @param oldDocument The previous document in which the user was working.
+     * @param newDocument The document the user has moved to.
+     * @return true if the document has changed.
+     */
+    private boolean hasDocumentChanged(Document oldDocument, Document newDocument) {
+        return oldDocument.equals(newDocument);
     }
 
     /**
      * Primitive storage of highlights for the current line.
-     *
-     * @param document The document from which highlights are requested.
-     * @param project  The project from which the document originates.
+     * This may or may not be used in a release version; we have to test it first.
+     * The API that I am using to obtain {@link HighlightInfo} objects {@link DaemonCodeAnalyzerEx#processHighlights(Document, Project, HighlightSeverity, int, int, Processor)}, is marked as experimental, but it was the only API that exposed the information that AudioBug requires.
+     * This is acknowledgement that this may break in the future.
      */
-    private void getHighlightHelper(Document document, Project project) {
-
-
-        DaemonCodeAnalyzerEx.processHighlights(document, project, HighlightSeverity.WARNING, lineOffsets.startOffset, lineOffsets.endOffset, Processor < HighlightInfo > processor, info -> {
+    private void getHighlightHelper() {
+        Processor<HighlightInfo> highlightProcessor = (HighlightInfo info) -> {
             this.highlights.add(info);
             return true;
-        });
+        };
+
+        DaemonCodeAnalyzerEx.processHighlights(this.document, this.project, HighlightSeverity.WARNING, lineOffsets.startOffset, lineOffsets.endOffset, highlightProcessor);
     }
 
 
