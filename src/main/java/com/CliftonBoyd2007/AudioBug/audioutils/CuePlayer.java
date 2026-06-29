@@ -10,13 +10,21 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 public class AudioBugCuePlayer {
-    // The cue to be played when the caret enters a line with an error.
+    /**
+     * The cue to be played when the caret enters a line with an error.
+     */
     private final File cue_Error;
-    // The cue to be played when the caret enters a line with a warning.
+    /**
+     * The cue to be played when the caret enters a line with a warning.
+     */
     private final File cue_Warning;
-    // The cue to be played when the caret enters a line with a breakpoint.
+    /**
+     * The cue to be played when the caret enters a line with a breakpoint.
+     */
     private final File cue_Breakpoint;
-    // Global flag that determines whether audio cues will be played.
+    /**
+     * Global flag that determines whether audio cues will be played.
+     */
     public boolean allFilesAvailable;
 
     public AudioBugCuePlayer(File cue_Breakpoint, File cue_Error, File cue_Warning) {
