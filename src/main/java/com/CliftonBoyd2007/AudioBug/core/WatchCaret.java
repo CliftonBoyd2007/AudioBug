@@ -6,15 +6,17 @@ import com.intellij.openapi.editor.event.CaretListener;
 import org.jetbrains.annotations.NotNull;
 
 public class WatchCaret implements CaretListener {
+    private LineHighlightLocator locator;
+
     @Override
     public void caretPositionChanged(@NotNull CaretEvent event) {
         LogicalPosition oldPosition = event.getOldPosition();
         LogicalPosition newPosition = event.getNewPosition();
         boolean caretMovedToNewLine = hasCaretMovedToNewLine(oldPosition, newPosition);
         if (caretMovedToNewLine) {
-            // React accordingly
+            annotationLocatorUpdateHelper(event);
         } else {
-            return; // Do not overwhelm the user by reacting to caret movement on the same line.
+            // Do not overwhelm the user by reacting to caret movement on the same line.
         }
 
     }
@@ -28,5 +30,18 @@ public class WatchCaret implements CaretListener {
      */
     private boolean hasCaretMovedToNewLine(LogicalPosition oldPosition, LogicalPosition newPosition) {
         return oldPosition.line != newPosition.line;
+    }
+
+    /**
+     * Helper method for updating the {@link LineHighlightLocator} object safely.
+     *
+     * @param event Event containing information about the caret.
+     */
+    private void annotationLocatorUpdateHelper(@NotNull CaretEvent event) {
+        if (this.locator == null) {
+            this.locator = new LineHighlightLocator(event);
+        } else {
+            this.locator.update(event);
+        }
     }
 }
