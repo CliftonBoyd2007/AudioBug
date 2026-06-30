@@ -25,7 +25,7 @@ public class AudioBugCuePlayer {
     /**
      * Global flag that determines whether audio cues will be played.
      */
-    public boolean allFilesAvailable;
+    private boolean allFilesAvailable;
 
     public AudioBugCuePlayer(File cue_Breakpoint, File cue_Error, File cue_Warning) {
         this.cue_Breakpoint = cue_Breakpoint;
@@ -114,6 +114,13 @@ public class AudioBugCuePlayer {
     public void playCue_Breakpoint() {
         play(this.cue_Breakpoint);
 
+    }
+
+    /**
+     * @return the value of {@link this#allFilesAvailable}.
+     */
+    public boolean getAudioFilesAvailable() {
+        return this.allFilesAvailable;
     }
 
 
