@@ -2,6 +2,7 @@ package com.CliftonBoyd2007.AudioBug.audioutils;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -37,17 +38,18 @@ public class CuePlayer {
      */
     private void loadAudioFiles() {
         ClassLoader cl = this.getClass().getClassLoader();
-        this.cue_Breakpoint = new File(cl.getResource("Sounds/Breakpoint.wav").toURI());
-        this.cue_Error = new File(cl.getResource("Sounds/Error.wav").toURI());
-        this.cue_Warning = new File(cl.getResource("Sounds/Warning.wav").toURI());
+        this.cue_Breakpoint = new File(cl.getResource("/Sounds/Breakpoint.wav").toURI());
+        this.cue_Error = new File(cl.getResource("/Sounds/Error.wav").toURI());
+        this.cue_Warning = new File(cl.getResource("/Sounds/Warning.wav").toURI());
         this.allFilesAvailable = verifyAllFilesExist();
+
 
     }
 
     /**
      * Indicates whether all specified audio files are available.
      *
-     * @return true if all files exist.
+     * @return true if all files exist and are not null.
      */
     private boolean verifyAllFilesExist() {
         if (this.cue_Breakpoint == null || this.cue_Error == null || this.cue_Warning == null) {
@@ -61,11 +63,12 @@ public class CuePlayer {
     /**
      * Plays the specified audio file using the Java Clip sound API.
      * Any print statements are for debugging purposes only.
+     * If any exception is thrown, {@code this#allFilesAvailable} will be marked false.
      *
      * @param file The file to be played.
-     * @throws UnsupportedAudioFileException When an unsupported audio file is passed into the method. Audio playback will be disabled.
-     * @throws IOException                   When any file I/O error occurs. Audio playback will be disabled.
-     * @throws LineUnavailableException      When an audio line (or audio output) is either busy or unavailable. Audio file playback will be disabled.
+     * @throws UnsupportedAudioFileException When an unsupported audio file is passed into the method.
+     * @throws IOException                   When any file I/O error occurs.
+     * @throws LineUnavailableException      When an audio line (or audio output) is either busy or unavailable.
      */
 
     private void play(final File file) throws LineUnavailableException, UnsupportedAudioFileException, IOException {
@@ -131,7 +134,7 @@ public class CuePlayer {
     /**
      * @return the value of {@link this#allFilesAvailable}.
      */
-    public boolean getAudioFilesAvailable() {
+    public boolean getAllFilesAvailable() {
         return this.allFilesAvailable;
     }
 
