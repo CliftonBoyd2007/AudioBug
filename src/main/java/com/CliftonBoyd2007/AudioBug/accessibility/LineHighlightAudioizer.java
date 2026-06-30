@@ -38,6 +38,17 @@ public class LineHighlightAudioizer {
 
     }
 
-    
+    /**
+     * Updates the current editor {@link JComponent}.
+     *
+     * @param editorComponent The new editor component.
+     */
+    public void updateEditorComponent(JComponent editorComponent) {
+        if (editorComponent == null) {
+            return;
+        }
+        this.editorComponent = editorComponent;
+
+    }
 
 }
