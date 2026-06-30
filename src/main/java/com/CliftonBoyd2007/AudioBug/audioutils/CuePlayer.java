@@ -27,10 +27,19 @@ public class CuePlayer {
      */
     private boolean allFilesAvailable;
 
-    public CuePlayer(File cue_Breakpoint, File cue_Error, File cue_Warning) {
-        this.cue_Breakpoint = cue_Breakpoint;
-        this.cue_Error = cue_Error;
-        this.cue_Warning = cue_Warning;
+    public CuePlayer() {
+        loadAudioFiles();
+
+    }
+
+    /**
+     * Loads audio files into CuePlayer.
+     */
+    private void loadAudioFiles() {
+        ClassLoader cl = this.getClass().getClassLoader();
+        this.cue_Breakpoint = new File(cl.getResource("Sounds/Breakpoint.wav").toURI());
+        this.cue_Error = new File(cl.getResource("Sounds/Error.wav").toURI());
+        this.cue_Warning = new File(cl.getResource("Sounds/Warning.wav").toURI());
         this.allFilesAvailable = verifyAllFilesExist();
 
     }
@@ -41,6 +50,7 @@ public class CuePlayer {
      * @return true if all files exist.
      */
     private boolean verifyAllFilesExist() {
+        
         return this.cue_Breakpoint.exists()
                 && this.cue_Error.exists()
                 && this.cue_Warning.exists();
