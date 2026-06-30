@@ -50,7 +50,9 @@ public class CuePlayer {
      * @return true if all files exist.
      */
     private boolean verifyAllFilesExist() {
-        
+        if (this.cue_Breakpoint == null || this.cue_Error == null || this.cue_Warning == null) {
+            return false;
+        }
         return this.cue_Breakpoint.exists()
                 && this.cue_Error.exists()
                 && this.cue_Warning.exists();
