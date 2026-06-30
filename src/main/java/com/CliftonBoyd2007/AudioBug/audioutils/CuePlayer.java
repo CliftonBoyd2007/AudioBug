@@ -9,7 +9,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 
-public class AudioBugCuePlayer {
+public class CuePlayer {
     /**
      * The cue to be played when the caret enters a line with an error.
      */
@@ -27,7 +27,7 @@ public class AudioBugCuePlayer {
      */
     private boolean allFilesAvailable;
 
-    public AudioBugCuePlayer(File cue_Breakpoint, File cue_Error, File cue_Warning) {
+    public CuePlayer(File cue_Breakpoint, File cue_Error, File cue_Warning) {
         this.cue_Breakpoint = cue_Breakpoint;
         this.cue_Error = cue_Error;
         this.cue_Warning = cue_Warning;
@@ -38,7 +38,7 @@ public class AudioBugCuePlayer {
     /**
      * Indicates whether all specified audio files are available.
      *
-     * @return Whether all files are available to play.
+     * @return true if all files exist.
      */
     private boolean verifyAllFilesExist() {
         return this.cue_Breakpoint.exists()
@@ -67,7 +67,7 @@ public class AudioBugCuePlayer {
         } catch (UnsupportedAudioFileException ex) {
             System.err.println("Unsupported file: " + file);
             System.err.println(ex.getMessage());
-            // Avoid audio playback to prevent inconsistent feedback.
+
 
             allFilesAvailable = false;
         } catch (LineUnavailableException ex) {
