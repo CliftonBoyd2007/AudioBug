@@ -24,7 +24,7 @@ public class WatchCaret implements CaretListener {
      *
      * @param oldPosition The previous position of the caret.
      * @param newPosition The current position of the caret.
-     * @return Whether the newPosition of the caret is on the same line as the old position.
+     * @return true if the new position is on a different line from the old position.
      */
     private boolean hasCaretMovedToNewLine(LogicalPosition oldPosition, LogicalPosition newPosition) {
         return oldPosition.line != newPosition.line;

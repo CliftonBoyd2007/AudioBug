@@ -20,7 +20,7 @@ public class LineHighlightAudioizer {
     /**
      * Object responsible for audio playback management.
      */
-    private CuePlayer player;
+    private final CuePlayer player;
     /**
      * Global flag that determines whether audio cues will be played.
      */

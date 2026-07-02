@@ -11,6 +11,7 @@ import com.intellij.openapi.editor.event.CaretEvent;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.util.Processor;
+import com.CliftonBoyd2007.AudioBug.accessibility.LineHighlightAudioizer;
 
 public class LineHighlightLocator {
     private record LineOffsets(int startOffset, int endOffset) {
@@ -39,6 +40,10 @@ public class LineHighlightLocator {
      * Backing store for warning highlights.
      */
     private ArrayList<HighlightInfo> warnings;
+    /**
+     * Object responsible for sspeech/audio feedback.
+     */
+    private LineHighlightAudioizer audioizer;
 
     public LineHighlightLocator(@NotNull CaretEvent event) {
         this.errors = new ArrayList<>();
@@ -71,21 +76,23 @@ public class LineHighlightLocator {
         this.lineOffsets = getLineOffsets(event);
         this.errors.clear();
         this.warnings.clear();
-        if (hasDocumentChanged(this.document, event.getEditor().getDocument())) {
-            this.document = event.getEditor().getDocument();
-        }
-        getHighlightHelper();
+        updateDocumentIfChanged(this.document, event.getEditor().getDocument());
+        getHighlights();
     }
 
     /**
-     * Indicates whether the current {@link Document} has changed.
-     *
-     * @param oldDocument The previous document in which the user was working.
+     * Updates the document instance field if the current document has changed.
+     * @param oldDocument the previous document in which the user was working.
      * @param newDocument The document the user has moved to.
-     * @return true if the document has changed.
      */
-    private boolean hasDocumentChanged(Document oldDocument, Document newDocument) {
-        return oldDocument.equals(newDocument);
+    private void updateDocumentIfChanged(Document oldDocument, Document newDocument) {
+
+        if (!oldDocument.equals(newDocument)) {
+            this.document = newDocument;
+
+        } else {
+            return;
+        }
     }
 
     /**
@@ -105,7 +112,7 @@ public class LineHighlightLocator {
      * may replace or remove this API. If a stable replacement becomes
      * available, this method should be updated accordingly.
      */
-    private void getHighlightHelper() {
+    private void getHighlights() {
         Processor<HighlightInfo> highlightProcessor = (HighlightInfo info) -> {
             if (info.getSeverity() == HighlightSeverity.WARNING) {
                 this.warnings.add(info);
