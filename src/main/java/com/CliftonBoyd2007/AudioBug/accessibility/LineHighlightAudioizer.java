@@ -4,8 +4,8 @@ import com.intellij.codeInsight.daemon.impl.HighlightInfo;
 import com.intellij.util.ui.accessibility.AccessibleAnnouncerUtil;
 import com.CliftonBoyd2007.AudioBug.audioutils.CuePlayer;
 
-import javax.swing.*;
-import java.util.ArrayList;
+import javax.swing.JComponent;
+
 import java.util.ArrayList;
 
 public class LineHighlightAudioizer {
