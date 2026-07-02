@@ -12,6 +12,9 @@ import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.util.Processor;
 import com.CliftonBoyd2007.AudioBug.accessibility.LineHighlightAudioizer;
+import com.intellij.openapi.editor.Editor;
+
+import javax.swing.*;
 
 public class LineHighlightLocator {
     private record LineOffsets(int startOffset, int endOffset) {
@@ -36,10 +39,12 @@ public class LineHighlightLocator {
      * Backing store for error highlights.
      */
     private ArrayList<HighlightInfo> errors;
+
     /**
      * Backing store for warning highlights.
      */
     private ArrayList<HighlightInfo> warnings;
+
     /**
      * Object responsible for sspeech/audio feedback.
      */
@@ -77,11 +82,20 @@ public class LineHighlightLocator {
         this.errors.clear();
         this.warnings.clear();
         updateDocumentIfChanged(this.document, event.getEditor().getDocument());
+
+        if (this.audioizer == null) {
+            this.audioizer = new LineHighlightAudioizer(this.errors, this.warnings);
+            JComponent editorComponent = event.getEditor().getComponent();
+            this.audioizer.updateEditorComponent(editorComponent);
+
+        }
         getHighlights();
     }
 
+
     /**
      * Updates the document instance field if the current document has changed.
+     *
      * @param oldDocument the previous document in which the user was working.
      * @param newDocument The document the user has moved to.
      */
@@ -94,6 +108,7 @@ public class LineHighlightLocator {
             return;
         }
     }
+
 
     /**
      * Primitive storage of highlights for the current line.
