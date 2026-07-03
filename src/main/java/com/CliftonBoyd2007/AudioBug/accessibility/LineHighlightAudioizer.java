@@ -39,7 +39,7 @@ public class LineHighlightAudioizer {
     }
 
     /**
-     * Updates the current editor {@link JComponent}.
+     * Updates the current editor {@link JComponent} in the event that it has changed.
      *
      * @param editorComponent The new editor component.
      */
@@ -47,8 +47,24 @@ public class LineHighlightAudioizer {
         if (editorComponent == null) {
             return;
         }
+        // Avoid unnecessarily update the editor component.
+        if (this.editorComponent.equals(editorComponent)) {
+            return;
+        }
         this.editorComponent = editorComponent;
 
+    }
+
+    /**
+     * Updates the list of errors and warnings.
+     *
+     * @param newErrors   The new list of error highlights.
+     * @param newWarnings The new list of warning highlights.
+     */
+    public void updateHighlights(ArrayList<HighlightInfo> newErrors, ArrayList<HighlightInfo> newWarnings) {
+
+        this.errors = newErrors;
+        this.warnings = newWarnings;
     }
 
 }

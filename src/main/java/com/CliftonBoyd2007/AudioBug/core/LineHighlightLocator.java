@@ -79,17 +79,28 @@ public class LineHighlightLocator {
      */
     public void update(@NotNull CaretEvent event) {
         this.lineOffsets = getLineOffsets(event);
-        this.errors.clear();
-        this.warnings.clear();
         updateDocumentIfChanged(this.document, event.getEditor().getDocument());
-
+        clearErrorAndWarningLists();
         if (this.audioizer == null) {
             this.audioizer = new LineHighlightAudioizer(this.errors, this.warnings);
             JComponent editorComponent = event.getEditor().getComponent();
             this.audioizer.updateEditorComponent(editorComponent);
 
+        } else {
+            this.audioizer.updateHighlights(this.errors, this.warnings);
+            JComponent editorComponent = event.getEditor().getComponent();
+            this.audioizer.updateEditorComponent(editorComponent);
         }
         getHighlights();
+    }
+
+    /**
+     * Clears the list of errors and warnings.
+     */
+    private void clearErrorAndWarningLists() {
+        this.errors.clear();
+        this.warnings.clear();
+
     }
 
 
