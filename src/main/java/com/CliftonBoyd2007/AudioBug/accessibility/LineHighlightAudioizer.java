@@ -1,14 +1,11 @@
 package com.CliftonBoyd2007.AudioBug.accessibility;
 
 import com.intellij.codeInsight.daemon.impl.HighlightInfo;
-import com.CliftonBoyd2007.AudioBug.audioutils.CuePlayer;
 import com.intellij.util.ui.accessibility.AccessibleAnnouncerUtil;
+import com.CliftonBoyd2007.AudioBug.audioutils.CuePlayer;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JComponent;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class LineHighlightAudioizer {
@@ -50,7 +47,7 @@ public class LineHighlightAudioizer {
         if (editorComponent == null) {
             return;
         }
-        // Avoid unnecessarily updating the editor component.
+        // Avoid unnecessarily update the editor component.
         if (this.editorComponent.equals(editorComponent)) {
             return;
         }
@@ -68,20 +65,6 @@ public class LineHighlightAudioizer {
 
         this.errors = newErrors;
         this.warnings = newWarnings;
-        announceHighlightType();
     }
-
-    public void announceHighlightType() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
-        if (errors.size() > 0) {
-            AccessibleAnnouncerUtil.announce(this.editorComponent.getAccessibleContext().getAccessibleParent(), "Error.", true);
-
-
-        } else if (warnings.size() > 0 && errors.size() == 0) {
-            AccessibleAnnouncerUtil.announce(this.editorComponent.getAccessibleContext().getAccessibleParent(), "Error.", true);
-        } else {
-            return;
-        }
-    }
-
 
 }

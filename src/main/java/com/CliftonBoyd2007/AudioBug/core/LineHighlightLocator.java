@@ -1,6 +1,5 @@
 package com.CliftonBoyd2007.AudioBug.core;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import com.intellij.lang.annotation.HighlightSeverity;
@@ -13,9 +12,8 @@ import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.util.Processor;
 import com.CliftonBoyd2007.AudioBug.accessibility.LineHighlightAudioizer;
+import com.intellij.openapi.editor.Editor;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 
 public class LineHighlightLocator {
@@ -52,7 +50,7 @@ public class LineHighlightLocator {
      */
     private LineHighlightAudioizer audioizer;
 
-    public LineHighlightLocator(@NotNull CaretEvent event) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public LineHighlightLocator(@NotNull CaretEvent event) {
         this.errors = new ArrayList<>();
         this.warnings = new ArrayList<>();
         this.project = event.getEditor().getProject();
@@ -79,10 +77,9 @@ public class LineHighlightLocator {
      *
      * @param event The event containing information about the caret.
      */
-    public void update(@NotNull CaretEvent event) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+    public void update(@NotNull CaretEvent event) {
         this.lineOffsets = getLineOffsets(event);
         updateDocumentIfChanged(this.document, event.getEditor().getDocument());
-        // Clear the lists before retrieving new highlights to avoid retaining stale highlights.
         clearErrorAndWarningLists();
         if (this.audioizer == null) {
             this.audioizer = new LineHighlightAudioizer(this.errors, this.warnings);
@@ -90,21 +87,15 @@ public class LineHighlightLocator {
             this.audioizer.updateEditorComponent(editorComponent);
 
         } else {
-
+            this.audioizer.updateHighlights(this.errors, this.warnings);
             JComponent editorComponent = event.getEditor().getComponent();
             this.audioizer.updateEditorComponent(editorComponent);
         }
         getHighlights();
-        this.audioizer.updateHighlights(this.errors, this.warnings);
-        fuck();
-    }
-
-    private void fuck() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-        this.audioizer.announceHighlightType();
     }
 
     /**
-     * Clears the error and warning lists.
+     * Clears the list of errors and warnings.
      */
     private void clearErrorAndWarningLists() {
         this.errors.clear();
