@@ -3,6 +3,7 @@ package com.CliftonBoyd2007.AudioBug.audioutils;
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Objects;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -14,15 +15,15 @@ public class CuePlayer {
     /**
      * The cue to be played when the caret enters a line with an error.
      */
-    private final File cue_Error;
+    private File cue_Error;
     /**
      * The cue to be played when the caret enters a line with a warning.
      */
-    private final File cue_Warning;
+    private File cue_Warning;
     /**
      * The cue to be played when the caret enters a line with a breakpoint.
      */
-    private final File cue_Breakpoint;
+    private File cue_Breakpoint;
     /**
      * Global flag that determines whether audio cues will be played.
      */
@@ -38,10 +39,20 @@ public class CuePlayer {
      */
     private void loadAudioFiles() {
         ClassLoader cl = this.getClass().getClassLoader();
-        this.cue_Breakpoint = new File(cl.getResource("/Sounds/Breakpoint.wav").toURI());
-        this.cue_Error = new File(cl.getResource("/Sounds/Error.wav").toURI());
-        this.cue_Warning = new File(cl.getResource("/Sounds/Warning.wav").toURI());
-        this.allFilesAvailable = verifyAllFilesExist();
+        try {
+            this.cue_Breakpoint = new File(Objects.requireNonNull(cl.getResource("/Sounds/Breakpoint.wav")).toURI());
+            this.cue_Error = new File(Objects.requireNonNull(cl.getResource("/Sounds/Error.wav")).toURI());
+            this.cue_Warning = new File(Objects.requireNonNull(cl.getResource("/Sounds/Warning.wav")).toURI());
+            this.allFilesAvailable = verifyAllFilesExist();
+        } catch (URISyntaxException e) {
+            // Log that we have disabled audio playback in the event that the files fail to load.
+            this.allFilesAvailable = false;
+        } catch (NullPointerException e) {
+            // Disable audio playback. Log it and go away.
+            this.allFilesAvailable = false;
+        } catch (Exception e) {
+            this.allFilesAvailable = false;
+        }
 
 
     }
@@ -107,8 +118,9 @@ public class CuePlayer {
 
     /**
      * Play the cue for warnings.
+     * Any exceptions thrown here are caught in {@link this#play(File)}. Catching them here is unnecessary.
      */
-    public void playCue_Warning() {
+    public void playCue_Warning() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
         play(this.cue_Warning);
 
 
@@ -118,7 +130,7 @@ public class CuePlayer {
      * Play the cue for errors.
      */
 
-    public void playCue_Error() {
+    public void playCue_Error() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
         play(this.cue_Error);
     }
 
@@ -126,7 +138,7 @@ public class CuePlayer {
      * Play the cue for breakpoints.
      */
 
-    public void playCue_Breakpoint() {
+    public void playCue_Breakpoint() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
         play(this.cue_Breakpoint);
 
     }
