@@ -9,7 +9,7 @@ public class AudioBug_Init implements EditorFactoryListener {
     @Override
     public void editorCreated(@NotNull EditorFactoryEvent event) {
         CaretModel caretModel = event.getEditor().getCaretModel();
-        caretModel.addCaretListener(new CaretWatcher());
+        caretModel.addCaretListener(new WatchCaret());
 
     }
 }
