@@ -7,6 +7,11 @@ import com.intellij.util.ui.accessibility.AccessibleAnnouncerUtil;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import com.CliftonBoyd2007.AudioBug.audioutils.CuePlayer;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+
 public class WatchCaret implements CaretListener {
     private CuePlayer player;
 
@@ -19,9 +24,15 @@ public class WatchCaret implements CaretListener {
 
     @Override
     public void caretPositionChanged(@NotNull CaretEvent event) {
-        this.player.playCue_Warning();
-
-
+        try {
+            this.player.playCue_Warning();
+        } catch (LineUnavailableException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (UnsupportedAudioFileException e) {
+            throw new RuntimeException(e);
+        }
 
 
     }
