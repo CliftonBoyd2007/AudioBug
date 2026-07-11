@@ -18,7 +18,7 @@ public class WatchCaret implements CaretListener {
     @Override
     public void caretPositionChanged(@NotNull CaretEvent event) {
 
-        AccessibleAnnouncerUtil.announce(event.getEditor().getComponent().getAccessibleContext().getAccessibleParent(), "Caret has moved.", true);
+
 
     }
 
