@@ -3,30 +3,24 @@ package com.CliftonBoyd2007.AudioBug.core;
 import com.intellij.openapi.editor.LogicalPosition;
 import com.intellij.openapi.editor.event.CaretEvent;
 import com.intellij.openapi.editor.event.CaretListener;
+import com.intellij.util.ui.accessibility.AccessibleAnnouncerUtil;
+import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 public class WatchCaret implements CaretListener {
+
+
+    WatchCaret() {
+        // Do not do anything here.
+        // This only exists to make sure that this object is correctly constructed.
+    }
+
     @Override
     public void caretPositionChanged(@NotNull CaretEvent event) {
-        LogicalPosition oldPosition = event.getOldPosition();
-        LogicalPosition newPosition = event.getNewPosition();
-        boolean caretMovedToNewLine = hasCaretMovedToNewLine(oldPosition, newPosition);
-        if (caretMovedToNewLine) {
-            // React accordingly
-        } else {
-            return; // Do not overwhelm the user by reacting to caret movement on the same line.
-        }
+
+        AccessibleAnnouncerUtil.announce(event.getEditor().getComponent().getAccessibleContext().getAccessibleParent(), "Caret has moved.", true);
 
     }
 
-    /**
-     * Indicates whether the caret has moved to a new line.
-     *
-     * @param oldPosition The previous position of the caret.
-     * @param newPosition The current position of the caret.
-     * @return Whether the newPosition of the caret is on the same line as the old position.
-     */
-    private boolean hasCaretMovedToNewLine(LogicalPosition oldPosition, LogicalPosition newPosition) {
-        return oldPosition.line != newPosition.line;
-    }
+
 }
