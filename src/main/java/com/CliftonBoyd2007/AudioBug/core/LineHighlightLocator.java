@@ -1,0 +1,165 @@
+package com.CliftonBoyd2007.AudioBug.core;
+
+import java.io.IOException;
+import java.util.ArrayList;
+
+import com.intellij.lang.annotation.HighlightSeverity;
+import com.intellij.codeInsight.daemon.impl.DaemonCodeAnalyzerEx;
+import com.intellij.codeInsight.daemon.impl.HighlightInfo;
+
+import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.editor.event.CaretEvent;
+import com.intellij.openapi.project.Project;
+import org.jetbrains.annotations.NotNull;
+import com.intellij.util.Processor;
+import com.CliftonBoyd2007.AudioBug.accessibility.LineHighlightAudioizer;
+import com.intellij.openapi.editor.Editor;
+
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.*;
+
+public class LineHighlightLocator {
+    private record LineOffsets(int startOffset, int endOffset) {
+    }
+
+    /**
+     * The document the user is currently working with.
+     */
+    private Document document;
+
+    /**
+     * The project in which the current document is located.
+     */
+    private final Project project;
+
+    /**
+     * Record containing the start and end offsets for the current line of the caret.
+     */
+    private LineOffsets lineOffsets;
+
+    /**
+     * Backing store for error highlights.
+     */
+    private ArrayList<HighlightInfo> errors;
+
+    /**
+     * Backing store for warning highlights.
+     */
+    private ArrayList<HighlightInfo> warnings;
+
+    /**
+     * Object responsible for sspeech/audio feedback.
+     */
+    private LineHighlightAudioizer audioizer;
+
+    public LineHighlightLocator(@NotNull CaretEvent event) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        this.errors = new ArrayList<>();
+        this.warnings = new ArrayList<>();
+        this.project = event.getEditor().getProject();
+        this.document = event.getEditor().getDocument();
+        update(event);
+
+    }
+
+    /**
+     * Gets the start and end offsets for the caret's current line.
+     *
+     * @param event Event containing relevant information about the caret.
+     * @return start and end offsets for the line of the caret.
+     */
+    private LineOffsets getLineOffsets(@NotNull CaretEvent event) {
+        int line = event.getNewPosition().line;
+        int startOffset = this.document.getLineStartOffset(line);
+        int endOffset = this.document.getLineEndOffset(line);
+        return new LineOffsets(startOffset, endOffset);
+    }
+
+    /**
+     * Updates and removes stale information when the caret moves to a new line.
+     *
+     * @param event The event containing information about the caret.
+     */
+    public void update(@NotNull CaretEvent event) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        this.lineOffsets = getLineOffsets(event);
+        updateDocumentIfChanged(this.document, event.getEditor().getDocument());
+        // Clear the lists before retrieving new highlights to avoid retaining stale highlights.
+        clearErrorAndWarningLists();
+        if (this.audioizer == null) {
+            this.audioizer = new LineHighlightAudioizer(this.errors, this.warnings);
+            JComponent editorComponent = event.getEditor().getComponent();
+            this.audioizer.updateEditorComponent(editorComponent);
+
+        } else {
+
+            JComponent editorComponent = event.getEditor().getComponent();
+            this.audioizer.updateEditorComponent(editorComponent);
+        }
+        getHighlights();
+        this.audioizer.updateHighlights(this.errors, this.warnings);
+        fuck();
+    }
+
+    private void fuck() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        this.audioizer.announceHighlightType_audiotoryOnly();
+    }
+
+    /**
+     * Clears the error and warning lists.
+     */
+    private void clearErrorAndWarningLists() {
+        this.errors.clear();
+        this.warnings.clear();
+
+    }
+
+
+    /**
+     * Updates the document instance field if the current document has changed.
+     *
+     * @param oldDocument the previous document in which the user was working.
+     * @param newDocument The document the user has moved to.
+     */
+    private void updateDocumentIfChanged(Document oldDocument, Document newDocument) {
+
+        if (!oldDocument.equals(newDocument)) {
+            this.document = newDocument;
+
+        } else {
+            return;
+        }
+    }
+
+
+    /**
+     * Primitive storage of highlights for the current line.
+     * <p>
+     * AudioBug currently ignores any highlights below
+     * {@link HighlightSeverity#WARNING}.
+     *
+     * <p>This implementation currently relies on
+     * {@link DaemonCodeAnalyzerEx#processHighlights(Document, Project,
+     * HighlightSeverity, int, int, Processor)} because it is the only API
+     * that exposes the {@link HighlightInfo} objects required by AudioBug.
+     *
+     * <p>Note:
+     * {@code processHighlights()} is currently marked
+     * {@code @ApiStatus.Experimental}. Future IntelliJ Platform releases
+     * may replace or remove this API. If a stable replacement becomes
+     * available, this method should be updated accordingly.
+     */
+    private void getHighlights() {
+        Processor<HighlightInfo> highlightProcessor = (HighlightInfo info) -> {
+            if (info.getSeverity() == HighlightSeverity.WARNING) {
+                this.warnings.add(info);
+            } else if (info.getSeverity() == HighlightSeverity.ERROR) {
+                this.errors.add(info);
+            }
+            return true;
+        };
+
+        DaemonCodeAnalyzerEx.processHighlights(this.document, this.project, HighlightSeverity.WARNING, lineOffsets.startOffset, lineOffsets.endOffset, highlightProcessor);
+    }
+
+
+}
