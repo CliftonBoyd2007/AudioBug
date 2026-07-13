@@ -1,5 +1,8 @@
 package com.CliftonBoyd2007.AudioBug.audioutils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -12,6 +15,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 
 public class CuePlayer {
+    private static final Logger log = LoggerFactory.getLogger(CuePlayer.class);
     /**
      * The cue to be played when the caret enters a line with an error.
      */
@@ -39,20 +43,7 @@ public class CuePlayer {
      */
     private void loadAudioFiles() {
         ClassLoader cl = this.getClass().getClassLoader();
-        try {
-            this.cue_Breakpoint = new File(Objects.requireNonNull(cl.getResource("/Sounds/Breakpoint.wav")).toURI());
-            this.cue_Error = new File(Objects.requireNonNull(cl.getResource("/Sounds/Error.wav")).toURI());
-            this.cue_Warning = new File(Objects.requireNonNull(cl.getResource("/Sounds/Warning.wav")).toURI());
-            this.allFilesAvailable = verifyAllFilesExist();
-        } catch (URISyntaxException e) {
-            // Log that we have disabled audio playback in the event that the files fail to load.
-            this.allFilesAvailable = false;
-        } catch (NullPointerException e) {
-            // Disable audio playback. Log it and go away.
-            this.allFilesAvailable = false;
-        } catch (Exception e) {
-            this.allFilesAvailable = false;
-        }
+        File cue_Breakpoint = new File(String.valueOf(cl.getResource("Sounds/Breakpoint.wav"))); // Only load this one for testing for now. 
 
 
     }
@@ -79,7 +70,7 @@ public class CuePlayer {
      * @param file The file to be played.
      * @throws UnsupportedAudioFileException When an unsupported audio file is passed into the method.
      * @throws IOException                   When any file I/O error occurs.
-     * @throws LineUnavailableException      When an audio line (or audio output) is either busy or unavailable.
+     * @throws LineUnavTailableException     When an audio line (or audio output) is either busy or unavailable.
      */
 
     private void play(final File file) throws LineUnavailableException, UnsupportedAudioFileException, IOException {
@@ -91,8 +82,8 @@ public class CuePlayer {
 
 
         } catch (UnsupportedAudioFileException ex) {
-            System.err.println("Unsupported file: " + file);
-            System.err.println(ex.getMessage());
+            log.error("Unsupported file: {}", file);
+            log.error(ex.getMessage());
 
 
             allFilesAvailable = false;
