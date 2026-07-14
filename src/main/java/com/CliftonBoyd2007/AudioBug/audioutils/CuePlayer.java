@@ -43,7 +43,7 @@ public class CuePlayer {
      */
     private void loadAudioFiles() {
         ClassLoader cl = this.getClass().getClassLoader();
-        File cue_Breakpoint = new File(String.valueOf(cl.getResource("Sounds/Breakpoint.wav"))); // Only load this one for testing for now. 
+        File cue_Breakpoint = new File(String.valueOf(cl.getResource("Sounds/Breakpoint.wav"))); // Only load this one for testing for now.
 
 
     }
@@ -70,7 +70,7 @@ public class CuePlayer {
      * @param file The file to be played.
      * @throws UnsupportedAudioFileException When an unsupported audio file is passed into the method.
      * @throws IOException                   When any file I/O error occurs.
-     * @throws LineUnavTailableException     When an audio line (or audio output) is either busy or unavailable.
+     * @throws LineUnavailableException      When an audio line (or audio output) is either busy or unavailable.
      */
 
     private void play(final File file) throws LineUnavailableException, UnsupportedAudioFileException, IOException {

@@ -25,7 +25,7 @@ public class WatchCaret implements CaretListener {
     @Override
     public void caretPositionChanged(@NotNull CaretEvent event) {
         try {
-            this.player.playCue_Warning();
+            this.player.playCue_Breakpoint();
         } catch (LineUnavailableException e) {
             throw new RuntimeException(e);
         } catch (IOException e) {
