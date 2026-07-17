@@ -24,7 +24,7 @@ public class LineHighlightAudioizer {
     /**
      * Object responsible for audio playback management.
      */
-    private final CuePlayer player;
+//    private final CuePlayer player;
     /**
      * Global flag that determines whether audio cues will be played.
      */
@@ -37,8 +37,8 @@ public class LineHighlightAudioizer {
     public LineHighlightAudioizer(ArrayList<HighlightInfo> errors, ArrayList<HighlightInfo> warnings) {
         this.errors = errors;
         this.warnings = warnings;
-        this.player = new CuePlayer();
-        this.isAudioCuesEnabled = this.player.getAllFilesAvailable();
+//        this.player = new CuePlayer();
+//        this.isAudioCuesEnabled = this.player.getAllFilesAvailable();
 
     }
 
