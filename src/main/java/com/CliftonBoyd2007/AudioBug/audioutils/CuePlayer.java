@@ -1,59 +1,50 @@
 package com.CliftonBoyd2007.AudioBug.audioutils;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.util.Objects;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.sound.sampled.LineUnavailableException;
+import java.io.IOException;
 
 
 public class CuePlayer {
-    private static final Logger log = LoggerFactory.getLogger(CuePlayer.class);
+
     /**
-     * The cue to be played when the caret enters a line with an error.
+     * The cue to be played when an error is encountered.
      */
-    private File cue_Error;
+    private final File cue_Error;
     /**
-     * The cue to be played when the caret enters a line with a warning.
+     * The cue to be played when a breakpoint is encountered.
      */
-    private File cue_Warning;
+    private final File cue_Breakpoint;
     /**
-     * The cue to be played when the caret enters a line with a breakpoint.
+     * The cue to be played when a warning is encountered.
      */
-    private File cue_Breakpoint;
+    private final File cue_Warning;
     /**
-     * Global flag that determines whether audio cues will be played.
+     * Indicates whether  all audio files are available.
      */
     private boolean allFilesAvailable;
 
-    public CuePlayer() {
-        loadAudioFiles();
-
-    }
-
     /**
-     * Loads audio files into CuePlayer.
-     */
-    private void loadAudioFiles() {
-        ClassLoader cl = this.getClass().getClassLoader();
-        File cue_Breakpoint = new File(String.valueOf(cl.getResource("Sounds/Breakpoint.wav"))); // Only load this one for testing for now.
-
-
-    }
-
-    /**
-     * Indicates whether all specified audio files are available.
+     * Constructor.
      *
+     * @param cue_Breakpoint The audio file to be played for breakpoints.
+     * @param cue_Error      The audio file to be played for errors.
+     * @param cue_Warning    The audio file to be played for warnings.
+     */
+    public CuePlayer(final File cue_Breakpoint, final File cue_Error, final File cue_Warning) {
+        this.cue_Breakpoint = cue_Breakpoint;
+        this.cue_Error = cue_Error;
+        this.cue_Warning = cue_Warning;
+        this.allFilesAvailable = verifyFilesAvailable();
+    }
+
+    /**
      * @return true if all files exist and are not null.
      */
-    private boolean verifyAllFilesExist() {
+    private boolean verifyFilesAvailable() {
         if (this.cue_Breakpoint == null || this.cue_Error == null || this.cue_Warning == null) {
             return false;
         }
@@ -63,83 +54,60 @@ public class CuePlayer {
     }
 
     /**
-     * Plays the specified audio file using the Java Clip sound API.
-     * Any print statements are for debugging purposes only.
-     * If any exception is thrown, {@code this#allFilesAvailable} will be marked false.
+     * Plays the specified file with the Java Clip sound API.
+     * If any exception is thrown, audio playback will be disabled, regardless of the availability of the audio files.
      *
-     * @param file The file to be played.
-     * @throws UnsupportedAudioFileException When an unsupported audio file is passed into the method.
-     * @throws IOException                   When any file I/O error occurs.
-     * @throws LineUnavailableException      When an audio line (or audio output) is either busy or unavailable.
-     */
+     * @param file the audio file to be played.
+     * @throws IOException                   When a file I/O error occurs.
+     * @throws UnsupportedAudioFileException When an unsupported file is specified.
+     * @throws LineUnavailableException      When a {code Line} is unavailable.
 
-    private void play(final File file) throws LineUnavailableException, UnsupportedAudioFileException, IOException {
+     * @see javax.sound.sampled.LineUnavailableException
+     *
+     */
+    private void play(File file) {
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file.getAbsoluteFile());
+            AudioInputStream inputStream = AudioSystem.getAudioInputStream(file.getAbsoluteFile());
             Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
+            clip.open(inputStream);
             clip.start();
-
-
-        } catch (UnsupportedAudioFileException ex) {
-            log.error("Unsupported file: {}", file);
-            log.error(ex.getMessage());
-
-
-            allFilesAvailable = false;
-        } catch (LineUnavailableException ex) {
-            System.err.println("Audio line unavailable.");
-            System.err.println(ex.getMessage());
-
-            allFilesAvailable = false;
-        } catch (IOException ex) {
-            System.err.println("I/O error occurred.");
-            System.err.println(ex.getMessage());
-
-            allFilesAvailable = false;
-        } catch (Exception ex) {
-            System.err.println("Unknown error occurred.");
-            System.err.println(ex.getMessage());
-
-            allFilesAvailable = false;
+        } catch (LineUnavailableException e) {
+            System.err.println(e.getMessage());
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        } catch (UnsupportedAudioFileException e) {
+            System.err.println(e.getMessage());
         }
-
-
     }
 
     /**
-     * Play the cue for warnings.
-     * Any exceptions thrown here are caught in {@link this#play(File)}. Catching them here is unnecessary.
+     * Plays the cue for errors.
      */
-    public void playCue_Warning() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
-        play(this.cue_Warning);
-
-
-    }
-
-    /**
-     * Play the cue for errors.
-     */
-
-    public void playCue_Error() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
+    public void playCue_Error() {
         play(this.cue_Error);
     }
 
     /**
-     * Play the cue for breakpoints.
+     * Plays the cue for breakpoints.
      */
-
-    public void playCue_Breakpoint() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
+    public void playCue_Breakpoint() {
         play(this.cue_Breakpoint);
 
     }
 
     /**
-     * @return the value of {@link this#allFilesAvailable}.
+     * Plays the cue for warnings.
+     */
+    public void playCue_Warning() {
+        play(this.cue_Warning);
+    }
+
+    /**
+     * Getter for {@link this#allFilesAvailable}.
+     *
+     * @return {@link this#allFilesAvailable}.
      */
     public boolean getAllFilesAvailable() {
         return this.allFilesAvailable;
     }
-
-
 }
