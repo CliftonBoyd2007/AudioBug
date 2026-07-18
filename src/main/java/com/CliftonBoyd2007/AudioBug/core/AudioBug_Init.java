@@ -5,7 +5,20 @@ import com.intellij.openapi.editor.event.EditorFactoryEvent;
 import com.intellij.openapi.editor.event.EditorFactoryListener;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Initializes AudioBug for newly-created editor instances.
+ * <p>
+ * When an editor is created, this will attach an instance of {@link WatchCaret} to the caret model of the editor that was just created.
+ * </p>
+ *
+ * @author Clifton Boyd
+ */
 public class AudioBug_Init implements EditorFactoryListener {
+    /**
+     * Registers a new instance of {@link WatchCaret} with the caret model of the newly-created editor.
+     *
+     * @param event The event containing information about the editor.
+     */
     @Override
     public void editorCreated(@NotNull EditorFactoryEvent event) {
         CaretModel caretModel = event.getEditor().getCaretModel();

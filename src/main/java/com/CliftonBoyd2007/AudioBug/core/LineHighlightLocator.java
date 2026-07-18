@@ -49,7 +49,7 @@ public class LineHighlightLocator {
     private ArrayList<HighlightInfo> warnings;
 
     /**
-     * Object responsible for sspeech/audio feedback.
+     * Object responsible for speech/audio feedback.
      */
     private LineHighlightAudioizer audioizer;
 
@@ -100,12 +100,9 @@ public class LineHighlightLocator {
         fuck();
     }
 
-    private void fuck() throws UnsupportedAudioFileException, LineUnavailableException, IOException {
-        this.audioizer.announceHighlightType_audiotoryOnly();
-    }
 
     /**
-     * Clears the error and warning lists.
+     * Clears the error and warning backing stores.
      */
     private void clearErrorAndWarningLists() {
         this.errors.clear();

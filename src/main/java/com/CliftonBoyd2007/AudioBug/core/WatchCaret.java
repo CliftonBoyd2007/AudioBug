@@ -14,16 +14,20 @@ import java.io.File;
  * Listens to caret movement and determines whether AudioBug should respond when the caret changes position.
  *
  * <p>
- * It distinguishes between vertical and lateral movement of the caret to avoid overwhelming the user with feedback.
+ * It distinguishes between vertical and lateral movement to avoid overwhelming the user with feedback.
  *
  * @author Clifton Boyd
  */
 public class WatchCaret implements CaretListener {
+    /**
+     * Object responsible for querying for highlights on in which the caret is located.
+     */
+    private LineHighlightLocator highlightLocator;
 
     /**
      * Constructs an instance of the WatchCaret class.
      * <p>
-     * Please do not call this yourself. This is only here for {@link AudioBug_Init}.
+     * Please DO NOT call this yourself. This is only here for {@link AudioBug_Init}.
      */
     WatchCaret() {
         // Unless you are testing something, leave this method alone.
@@ -33,9 +37,7 @@ public class WatchCaret implements CaretListener {
 
     /**
      * Responds to caret events within the editor.
-     * When the caret moves, it determines if the caret has moved to a new line.
-     * <p>
-     * With that information, it responds accordingly.
+     * When the caret moves, it determines if it has moved to a new line or not and responds accordingly.
      *
      * @param event the event containing information about the caret.
      */
