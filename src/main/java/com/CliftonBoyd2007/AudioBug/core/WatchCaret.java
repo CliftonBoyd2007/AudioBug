@@ -18,7 +18,7 @@ public class WatchCaret implements CaretListener {
     WatchCaret() {
         // Unless you are testing something, leave this method alone.
         // This only exists to make sure that this object is correctly constructed.
-        this.player = new CuePlayer(new File("C:\\Users\\Clifton Boyd\\Documents\\wav\\Breakpoint.wav"), new File("C:\\Users\\Clifton Boyd\\Documents\\wav\\Error.wav"), new File("C:\\Users\\Clifton Boyd\\Documents\\wav\\Warning.wav")); // REMOVE THIS BEFORE MOVING ON.
+        this.player = new CuePlayer();
     }
 
     @Override
