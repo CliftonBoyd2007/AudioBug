@@ -3,13 +3,9 @@ package com.CliftonBoyd2007.AudioBug.accessibility;
 import com.intellij.codeInsight.daemon.impl.HighlightInfo;
 import com.CliftonBoyd2007.AudioBug.audioutils.CuePlayer;
 import com.intellij.util.ui.accessibility.AccessibleAnnouncerUtil;
-import com.jetbrains.AccessibleAnnouncer;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JComponent;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class LineHighlightAudioizer {
@@ -66,15 +62,17 @@ public class LineHighlightAudioizer {
 
         this.errors = newErrors;
         this.warnings = newWarnings;
-        announceHighlightType_audiotoryOnly();
+        announceHighlightType();
     }
 
-    private void announceHighlightType_audiotoryOnly() {
+    private void announceHighlightType() {
         if (this.errors.size() > 0) {
+            this.player.playCue_Error();
             AccessibleAnnouncerUtil.announce(this.editorComponent.getAccessibleContext().getAccessibleParent(), "Error.", true);
 
 
         } else if (this.warnings.size() > 0 && this.errors.size() == 0) {
+            this.player.playCue_Warning();
             AccessibleAnnouncerUtil.announce(this.editorComponent.getAccessibleContext().getAccessibleParent(), "Warning.", true);
         } else {
             return;
