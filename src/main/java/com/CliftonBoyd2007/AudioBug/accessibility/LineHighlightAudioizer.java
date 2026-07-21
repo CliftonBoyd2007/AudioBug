@@ -75,7 +75,7 @@ public class LineHighlightAudioizer {
 
 
         } else if (this.warnings.size() > 0 && this.errors.size() == 0) {
-            AccessibleAnnouncerUtil.announce(this.editorComponent.getAccessibleContext().getAccessibleParent(), "Error.", true);
+            AccessibleAnnouncerUtil.announce(this.editorComponent.getAccessibleContext().getAccessibleParent(), "Warning.", true);
         } else {
             return;
         }

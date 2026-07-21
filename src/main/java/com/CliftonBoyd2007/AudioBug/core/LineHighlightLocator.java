@@ -1,6 +1,6 @@
 package com.CliftonBoyd2007.AudioBug.core;
 
-import java.io.IOException;
+
 import java.util.ArrayList;
 
 import com.intellij.lang.annotation.HighlightSeverity;
@@ -15,8 +15,6 @@ import com.intellij.util.Processor;
 import com.CliftonBoyd2007.AudioBug.accessibility.LineHighlightAudioizer;
 import com.intellij.openapi.editor.Editor;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 
 public class LineHighlightLocator {
@@ -118,8 +116,6 @@ public class LineHighlightLocator {
         if (!oldDocument.equals(newDocument)) {
             this.document = newDocument;
 
-        } else {
-            return;
         }
     }
 
