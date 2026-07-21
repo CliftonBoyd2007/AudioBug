@@ -24,7 +24,7 @@ public class LineHighlightAudioizer {
     /**
      * Object responsible for audio playback management.
      */
-//    private final CuePlayer player;
+    private final CuePlayer player;
     /**
      * Global flag that determines whether audio cues will be played.
      */
@@ -37,8 +37,8 @@ public class LineHighlightAudioizer {
     public LineHighlightAudioizer(ArrayList<HighlightInfo> errors, ArrayList<HighlightInfo> warnings) {
         this.errors = errors;
         this.warnings = warnings;
-//        this.player = new CuePlayer();
-//        this.isAudioCuesEnabled = this.player.getAllFilesAvailable();
+        this.player = new CuePlayer();
+        this.isAudioCuesEnabled = this.player.getAllFilesAvailable();
 
     }
 
@@ -51,10 +51,7 @@ public class LineHighlightAudioizer {
         if (editorComponent == null) {
             return;
         }
-        // Avoid unnecessarily updating the editor component.
-        if (this.editorComponent.equals(editorComponent)) {
-            return;
-        }
+
         this.editorComponent = editorComponent;
 
     }
@@ -69,14 +66,15 @@ public class LineHighlightAudioizer {
 
         this.errors = newErrors;
         this.warnings = newWarnings;
+        announceHighlightType_audiotoryOnly();
     }
 
-    public void announceHighlightType_audiotoryOnly() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
-        if (errors.size() > 0) {
+    private void announceHighlightType_audiotoryOnly() {
+        if (this.errors.size() > 0) {
             AccessibleAnnouncerUtil.announce(this.editorComponent.getAccessibleContext().getAccessibleParent(), "Error.", true);
 
 
-        } else if (warnings.size() > 0 && errors.size() == 0) {
+        } else if (this.warnings.size() > 0 && this.errors.size() == 0) {
             AccessibleAnnouncerUtil.announce(this.editorComponent.getAccessibleContext().getAccessibleParent(), "Error.", true);
         } else {
             return;

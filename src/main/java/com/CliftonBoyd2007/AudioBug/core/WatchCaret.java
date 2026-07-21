@@ -20,9 +20,9 @@ import java.io.File;
  */
 public class WatchCaret implements CaretListener {
     /**
-     * Object responsible for querying for highlights on in which the caret is located.
+     * Object responsible for querying for highlights on the line where the caret is located.
      */
-    private LineHighlightLocator highlightLocator;
+    private LineHighlightLocator locator;
 
     /**
      * Constructs an instance of the WatchCaret class.
@@ -47,8 +47,8 @@ public class WatchCaret implements CaretListener {
         LogicalPosition newPosition = event.getNewPosition();
         boolean caretHasMovedToNewLine = hasCaretMovedToNewLine(oldPosition, newPosition);
         if (caretHasMovedToNewLine) {
-
-        } else {
+            highlightLocatorUpdateHelper(event);
+            } else {
             return;
 
         }
@@ -65,5 +65,17 @@ public class WatchCaret implements CaretListener {
         return oldPosition.line != newPosition.line;
     }
 
+    /**
+     * Helper method for updating the {@link LineHighlightLocator} safely.
+     *
+     * @param event the event containing information about the caret.
+     */
+    private void highlightLocatorUpdateHelper(@NotNull CaretEvent event) {
+        if (this.locator == null) {
+            this.locator = new LineHighlightLocator(event);
+        } else { // breakpoint here
+            this.locator.update(event);
+        }
+    }
 
 }
