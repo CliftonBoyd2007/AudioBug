@@ -1,11 +1,13 @@
 package com.CliftonBoyd2007.AudioBug.accessibility;
 
+import com.CliftonBoyd2007.AudioBug.core.HighlightStateService;
 import com.intellij.codeInsight.daemon.impl.HighlightInfo;
 import com.CliftonBoyd2007.AudioBug.audioutils.CuePlayer;
+import com.intellij.openapi.project.Project;
 import com.intellij.util.ui.accessibility.AccessibleAnnouncerUtil;
 
 import javax.swing.JComponent;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Responsible for triggering screen reader announcements and audio cue playback for  highlights on the current line.
@@ -16,11 +18,15 @@ public class LineHighlightAudioizer {
     /**
      * Backing store for error highlights.
      */
-    private ArrayList<HighlightInfo> errors;
+    private List<HighlightInfo> errors;
     /**
      * Backing store for warning highlights.
      */
-    private ArrayList<HighlightInfo> warnings;
+    private List<HighlightInfo> warnings;
+    /**
+     * The current project.
+     */
+    private final Project project;
     /**
      * Object responsible for audio playback management.
      */
@@ -34,12 +40,10 @@ public class LineHighlightAudioizer {
      */
     private JComponent editorComponent;
 
-    public LineHighlightAudioizer(ArrayList<HighlightInfo> errors, ArrayList<HighlightInfo> warnings) {
-        this.errors = errors;
-        this.warnings = warnings;
+    public LineHighlightAudioizer(Project project) {
         this.player = new CuePlayer();
         this.isAudioCuesEnabled = this.player.getAllFilesAvailable();
-
+        this.project = project;
     }
 
     /**
@@ -57,15 +61,13 @@ public class LineHighlightAudioizer {
     }
 
     /**
-     * Updates the list of errors and warnings.
-     *
-     * @param newErrors   The new list of error highlights.
-     * @param newWarnings The new list of warning highlights.
+     * Retrieves the updated list of highlights from the {@link HighlightStateService}.
      */
-    public void updateHighlights(ArrayList<HighlightInfo> newErrors, ArrayList<HighlightInfo> newWarnings) {
+    public void updateAudioizer() {
+        HighlightStateService service = this.project.getService(HighlightStateService.class);
+        this.errors = service.getErrors();
+        this.warnings = service.getWarnings();
 
-        this.errors = newErrors;
-        this.warnings = newWarnings;
         announceHighlightType();
     }
 
@@ -79,6 +81,7 @@ public class LineHighlightAudioizer {
      * Please do not modify the logic that retains this model of precedence. We must keep output as minimal as possible to avoid overwhelming the user.
      */
     private void announceHighlightType() {
+
         if (!this.errors.isEmpty()) {
             this.player.playCue_Error();
             AccessibleAnnouncerUtil.announce(this.editorComponent.getAccessibleContext().getAccessibleParent(), "Error.", true);

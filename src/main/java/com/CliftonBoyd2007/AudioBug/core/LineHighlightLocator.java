@@ -86,10 +86,12 @@ public class LineHighlightLocator {
         clearErrorAndWarningLists();
 
         getHighlights();
+        HighlightStateService service = this.project.getService(HighlightStateService.class);
+        service.updateHighlights(this.errors, this.warnings);
         if (this.audioizer == null) {
-            this.audioizer = new LineHighlightAudioizer(this.errors, this.warnings);
+            this.audioizer = new LineHighlightAudioizer(this.project);
         } else {
-            this.audioizer.updateHighlights(this.errors, this.warnings);
+            this.audioizer.updateAudioizer();
             JComponent editorComponent = event.getEditor().getComponent();
             this.audioizer.updateEditorComponent(editorComponent);
         }
