@@ -69,7 +69,11 @@ public class LineHighlightAudioizer {
         this.errors = service.getErrors();
         this.warnings = service.getWarnings();
 
-        announceHighlightType();
+
+    }
+
+    private void announceHighlightType() {
+
     }
 
 
