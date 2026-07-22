@@ -24,7 +24,10 @@ public class AudioBug_Init implements EditorFactoryListener {
     public void editorCreated(@NotNull EditorFactoryEvent event) {
         CaretModel caretModel = event.getEditor().getCaretModel();
         caretModel.addCaretListener(new WatchCaret());
-
+        Project project = event.getEditor().getProject();
+        assert project != null;
+        FeedbackService feedbackService = project.getService(FeedbackService.class);
+        feedbackService.updateAccessibleEditorUIComponent(event.getEditor().getComponent());
 
     }
 }
