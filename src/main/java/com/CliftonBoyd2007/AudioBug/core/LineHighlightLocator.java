@@ -92,8 +92,7 @@ public class LineHighlightLocator {
             this.audioizer = new LineHighlightAudioizer(this.project);
         } else {
             this.audioizer.updateAudioizer();
-            JComponent editorComponent = event.getEditor().getComponent();
-            this.audioizer.updateEditorComponent(editorComponent);
+
         }
     }
 

@@ -26,7 +26,7 @@ public class LineHighlightAudioizer {
      */
     private List<HighlightInfo> warnings;
     /**
-     * The current project.
+     * The current project from which we obtain required services.
      */
     private final Project project;
 
@@ -44,6 +44,7 @@ public class LineHighlightAudioizer {
         HighlightStateService service = this.project.getService(HighlightStateService.class);
         this.errors = service.getErrors();
         this.warnings = service.getWarnings();
+        announceHighlightType();
     }
 
     private void announceHighlightType() {
