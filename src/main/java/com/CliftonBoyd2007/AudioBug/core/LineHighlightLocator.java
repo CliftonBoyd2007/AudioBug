@@ -2,21 +2,22 @@ package com.CliftonBoyd2007.AudioBug.core;
 
 
 import java.util.ArrayList;
-
 import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.codeInsight.daemon.impl.DaemonCodeAnalyzerEx;
 import com.intellij.codeInsight.daemon.impl.HighlightInfo;
-
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.event.CaretEvent;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.util.Processor;
 import com.CliftonBoyd2007.AudioBug.accessibility.LineHighlightAudioizer;
-import com.intellij.openapi.editor.Editor;
-
 import javax.swing.*;
 
+/**
+ * Responsible for querying highlights for the current line of the caret for AudioBug to announce.
+ *
+ * @author Clifton Boyd
+ */
 public class LineHighlightLocator {
     private record LineOffsets(int startOffset, int endOffset) {
     }

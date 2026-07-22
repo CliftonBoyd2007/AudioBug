@@ -5,9 +5,13 @@ import com.CliftonBoyd2007.AudioBug.audioutils.CuePlayer;
 import com.intellij.util.ui.accessibility.AccessibleAnnouncerUtil;
 
 import javax.swing.JComponent;
-
 import java.util.ArrayList;
 
+/**
+ * Responsible for triggering screen reader announcements and audio cue playback for  highlights on the current line.
+ *
+ * @author Clifton Boyd
+ */
 public class LineHighlightAudioizer {
     /**
      * Backing store for error highlights.
@@ -24,7 +28,7 @@ public class LineHighlightAudioizer {
     /**
      * Global flag that determines whether audio cues will be played.
      */
-    private boolean isAudioCuesEnabled;
+    private final boolean isAudioCuesEnabled;
     /**
      * The editor UI component from which screen reader announcements will originate.
      */
@@ -65,17 +69,24 @@ public class LineHighlightAudioizer {
         announceHighlightType();
     }
 
+    /**
+     * Announces the highlight type of greatest precedence and plays its respective cue.
+     * <p>
+     * The precedence rule is as follows:
+     * Error > Warning
+     * This is to keep output as minimal as possible, particularly when errors and warnings coexist on the same line.
+     * </p>
+     * Please do not modify the logic that retains this model of precedence. We must keep output as minimal as possible to avoid overwhelming the user.
+     */
     private void announceHighlightType() {
-        if (this.errors.size() > 0) {
+        if (!this.errors.isEmpty()) {
             this.player.playCue_Error();
             AccessibleAnnouncerUtil.announce(this.editorComponent.getAccessibleContext().getAccessibleParent(), "Error.", true);
 
 
-        } else if (this.warnings.size() > 0 && this.errors.size() == 0) {
+        } else if (!this.warnings.isEmpty() && this.errors.isEmpty()) {
             this.player.playCue_Warning();
             AccessibleAnnouncerUtil.announce(this.editorComponent.getAccessibleContext().getAccessibleParent(), "Warning.", true);
-        } else {
-            return;
         }
     }
 

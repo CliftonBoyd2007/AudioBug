@@ -3,12 +3,16 @@
     <id>com.CliftonBoyd2007.AudioBug</id>
 
     <name>AudioBug</name>
-    <version>0.0.2</version>
+    <version>0.1.2</version>
 
-    <vendor url="https://www.yourcompany.com">YourCompany</vendor>
+    <vendor url="https://github.com/CliftonBoyd2007/AudioBug"/>
 
     <description>
-        Description here.
+        AudioBug provides auditory and spoken feedback for diagnostics in the editor to those who are blind or visually
+        impaired.
+        Speech and audio when the caret enters a line with errors or warnings.
+        Read error/warning messages out loud on-demand.
+
 
     </description>
 

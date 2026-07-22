@@ -8,7 +8,7 @@ import com.intellij.openapi.editor.event.CaretListener;
 import org.jetbrains.annotations.NotNull;
 
 
-import java.io.File;
+
 
 /**
  * Listens to caret movement and determines whether AudioBug should respond when the caret changes position.
@@ -27,7 +27,7 @@ public class WatchCaret implements CaretListener {
     /**
      * Constructs an instance of the WatchCaret class.
      * <p>
-     * Please DO NOT call this yourself. This is only here for {@link AudioBug_Init}.
+     * Please, for the love of God, DO NOT call this yourself. This is only here for {@link AudioBug_Init}.
      */
     WatchCaret() {
         // Unless you are testing something, leave this method alone.
@@ -73,7 +73,7 @@ public class WatchCaret implements CaretListener {
     private void highlightLocatorUpdateHelper(@NotNull CaretEvent event) {
         if (this.locator == null) {
             this.locator = new LineHighlightLocator(event);
-        } else { // breakpoint here
+        } else {
             this.locator.update(event);
         }
     }
