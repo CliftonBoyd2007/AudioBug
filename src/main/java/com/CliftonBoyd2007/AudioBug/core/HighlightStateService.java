@@ -15,8 +15,15 @@ import java.util.List;
  */
 @Service(Service.Level.PROJECT)
 public final class HighlightStateService {
+    /**
+     * Backing store for error highlights.
+     */
     private ArrayList<HighlightInfo> errors;
+    /**
+     * Backing store for warning highlights.
+     */
     private ArrayList<HighlightInfo> warnings;
+
     private final Project project;
 
     public HighlightStateService(Project project) {
@@ -26,6 +33,12 @@ public final class HighlightStateService {
 
     }
 
+    /**
+     * Updates the list of errors and warnings.
+     *
+     * @param newErrors   The new list of error highlights.
+     * @param newWarnings The new list of warning highlights.
+     */
     public void updateHighlights(final ArrayList<HighlightInfo> newErrors, final ArrayList<HighlightInfo> newWarnings) {
         this.errors = newErrors;
         this.warnings = newWarnings;
@@ -33,6 +46,7 @@ public final class HighlightStateService {
 
     /**
      * Returns an unmodifiable copy of errors for the current line.
+     *
      * @return unmodifiable list of error highlights.
      */
     public List<HighlightInfo> getErrors() {
@@ -41,6 +55,7 @@ public final class HighlightStateService {
 
     /**
      * Returns an unmodifiable copy of warnings for the current line.
+     *
      * @return unmodifiable list of warning highlights.
      */
     public List<HighlightInfo> getWarnings() {
