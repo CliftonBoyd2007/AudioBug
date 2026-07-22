@@ -1,14 +1,10 @@
 package com.CliftonBoyd2007.AudioBug.accessibility;
 
-import com.CliftonBoyd2007.AudioBug.core.FeedbackService;
-import com.CliftonBoyd2007.AudioBug.core.HighlightStateService;
+import com.CliftonBoyd2007.AudioBug.core.services.FeedbackService;
+import com.CliftonBoyd2007.AudioBug.core.services.HighlightStateService;
 import com.intellij.codeInsight.daemon.impl.HighlightInfo;
-import com.CliftonBoyd2007.AudioBug.audioutils.CuePlayer;
 import com.intellij.openapi.project.Project;
-import com.intellij.util.ui.accessibility.AccessibleAnnouncerUtil;
 
-import javax.swing.JComponent;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

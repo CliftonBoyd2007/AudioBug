@@ -77,5 +77,4 @@ public class WatchCaret implements CaretListener {
             this.locator.update(event);
         }
     }
-
 }

@@ -1,13 +1,10 @@
 package com.CliftonBoyd2007.AudioBug.audioutils;
 
-import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.sound.sampled.LineUnavailableException;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.net.URL;
 
 public class CuePlayer {

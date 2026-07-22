@@ -1,5 +1,6 @@
 package com.CliftonBoyd2007.AudioBug.core;
 
+import com.CliftonBoyd2007.AudioBug.core.services.FeedbackService;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.event.EditorFactoryEvent;
 import com.intellij.openapi.editor.event.EditorFactoryListener;
