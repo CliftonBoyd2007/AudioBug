@@ -10,7 +10,7 @@ import javax.accessibility.Accessible;
 
 @Service(Service.Level.PROJECT)
 public final class FeedbackService {
-    private final CuePlayer player = new CuePlayer();
+    public final CuePlayer player = new CuePlayer();
     private final Project project;
     private Accessible accessibleEditorUIComponent;
 
@@ -18,7 +18,13 @@ public final class FeedbackService {
         this.project = project;
     }
 
-        private void announce(String message, boolean interruptCurrentSpeechOutput) {
+    /**
+     * Make an announcement with an active screen reader.
+     *
+     * @param message the message to announce.
+     * @param interruptCurrentSpeechOutput determine whether to interrupt current screen reader speech for this announcement.
+     */
+        public void announce(String message, boolean interruptCurrentSpeechOutput) {
         AccessibleAnnouncerUtil.announce(this.accessibleEditorUIComponent, message, interruptCurrentSpeechOutput);
     }
 }

@@ -1,5 +1,6 @@
 package com.CliftonBoyd2007.AudioBug.accessibility;
 
+import com.CliftonBoyd2007.AudioBug.core.FeedbackService;
 import com.CliftonBoyd2007.AudioBug.core.HighlightStateService;
 import com.intellij.codeInsight.daemon.impl.HighlightInfo;
 import com.CliftonBoyd2007.AudioBug.audioutils.CuePlayer;
@@ -7,6 +8,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.util.ui.accessibility.AccessibleAnnouncerUtil;
 
 import javax.swing.JComponent;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,48 +18,22 @@ import java.util.List;
  */
 public class LineHighlightAudioizer {
     /**
-     * Backing store for error highlights.
+     * Temporary storage for error highlights from {@link HighlightStateService}.
      */
     private List<HighlightInfo> errors;
     /**
-     * Backing store for warning highlights.
+     * Temporary storage for warning highlights from {@link HighlightStateService}.
      */
     private List<HighlightInfo> warnings;
     /**
      * The current project.
      */
     private final Project project;
-    /**
-     * Object responsible for audio playback management.
-     */
-//    private final CuePlayer player;
-    /**
-     * Global flag that determines whether audio cues will be played.
-     */
-//    private final boolean isAudioCuesEnabled;
-    /**
-     * The editor UI component from which screen reader announcements will originate.
-     */
-    private JComponent editorComponent;
+
 
     public LineHighlightAudioizer(Project project) {
-//        this.player = new CuePlayer();
-//        this.isAudioCuesEnabled = this.player.getAllFilesAvailable();
+
         this.project = project;
-    }
-
-    /**
-     * Updates the current editor {@link JComponent} in the event that it has changed.
-     *
-     * @param editorComponent The new editor component.
-     */
-    public void updateEditorComponent(JComponent editorComponent) {
-        if (editorComponent == null) {
-            return;
-        }
-
-        this.editorComponent = editorComponent;
-
     }
 
 
@@ -68,15 +44,20 @@ public class LineHighlightAudioizer {
         HighlightStateService service = this.project.getService(HighlightStateService.class);
         this.errors = service.getErrors();
         this.warnings = service.getWarnings();
-
-
     }
 
     private void announceHighlightType() {
+        FeedbackService feedbackService = this.project.getService(FeedbackService.class);
 
+
+        if (!this.errors.isEmpty()) {
+            feedbackService.player.playCue_Error();
+            feedbackService.announce("Error.", true);
+        } else if (!this.warnings.isEmpty() && this.errors.isEmpty()) {
+            feedbackService.player.playCue_Warning();
+            feedbackService.announce("Warning.", true);
+        }
     }
-
-
 
 
 }
