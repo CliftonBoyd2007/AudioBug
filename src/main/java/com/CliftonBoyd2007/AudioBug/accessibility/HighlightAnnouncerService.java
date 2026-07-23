@@ -29,7 +29,10 @@ public final class HighlightAnnouncerService {
      * The current project from which we obtain required services.
      */
     private final Project project;
-
+    /**
+     * The index of the highlight whose description we want to announce.
+     */
+    private int highlightIndex = 0;
 
     public HighlightAnnouncerService(Project project) {
 
@@ -79,15 +82,18 @@ public final class HighlightAnnouncerService {
         }
     }
 
+
     /**
      * Announces the description of the highlight with the highest precedence.
      */
     public void announceHighlightDescription() {
-        announceHighlightDescription(0);
+        announceHighlightDescription(this.highlightIndex);
     }
+
 
     /**
      * Announces the highlight description at the given index in either list of highlights.
+     * When the end of either list is reached, AudioBug will then wrap around back to the start of the list.
      *
      * @param indexOfHighlight the index of the highlight whose description we want to announce
      */
@@ -96,10 +102,30 @@ public final class HighlightAnnouncerService {
         if (shouldMakeErrorCallout()) {
             String highlightDescription = this.errors.get(indexOfHighlight).getDescription();
             feedbackService.announce(highlightDescription, true);
+
+            if (this.highlightIndex >= this.errors.size()) {
+                this.highlightIndex = 0; // wrap around to the start for cycling
+                announceHighlightDescription(this.highlightIndex);
+
+            } else {
+                this.highlightIndex++;
+                announceHighlightDescription(this.highlightIndex);
+            }
+
         } else if (shouldMakeWarningCallout()) {
             String highlightDescription = this.warnings.get(indexOfHighlight).getDescription();
             feedbackService.announce(highlightDescription, true);
+
+            if (this.highlightIndex >= this.warnings.size()) {
+                this.highlightIndex = 0; // wrap around to the start for continuous cycling
+                announceHighlightDescription(this.highlightIndex);
+
+            } else {
+                this.highlightIndex++;
+                announceHighlightDescription(this.highlightIndex);
+            }
         }
+
     }
 
 
