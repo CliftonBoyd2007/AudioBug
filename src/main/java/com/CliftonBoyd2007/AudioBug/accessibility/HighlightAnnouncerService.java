@@ -40,7 +40,7 @@ public final class HighlightAnnouncerService {
     /**
      * Retrieves the updated list of highlights from the {@link HighlightStateService}.
      */
-    public void updateAudioizer() {
+    public void updateService() {
         HighlightStateService service = this.project.getService(HighlightStateService.class);
         this.errors = service.getErrors();
         this.warnings = service.getWarnings();

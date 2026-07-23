@@ -48,10 +48,6 @@ public class LineHighlightLocator {
      */
     private ArrayList<HighlightInfo> warnings;
 
-    /**
-     * Object responsible for speech/audio feedback.
-     */
-    private HighlightAnnouncerService audioizer;
 
     public LineHighlightLocator(@NotNull CaretEvent event) {
         this.errors = new ArrayList<>();
@@ -87,14 +83,10 @@ public class LineHighlightLocator {
         clearErrorAndWarningLists();
 
         getHighlights();
-        HighlightStateService service = this.project.getService(HighlightStateService.class);
-        service.updateHighlights(this.errors, this.warnings);
-        if (this.audioizer == null) {
-            this.audioizer = new HighlightAnnouncerService(this.project);
-        } else {
-            this.audioizer.updateAudioizer();
-
-        }
+        HighlightStateService highlightService = this.project.getService(HighlightStateService.class);
+        highlightService.updateHighlights(this.errors, this.warnings);
+        HighlightAnnouncerService announcerService = this.project.getService(HighlightAnnouncerService.class);
+        announcerService.updateService();
     }
 
 
