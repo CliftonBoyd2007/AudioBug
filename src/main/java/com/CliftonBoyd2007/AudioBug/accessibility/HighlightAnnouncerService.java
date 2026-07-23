@@ -101,6 +101,10 @@ public final class HighlightAnnouncerService {
     private void announceHighlightDescription(int indexOfHighlight) {
 
         FeedbackService feedbackService = this.project.getService(FeedbackService.class);
+        if (this.errors.isEmpty() && this.warnings.isEmpty()) {
+            feedbackService.announce("No errors or warnings.", true);
+            return;
+        }
 
 
         if (shouldMakeErrorCallout()) {
@@ -129,7 +133,7 @@ public final class HighlightAnnouncerService {
             feedbackService.announce(highlightDescription, true);
             this.highlightIndex++;
 
-            
+
         }
 
 
