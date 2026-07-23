@@ -1,5 +1,6 @@
 package com.CliftonBoyd2007.AudioBug.core.actions;
 
+import com.CliftonBoyd2007.AudioBug.accessibility.HighlightAnnouncerService;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.CliftonBoyd2007.AudioBug.core.services.HighlightStateService;
 import com.CliftonBoyd2007.AudioBug.core.services.FeedbackService;
@@ -11,10 +12,9 @@ import java.util.ArrayList;
 public class ReadHighlightDescriptionAction extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent event) {
-
-        FeedbackService feedbackService = event.getProject().getService(FeedbackService.class);
-        HighlightStateService highlightService = event.getProject().getService(HighlightStateService.class);
-
+//        assert event.getProject() != null;
+        HighlightAnnouncerService announcerService = event.getProject().getService(HighlightAnnouncerService.class);
+        announcerService.announceHighlightDescription();
     }
 
 

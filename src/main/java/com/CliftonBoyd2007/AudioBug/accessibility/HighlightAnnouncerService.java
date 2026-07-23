@@ -70,14 +70,35 @@ public final class HighlightAnnouncerService {
      */
     private void announceHighlightType() {
         FeedbackService feedbackService = this.project.getService(FeedbackService.class);
-
-
         if (shouldMakeErrorCallout()) {
             feedbackService.player.playCue_Error();
             feedbackService.announce("Error.", true);
         } else if (shouldMakeWarningCallout()) {
             feedbackService.player.playCue_Warning();
             feedbackService.announce("Warning.", true);
+        }
+    }
+
+    /**
+     * Announces the description of the highlight with the highest precedence.
+     */
+    public void announceHighlightDescription() {
+        announceHighlightDescription(0);
+    }
+
+    /**
+     * Announces the highlight description at the given index in either list of highlights.
+     *
+     * @param indexOfHighlight the index of the highlight whose description we want to announce
+     */
+    private void announceHighlightDescription(int indexOfHighlight) {
+        FeedbackService feedbackService = this.project.getService(FeedbackService.class);
+        if (shouldMakeErrorCallout()) {
+            String highlightDescription = this.errors.get(indexOfHighlight).getDescription();
+            feedbackService.announce(highlightDescription, true);
+        } else if (shouldMakeWarningCallout()) {
+            String highlightDescription = this.warnings.get(indexOfHighlight).getDescription();
+            feedbackService.announce(highlightDescription, true);
         }
     }
 
