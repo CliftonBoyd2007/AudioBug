@@ -2,7 +2,6 @@ package com.CliftonBoyd2007.AudioBug.core;
 
 
 import java.util.ArrayList;
-
 import com.CliftonBoyd2007.AudioBug.core.services.HighlightStateService;
 import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.codeInsight.daemon.impl.DaemonCodeAnalyzerEx;

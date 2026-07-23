@@ -48,7 +48,7 @@ Note: AudioBug is primarily tested in IntelliJ Idea and Rider. Other IDEs based 
 
 ## Installation 
 
-To install AudioBug:
+To build AudioBug, follow these steps:
 
 - Clone this repo 
 - In a terminal, navigate to the directory where this repo was cloned. 
