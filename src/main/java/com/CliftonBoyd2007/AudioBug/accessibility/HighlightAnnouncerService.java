@@ -9,12 +9,14 @@ import com.intellij.openapi.project.Project;
 import java.util.List;
 
 /**
- *
+ * Decides which highlight type should be announced to the user.
+ * AudioBug prioritizes errors over warnings to avoid overwhelming the user with information. This is particularly important if both errors and warnings coexist on the same line.
+ * With this in mind, please do not modify that logic.
  *
  * @author Clifton Boyd
  */
 @Service(Service.Level.PROJECT)
-public final class LineHighlightAudioizer {
+public final class HighlightAnnouncerService {
     /**
      * Temporary storage for error highlights from {@link HighlightStateService}.
      */
@@ -29,7 +31,7 @@ public final class LineHighlightAudioizer {
     private final Project project;
 
 
-    public LineHighlightAudioizer(Project project) {
+    public HighlightAnnouncerService(Project project) {
 
         this.project = project;
     }
@@ -47,6 +49,7 @@ public final class LineHighlightAudioizer {
 
     /**
      * Indicates whether AudioBug should announce that there is an error on the current line of the caret.
+     *
      * @return true if the list of errors is not empty.
      */
     public boolean shouldMakeErrorCallout() {
@@ -54,13 +57,17 @@ public final class LineHighlightAudioizer {
     }
 
     /**
-     * Indicates whether AudioBug should announce that there is a warning on the line where the caret is located.
+     * Indicates whether AudioBug should announce that there is a warning on the current line of the caret.
+     *
      * @return true if the list of warnings is not empty and the list of errors is empty.
      */
     public boolean shouldMakeWarningCallout() {
         return !this.warnings.isEmpty() && this.errors.isEmpty();
     }
 
+    /**
+     * Announces the highlight type of greatest precedence.
+     */
     private void announceHighlightType() {
         FeedbackService feedbackService = this.project.getService(FeedbackService.class);
 

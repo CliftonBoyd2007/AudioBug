@@ -12,7 +12,7 @@ import com.intellij.openapi.editor.event.CaretEvent;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.util.Processor;
-import com.CliftonBoyd2007.AudioBug.accessibility.LineHighlightAudioizer;
+import com.CliftonBoyd2007.AudioBug.accessibility.HighlightAnnouncerService;
 
 /**
  * Responsible for querying highlights for the current line of the caret for AudioBug to announce.
@@ -51,7 +51,7 @@ public class LineHighlightLocator {
     /**
      * Object responsible for speech/audio feedback.
      */
-    private LineHighlightAudioizer audioizer;
+    private HighlightAnnouncerService audioizer;
 
     public LineHighlightLocator(@NotNull CaretEvent event) {
         this.errors = new ArrayList<>();
@@ -90,7 +90,7 @@ public class LineHighlightLocator {
         HighlightStateService service = this.project.getService(HighlightStateService.class);
         service.updateHighlights(this.errors, this.warnings);
         if (this.audioizer == null) {
-            this.audioizer = new LineHighlightAudioizer(this.project);
+            this.audioizer = new HighlightAnnouncerService(this.project);
         } else {
             this.audioizer.updateAudioizer();
 
