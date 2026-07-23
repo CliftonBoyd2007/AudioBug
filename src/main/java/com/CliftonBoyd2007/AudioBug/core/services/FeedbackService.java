@@ -7,9 +7,9 @@ import com.CliftonBoyd2007.AudioBug.audioutils.CuePlayer;
 import com.intellij.openapi.editor.event.EditorFactoryEvent;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.ui.accessibility.AccessibleAnnouncerUtil;
-
 import javax.accessibility.Accessible;
 import javax.swing.*;
+
 
 /**
  * Service responsible for user-facing feedback.
@@ -45,5 +45,7 @@ public final class FeedbackService {
      */
     public void updateAccessibleEditorUIComponent(JComponent editorComponent) {
         this.accessibleEditorUIComponent = editorComponent.getAccessibleContext().getAccessibleParent();
+
+
     }
 }
