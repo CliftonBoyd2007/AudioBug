@@ -32,11 +32,12 @@ public final class HighlightAnnouncerService {
     /**
      * The index of the highlight whose description we want to announce.
      */
-    private int highlightIndex = 0;
+    private int highlightIndex;
 
     public HighlightAnnouncerService(Project project) {
 
         this.project = project;
+        this.highlightIndex = 0;
     }
 
 
@@ -98,32 +99,23 @@ public final class HighlightAnnouncerService {
      * @param indexOfHighlight the index of the highlight whose description we want to announce
      */
     private void announceHighlightDescription(int indexOfHighlight) {
+        if (this.highlightIndex >= this.errors.size() || this.highlightIndex >= this.warnings.size()) {
+            this.highlightIndex = 0; // wrap around to the start for cycling
+            announceHighlightDescription(this.highlightIndex);
+        }
+
         FeedbackService feedbackService = this.project.getService(FeedbackService.class);
         if (shouldMakeErrorCallout()) {
             String highlightDescription = this.errors.get(indexOfHighlight).getDescription();
             feedbackService.announce(highlightDescription, true);
+            this.highlightIndex++;
 
-            if (this.highlightIndex >= this.errors.size()) {
-                this.highlightIndex = 0; // wrap around to the start for cycling
-                announceHighlightDescription(this.highlightIndex);
-
-            } else {
-                this.highlightIndex++;
-                announceHighlightDescription(this.highlightIndex);
-            }
 
         } else if (shouldMakeWarningCallout()) {
             String highlightDescription = this.warnings.get(indexOfHighlight).getDescription();
             feedbackService.announce(highlightDescription, true);
+this.highlightIndex++;
 
-            if (this.highlightIndex >= this.warnings.size()) {
-                this.highlightIndex = 0; // wrap around to the start for continuous cycling
-                announceHighlightDescription(this.highlightIndex);
-
-            } else {
-                this.highlightIndex++;
-                announceHighlightDescription(this.highlightIndex);
-            }
         }
 
     }
