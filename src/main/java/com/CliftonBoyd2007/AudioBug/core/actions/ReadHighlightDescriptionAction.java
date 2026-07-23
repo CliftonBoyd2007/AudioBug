@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class ReadHighlightDescriptionAction extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent event) {
-//        assert event.getProject() != null;
+        assert event.getProject() != null;
         HighlightAnnouncerService announcerService = event.getProject().getService(HighlightAnnouncerService.class);
         announcerService.announceHighlightDescription();
     }

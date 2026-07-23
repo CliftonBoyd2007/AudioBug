@@ -22,4 +22,12 @@
         <editorFactoryListener implementation="com.CliftonBoyd2007.AudioBug.core.AudioBug_Init"/>
     </extensions>
 
+    <actions>
+        <action id="com.CliftonBoyd2007.AudioBug.core.actions.ReadHighlightDescriptionAction"
+                class="com.CliftonBoyd2007.AudioBug.core.actions.ReadHighlightDescriptionAction"
+                text="Read Highlight Description"
+                description="Verbally read the message in the highlight on the current line.">
+            <keyboard-shortcut keymap="$default" first-keystroke="alt R"/>
+        </action>
+    </actions>
 </idea-plugin>
