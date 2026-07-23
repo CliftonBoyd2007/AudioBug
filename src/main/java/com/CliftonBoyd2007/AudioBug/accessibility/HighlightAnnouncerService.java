@@ -106,6 +106,7 @@ public final class HighlightAnnouncerService {
         if (shouldMakeErrorCallout()) {
             if (indexOfHighlight >= this.errors.size()) {
                 this.highlightIndex = 0; // wrap around
+                announceHighlightDescription(this.highlightIndex);
                 return;
 
             }
@@ -118,8 +119,9 @@ public final class HighlightAnnouncerService {
         } else if (shouldMakeWarningCallout()) {
             if (indexOfHighlight >= this.warnings.size()) {
                 this.highlightIndex = 0; // wrap around
-                
+                announceHighlightDescription(this.highlightIndex);
                 return;
+
 
             }
 
@@ -127,8 +129,9 @@ public final class HighlightAnnouncerService {
             feedbackService.announce(highlightDescription, true);
             this.highlightIndex++;
 
-
+            
         }
+
 
     }
 
