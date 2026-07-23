@@ -99,22 +99,34 @@ public final class HighlightAnnouncerService {
      * @param indexOfHighlight the index of the highlight whose description we want to announce
      */
     private void announceHighlightDescription(int indexOfHighlight) {
-        if (this.highlightIndex >= this.errors.size() || this.highlightIndex >= this.warnings.size()) {
-            this.highlightIndex = 0; // wrap around to the start for cycling
-            announceHighlightDescription(this.highlightIndex);
-        }
 
         FeedbackService feedbackService = this.project.getService(FeedbackService.class);
+
+
         if (shouldMakeErrorCallout()) {
+            if (indexOfHighlight >= this.errors.size()) {
+                this.highlightIndex = 0; // wrap around
+                return;
+
+            }
+
             String highlightDescription = this.errors.get(indexOfHighlight).getDescription();
             feedbackService.announce(highlightDescription, true);
             this.highlightIndex++;
 
 
         } else if (shouldMakeWarningCallout()) {
+            if (indexOfHighlight >= this.warnings.size()) {
+                this.highlightIndex = 0; // wrap around
+                
+                return;
+
+            }
+
             String highlightDescription = this.warnings.get(indexOfHighlight).getDescription();
             feedbackService.announce(highlightDescription, true);
-this.highlightIndex++;
+            this.highlightIndex++;
+
 
         }
 
