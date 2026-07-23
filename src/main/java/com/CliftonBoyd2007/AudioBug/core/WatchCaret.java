@@ -3,8 +3,6 @@ package com.CliftonBoyd2007.AudioBug.core;
 import com.intellij.openapi.editor.LogicalPosition;
 import com.intellij.openapi.editor.event.CaretEvent;
 import com.intellij.openapi.editor.event.CaretListener;
-
-
 import org.jetbrains.annotations.NotNull;
 
 
