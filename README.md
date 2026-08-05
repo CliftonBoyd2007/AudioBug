@@ -46,15 +46,35 @@ When multiple error and/or warnings exist on the same line, AudioBug allows the 
 Note: AudioBug is primarily tested in IntelliJ Idea and Rider. Other IDEs based on supported platform versions may work, but functionality has not been verified. 
 
 
-## Installation 
+## Building AudioBug 
 
 To build AudioBug, follow these steps:
 
-- Clone this repo 
-- In a terminal, navigate to the directory where this repo was cloned. 
-- If running macOS:
-  - Run ``` chmod +x ./gradlew ```
-- Run ``` ./gradlew build ``` (macOS) or ``` .\gradlew.bat build ``` (Windows). 
-- The build output is in ``` ./build/libs/AudioBug-[version].jar``` 
-- To install the plugin, refer to the [instructions given here](https://www.jetbrains.com/help/idea/managing-plugins.html#install_plugin_from_disk)
+- Clone this repo
+```bash
+git clone https://github.com/CliftonBoyd2007/AudioBug 
+```
 
+- Navigate to the directory containing the AudioBug repo. 
+- If you are running macOS, before building AudioBug, run 
+
+```bash
+chmod +x ./gradlew
+```
+
+And then 
+```bash
+./gradlew build 
+```
+- If you are running Windows, run 
+
+```cmd 
+.\gradlew.bat build
+```
+
+
+The build output will be located at ./build/libs/Audiobug-[version].jar.
+
+- For instructions on installing the plugin from disk, refer to [the instructions given here by JetBrains](https://www.jetbrains.com/help/idea/managing-plugins.html#install_plugin_from_disk) under the heading "Installing Plugins from Disk."
+
+the instructions apply to other JetBrains IDEs. 

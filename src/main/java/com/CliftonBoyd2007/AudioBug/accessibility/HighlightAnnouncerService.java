@@ -45,7 +45,7 @@ public final class HighlightAnnouncerService {
      * Retrieves the updated list of highlights from the {@link HighlightStateService}.
      */
     public void updateService() {
-        HighlightStateService service = this.project.getService(HighlightStateService.class);
+        HighlightStateService service = this.project.<HighlightStateService>getService(HighlightStateService.class);
         this.errors = service.getErrors();
         this.warnings = service.getWarnings();
         announceHighlightType();
@@ -71,6 +71,7 @@ public final class HighlightAnnouncerService {
 
     /**
      * Announces the highlight type of greatest precedence.
+     *
      */
     private void announceHighlightType() {
         FeedbackService feedbackService = this.project.getService(FeedbackService.class);
@@ -100,7 +101,7 @@ public final class HighlightAnnouncerService {
      */
     private void announceHighlightDescription(int indexOfHighlight) {
 
-        FeedbackService feedbackService = this.project.getService(FeedbackService.class);
+        FeedbackService feedbackService = this.project.<FeedbackService>getService(FeedbackService.class);
         if (this.errors.isEmpty() && this.warnings.isEmpty()) {
             feedbackService.announce("No errors or warnings.", true);
             return;
@@ -114,7 +115,6 @@ public final class HighlightAnnouncerService {
                 return;
 
             }
-
             String highlightDescription = this.errors.get(indexOfHighlight).getDescription();
             feedbackService.announce(highlightDescription, true);
             this.highlightIndex++;
