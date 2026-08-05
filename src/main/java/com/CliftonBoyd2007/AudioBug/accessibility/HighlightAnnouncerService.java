@@ -45,7 +45,7 @@ public final class HighlightAnnouncerService {
      * Retrieves the updated list of highlights from the {@link HighlightStateService}.
      */
     public void updateService() {
-        HighlightStateService service = this.project.<HighlightStateService>getService(HighlightStateService.class);
+        HighlightStateService service = this.project.getService(HighlightStateService.class);
         this.errors = service.getErrors();
         this.warnings = service.getWarnings();
         announceHighlightType();
@@ -77,10 +77,10 @@ public final class HighlightAnnouncerService {
         FeedbackService feedbackService = this.project.getService(FeedbackService.class);
         if (shouldMakeErrorCallout()) {
             feedbackService.player.playCue_Error();
-            feedbackService.announce("Error.", true);
+            feedbackService.announce("Error.", false);
         } else if (shouldMakeWarningCallout()) {
             feedbackService.player.playCue_Warning();
-            feedbackService.announce("Warning.", true);
+            feedbackService.announce("Warning.", false);
         }
     }
 
@@ -101,7 +101,7 @@ public final class HighlightAnnouncerService {
      */
     private void announceHighlightDescription(int indexOfHighlight) {
 
-        FeedbackService feedbackService = this.project.<FeedbackService>getService(FeedbackService.class);
+        FeedbackService feedbackService = this.project.getService(FeedbackService.class);
         if (this.errors.isEmpty() && this.warnings.isEmpty()) {
             feedbackService.announce("No errors or warnings.", true);
             return;
