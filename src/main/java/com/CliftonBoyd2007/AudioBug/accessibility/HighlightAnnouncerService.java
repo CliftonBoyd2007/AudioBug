@@ -125,7 +125,7 @@ public final class HighlightAnnouncerService {
                 this.highlightIndex = 0; // wrap around
                 announceHighlightDescription(this.highlightIndex);
                 return;
-T
+
 
             }
 
