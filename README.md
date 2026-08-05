@@ -75,6 +75,6 @@ And then
 
 The build output will be located at ./build/libs/Audiobug-[version].jar.
 
-- For instructions on installing the plugin from disk, refer to [the instructions given here by JetBrains](https://www.jetbrains.com/help/idea/managing-plugins.html#install_plugin_from_disk) under the heading "Installing Plugins from Disk."
+- For instructions on installing the plugin from disk, refer to [the instructions given here by JetBrains](https://www.jetbrains.com/help/idea/managing-plugins.html#install_plugin_from_disk) under the heading "Install Plugin from Disk."
 
-the instructions apply to other JetBrains IDEs. 
+These instructions apply to other JetBrains IDEs. 
