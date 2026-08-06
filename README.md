@@ -4,11 +4,24 @@ AudioBug is a plugin for JetBrains IDEs that provides non-visual editor feedback
 Inspired by the accessible feedback in Visual Studio and Visual Studio Code, it brings a similar experience to JetBrains
 IDEs.
 
+## Why AudioBug?
 
-## Why AudioBug? 
+JetBrains IDEs are incredibly powerful and popular tools used by many software engineers around the world. One of their
+biggest advantages is their code intelligence features. However, these features heavily rely on immediate visual
+feedback within the editor, making it difficult to use those features if the user is blind or visually impaired. A
+sighted user can quickly glance at the squiggles or lightbulbs without leaving the editor. On the other hand, someone
+who uses a screen reader would have to toggle back-and-forth between the editor and problems view to get that same
+information. AudioBug bridges this gap by providing spoken and auditory feedback to convey the presence of errors and
+warnings where the cursor is located, allowing for the same level of immediate feedback while navigating and editing
+code.
 
-JetBrains IDEs are incredibly powerful and popular tools used by many software engineers around the world. One of their biggest advantages is their code intelligence features. However, these features heavily rely on immediate visual feedback within the editor, making it difficult to use those features if the user is blind or visually impaired. A sighted user can quickly glance at the squiggles or lightbulbs without leaving the editor. On the other hand, someone who uses a screen reader would have to toggle back-and-forth between the editor and problems view to get that same information. AudioBug bridges this gap by providing spoken and auditory feedback to convey the presence of errors and warnings where the cursor is located, allowing for the same level of immediate feedback while navigating and editing code. 
+## Key Features
 
+- Automatic Diagnostic Announcements - Sound cues and spoken feedback for errors and warnings associated with the
+  current line.
+- Read Error/Warning Descriptions - When alt/option+R is pressed, read the description of the error or warning
+  associated
+  with the current line. If multiple errors/warnings are present, repeatedly press the keystroke to cycle through them.
 
 ## Requirements
 
@@ -22,14 +35,6 @@ JetBrains IDEs are incredibly powerful and popular tools used by many software e
 - JAWS 2024
 - VoiceOver on macOS 26.6 (25G72)
 - Rider, IntelliJ IDEA, CLion (2025.3 up to and including 2026.2)
-
-## Key Features
-
-- Automatic Diagnostic Announcements - Sound cues and spoken feedback for errors and warnings associated with the
-  current line.
-- Read Error/Warning Descriptions - When alt/option+R is pressed, read the description of the error or warning
-  associated
-  with the current line. If multiple errors/warnings are present, repeatedly press the keystroke to cycle through them.
 
 ## Installation
 
