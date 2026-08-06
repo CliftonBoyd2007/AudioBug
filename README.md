@@ -1,16 +1,18 @@
 # AudioBug
 
 AudioBug is a plugin for JetBrains IDEs that provides non-visual editor feedback to someone using a screen reader.
-Inspired by the accessible feedback in Visual Studio and Visual Studio Code, it brings a similar experience to JetBrains
-IDEs.
+Inspired by the accessible nature of in Visual Studio and Visual Studio Code, it brings a similar experience to
+JetBrains
+IDEs by utilizing audio cues and spoken feedback to convey information rather than visual cues to make software
+development for the blind and visually impaired more accessible in more environments.
 
 ## Why AudioBug?
 
 JetBrains IDEs are incredibly powerful and popular tools used by many software engineers around the world. One of their
 biggest advantages is their code intelligence features. However, these features heavily rely on immediate visual
 feedback within the editor, making it difficult to use those features if the user is blind or visually impaired. A
-sighted user can quickly glance at the squiggles or lightbulbs without leaving the editor. On the other hand, someone
-who uses a screen reader would have to toggle back-and-forth between the editor and problems view to get that same
+sighted user can quickly glance at the squiggles or lightbulbs without leaving the editor. By contrast, someone
+who uses a screen reader would have to toggle back and forth between the editor and problems view to get that same
 information. AudioBug bridges this gap by providing spoken and auditory feedback to convey the presence of errors and
 warnings where the cursor is located, allowing for the same level of immediate feedback while navigating and editing
 code.
