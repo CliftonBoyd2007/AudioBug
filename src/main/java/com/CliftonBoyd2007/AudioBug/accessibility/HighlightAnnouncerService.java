@@ -12,6 +12,7 @@ import java.util.List;
  * Decides which highlight type should be announced to the user.
  * AudioBug prioritizes errors over warnings to avoid overwhelming the user with information. This is particularly important if both errors and warnings coexist on the same line.
  * With this in mind, please do not modify that logic.
+ * Copyright Clifton Boyd and AudioBug Contributors.
  *
  * @author Clifton Boyd
  */

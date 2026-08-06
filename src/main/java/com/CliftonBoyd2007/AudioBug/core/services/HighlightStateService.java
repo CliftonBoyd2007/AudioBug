@@ -11,6 +11,9 @@ import java.util.List;
 
 /**
  * Implements facilities for obtaining information about highlights received from a {@link LineHighlightLocator} instance.
+ * <p>
+ * Copyright Clifton Boyd and AudioBug Contributors.
+ * </p>
  *
  * @author Clifton Boyd
  */

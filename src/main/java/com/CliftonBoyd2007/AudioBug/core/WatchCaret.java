@@ -6,13 +6,13 @@ import com.intellij.openapi.editor.event.CaretListener;
 import org.jetbrains.annotations.NotNull;
 
 
-
-
 /**
  * Listens to caret movement and determines whether AudioBug should respond when the caret changes position.
  *
  * <p>
  * It distinguishes between vertical and lateral movement to avoid overwhelming the user with feedback.
+ * </p>
+ * Copyright Clifton Boyd and AudioBug Contributors.
  *
  * @author Clifton Boyd
  */
@@ -25,7 +25,7 @@ public class WatchCaret implements CaretListener {
     /**
      * Constructs an instance of the WatchCaret class.
      * <p>
-     * Please, for the love of God, DO NOT call this yourself. This is only here for {@link AudioBug_Init}.
+     * Please DO NOT call this yourself. This is only here for {@link AudioBug_Init}.
      */
     WatchCaret() {
         // Unless you are testing something, leave this method alone.
@@ -46,7 +46,7 @@ public class WatchCaret implements CaretListener {
         boolean caretHasMovedToNewLine = hasCaretMovedToNewLine(oldPosition, newPosition);
         if (caretHasMovedToNewLine) {
             highlightLocatorUpdateHelper(event);
-            } else {
+        } else {
             return;
 
         }

@@ -2,6 +2,7 @@ package com.CliftonBoyd2007.AudioBug.core;
 
 
 import java.util.ArrayList;
+
 import com.CliftonBoyd2007.AudioBug.core.services.HighlightStateService;
 import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.codeInsight.daemon.impl.DaemonCodeAnalyzerEx;
@@ -15,6 +16,9 @@ import com.CliftonBoyd2007.AudioBug.accessibility.HighlightAnnouncerService;
 
 /**
  * Responsible for querying highlights for the current line of the caret for AudioBug to announce.
+ * <p>
+ * Copyright Clifton Boyd and AudioBug Contributors.
+ * </p>
  *
  * @author Clifton Boyd
  */

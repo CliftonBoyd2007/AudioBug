@@ -7,6 +7,12 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.sound.sampled.LineUnavailableException;
 import java.net.URL;
 
+/**
+ * Facilitates audio file playback for error, warning, and breakpoint cues.
+ * Copyright Clifton Boyd and AudioBug Contributors.
+ *
+ * @author Clifton Boyd
+ */
 public class CuePlayer {
 
     /**

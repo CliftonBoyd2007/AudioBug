@@ -6,8 +6,10 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 
 
-
-
+/**
+ * An action for reading the highlight descriptions (e.g., "';' expected"), aloud with the active screen reader on-demand.
+ * Copyright Clifton Boyd and AudioBug Contributors.
+ */
 public class ReadHighlightDescriptionAction extends AnAction {
     @Override
     public void actionPerformed(AnActionEvent event) {

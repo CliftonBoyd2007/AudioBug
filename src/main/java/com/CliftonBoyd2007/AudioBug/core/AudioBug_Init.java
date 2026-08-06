@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
  * <p>
  * When an editor is created, this will attach an instance of {@link WatchCaret} to the caret model of the editor that was just created.
  * </p>
+ * Copyright Clifton Boyd and AudioBug Contributors.
  *
  * @author Clifton Boyd
  */

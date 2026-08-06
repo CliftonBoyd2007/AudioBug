@@ -7,6 +7,7 @@ import com.CliftonBoyd2007.AudioBug.audioutils.CuePlayer;
 import com.intellij.openapi.editor.event.EditorFactoryEvent;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.ui.accessibility.AccessibleAnnouncerUtil;
+
 import javax.accessibility.Accessible;
 import javax.swing.*;
 
@@ -14,6 +15,7 @@ import javax.swing.*;
 /**
  * Service responsible for user-facing feedback.
  * It controls both speech and audio cue playback.
+ * Copyright Clifton Boyd and AudioBug Contributors.
  *
  * @author Clifton Boyd
  */
