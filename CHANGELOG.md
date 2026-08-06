@@ -3,3 +3,29 @@
 # AudioBug Changelog
 
 ## [Unreleased]
+
+## [0.2] - 2026-08-05
+
+- Added error/warning cycling for when multiple errors or warnings exist on the same line.
+- Default behavior for automatic announcements is to no longer interrupt current screen reader speech.
+## [0.1.2] - 2026-07-20
+
+- Added sound cues to accompany error/warning announcements.
+
+
+## [0.1.1] - 2026-07-20
+
+- Fixed incorrect "error" announcement for when warnings are encountered.
+
+## [0.1] - 2026-07-20
+
+- Added automatic error/warning announcements for when an error or warning is encountered.
+
+## [0.0.2] - 2026-07-18
+
+- Added audio playback subsystem for error and warning cues.
+
+## [0.0.1] - 2026-07-09
+
+
+- Added editor cursor tracking and screen reader speech output subsystem.
