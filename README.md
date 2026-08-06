@@ -29,39 +29,42 @@ IDEs.
 - From the [releases section](https://github.com/CliftonBoyd2007/AudioBug/releases), download the latest release. The
   file name is of the form AudioBug-[version number].jar.
 - Once downloaded, verify the file's SHA-256 hash.
-    - On Windows (from Command Prompt or PowerShell):
+  - Once downloaded, verify the file's SHA-256 hash.
+  - On Windows (from Command Prompt or PowerShell):
 
-```cmd
-certutil -hashfile path\to\AudioBug-[version].jar
+    ```cmd
+    certutil -hashfile path\to\AudioBug-[version].jar
+    ```
 
-``` 
+    Where "path\to\AudioBug-[version].jar" is the path to the AudioBug JAR archive on your computer that you downloaded.
 
-Where "path\to\AudioBug-[version].jar" is the path to the AudioBug JAR archive on your computer that you downloaded.
+    The output of the above command will be of the form:
 
-The output of the above command will be of the form:
-> SHA256 hash of
-> path\to\AudioBug-[version].jar:
->
->
-930e34796bbde0525cdd281145dee8ebd132a408fec5a98141fdb25119228c3d                                                        
-> CertUtil: -hashfile command completed successfully.
+    ```cmd
+    SHA256 hash of
+    path\to\AudioBug-[version].jar:
 
-    - If on macOS (from Terminal):
 
-```zsh 
-sha256sum /path/to/AudioBug-[version].jar
-```
-Where "/path/to/AudioBug-[version].jar" is the path to the downloaded AudioBug JAR archive on your computer.
+    930e34796bbde0525cdd281145dee8ebd132a408fec5a98141fdb25119228c3d
+    CertUtil: -hashfile command completed successfully.
+    ```
 
-The output will simply be the computed hash. Compare it to the one displayed on the GitHub releases page for the version you downloaded.
+  - On macOS (from Terminal):
 
+    ```zsh
+    sha256sum /path/to/AudioBug-[version].jar
+    ```
+
+    Where "/path/to/AudioBug-[version].jar" is the path to the downloaded AudioBug JAR archive on your computer.
+
+    The output will simply be the computed hash. Compare it to the one displayed on the GitHub releases page for the version you downloaded.
 - Once the file hash has been verified, refer
   to [the instructions given by JetBrains here](https://www.jetbrains.com/help/idea/managing-plugins.html#install_plugin_from_disk)
   under the heading "Install Plugin From Disk" for instructions on installing the plugin from disk.
 - Once installed, restart the IDE.
 
 ### IMPORTANT
-AudioBug will not speak that it is installed. To ensure that it is running after you restart the IDE, press alt/option+R. The active screen
+AudioBug will not speak that it is installed. To ensure that it is running after you restart the IDE, press alt/option+R in an open editor. The active screen
 reader should announce either "No errors or warnings" or, if there is an error or warning associated with the current line, its description (e.g., "';' expected").
 
 ## Building
