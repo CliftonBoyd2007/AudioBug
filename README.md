@@ -82,12 +82,12 @@ code.
 
 ## Important Notes
 
-- In AudioBug 0.2.2 and later, it will play a sound when it starts. However, this happens long before the editor is
+- In AudioBug 0.2.2 and later, a sound will be played upon startup. However, this happens long before the editor is
   open. As such, when the editor is open and ready, it will announce "AudioBug is ready." Please be aware that this
-  announcement may be interrupted by other screen reader activity.
-- This software is stable in my testing, however it is still in early development. I have not tested it in all JetBrains
-  IDEs. Please set your expectations
+  announcement may be interrupted by other screen reader activity. To check that it is running, press alt+R (Windows) or option+R (macOS). It will either announce "No errors or warnings," or--if the cursor lands on a line with one--its description (e.g., "Cannot resolve symbol 'undeclaredVariable'").
+- This software is stable in the environments that I have tested it in. I have not tested it in every JetBrains
+  IDE or configuration. Please set your expectations
   accordingly.
 - VoiceOver users - VoiceOver suppresses automatic diagnostic announcements from AudioBug. On-demand
   announcements are still spoken by VoiceOver and shown on a connected Braille display.
-- JAWS and NVDA users - AudioBug announcements do not appear as flash messages on a Braille display.
+- JAWS and NVDA users - AudioBug announcements do not appear as flash messages on a connected Braille display.
