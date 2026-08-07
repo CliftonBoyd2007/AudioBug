@@ -4,17 +4,21 @@
 
 ## [Unreleased]
 
-<<<<<<< HEAD
-## [0.2.1] - 2026-08-07
+## [0.2.2] - 2026-08-07
 
-### Added 
+### Added
 
-- Added audio cue for when AudioBug initially starts up.
 - Added startup announcement.
 
+## [0.2.1] - 2026-08-07
+
+### Added
+
+- Added audio cue for when AudioBug initially starts up.
 
 ## [0.2] - 2026-08-05
->>>>>>> components/AudioBugStartupNotification
+
+> > > > > > > components/AudioBugStartupNotification
 
 - Added error/warning cycling for when multiple errors or warnings exist on the same line.
 
