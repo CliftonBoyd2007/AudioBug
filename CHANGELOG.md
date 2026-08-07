@@ -16,7 +16,7 @@
 
 - Added audio cue for when AudioBug initially starts up.
 
-## [0.2] - 2026-08-05
+## [0.2.0] - 2026-08-05
 
 ### Added
 
