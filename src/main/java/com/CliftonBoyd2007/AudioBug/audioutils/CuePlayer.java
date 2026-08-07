@@ -31,7 +31,10 @@ public class CuePlayer {
      * Indicates whether  all audio files are available.
      */
     private boolean allFilesAvailable;
-
+    /**
+     * The cue to be played when AudioBug starts.
+     */
+    private URL cue_Start;
     /**
      * Constructor.
      */
@@ -111,6 +114,13 @@ public class CuePlayer {
      */
     public void playCue_Warning() {
         play(this.cue_Warning);
+    }
+
+    /**
+     * Plays the cue for AudioBug startup.
+     */
+    public void playCue_Start() {
+        play(this.cue_Start);
     }
 
     /**

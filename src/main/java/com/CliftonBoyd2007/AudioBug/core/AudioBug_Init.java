@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Clifton Boyd
  */
 public final class AudioBug_Init implements EditorFactoryListener {
+
     /**
      * Registers a new instance of {@link WatchCaret} with the caret model of the newly-created editor.
      *
@@ -30,6 +31,5 @@ public final class AudioBug_Init implements EditorFactoryListener {
         assert project != null;
         FeedbackService feedbackService = project.getService(FeedbackService.class);
         feedbackService.updateAccessibleEditorUIComponent(event.getEditor().getComponent());
-
     }
 }
