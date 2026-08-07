@@ -1,5 +1,6 @@
 package com.CliftonBoyd2007.AudioBug.core;
 
+
 import com.CliftonBoyd2007.AudioBug.core.services.FeedbackService;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.event.EditorFactoryEvent;
@@ -17,6 +18,8 @@ import org.jetbrains.annotations.NotNull;
  * @author Clifton Boyd
  */
 public final class AudioBug_Init implements EditorFactoryListener {
+    private boolean notifiedUserOfStartup;
+
     /**
      * Registers a new instance of {@link WatchCaret} with the caret model of the newly-created editor.
      *
@@ -30,6 +33,21 @@ public final class AudioBug_Init implements EditorFactoryListener {
         assert project != null;
         FeedbackService feedbackService = project.getService(FeedbackService.class);
         feedbackService.updateAccessibleEditorUIComponent(event.getEditor().getComponent());
+        audioBugStartupNotifier(feedbackService);
+    }
 
+    /**
+     * Notifies the user when AudioBug initially starts.
+     *
+     * @param feedbackService The service to produce auditory feedback.
+     */
+    private void audioBugStartupNotifier(FeedbackService feedbackService) {
+        if (!this.notifiedUserOfStartup) {
+            feedbackService.player.playCue_Start();
+            feedbackService.announce("AudioBug started.", true);
+            this.notifiedUserOfStartup = true;
+        } else {
+            return;
+        }
     }
 }

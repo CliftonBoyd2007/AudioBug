@@ -28,6 +28,10 @@ public class CuePlayer {
      */
     private URL cue_Warning;
     /**
+     * The cue to be played when AudioBug starts.
+     */
+    private URL cue_Start;
+    /**
      * Indicates whether  all audio files are available.
      */
     private boolean allFilesAvailable;
@@ -48,7 +52,7 @@ public class CuePlayer {
         this.cue_Breakpoint = cl.getResource("Sounds/Breakpoint.wav");
         this.cue_Error = cl.getResource("Sounds/Error.wav");
         this.cue_Warning = cl.getResource("Sounds/Warning.wav");
-
+        this.cue_Start = cl.getResource("Sounds/AudioBug_Started.wav");
     }
 
     /**
@@ -111,6 +115,13 @@ public class CuePlayer {
      */
     public void playCue_Warning() {
         play(this.cue_Warning);
+    }
+
+    /**
+     * Plays the cue for AudioBug startup.
+     */
+    public void playCue_Start() {
+        play(this.cue_Start);
     }
 
     /**
