@@ -46,8 +46,6 @@ public final class AudioBug_Init implements EditorFactoryListener {
             feedbackService.player.playCue_Start();
             feedbackService.announce("AudioBug is ready.", true);
             this.notifiedUserOfStartup = true;
-        } else {
-            return;
         }
     }
 }

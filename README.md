@@ -1,9 +1,10 @@
 # AudioBug
 
 AudioBug is a plugin for JetBrains IDEs that provides non-visual editor feedback to someone using a screen reader.
-Inspired by the accessible nature of in Visual Studio and Visual Studio Code, it brings a similar experience to
-JetBrains
-IDEs by utilizing audio cues and spoken feedback to convey information rather than visual cues to make software
+Inspired by some of the accessibility features of Visual Studio and Visual Studio Code, AudioBug brings a similar
+experience to
+JetBrains IDEs by utilizing audio cues and spoken feedback to convey information rather than visuals in order to make
+software
 development for the blind and visually impaired more accessible in more environments.
 
 ## Why AudioBug?
@@ -12,7 +13,7 @@ JetBrains IDEs are incredibly powerful and popular tools used by many software e
 biggest advantages is their code intelligence features. However, these features heavily rely on immediate visual
 feedback within the editor, making it difficult to use those features if the user is blind or visually impaired. A
 sighted user can quickly glance at the squiggles or lightbulbs without leaving the editor. By contrast, someone
-who uses a screen reader would have to toggle back and forth between the editor and problems view to get that same
+who uses a screen reader has to toggle back and forth between the editor and problems view to get that same
 information. AudioBug bridges this gap by providing spoken and auditory feedback to convey the presence of errors and
 warnings where the cursor is located, allowing for the same level of immediate feedback while navigating and editing
 code.
@@ -47,7 +48,7 @@ code.
     - On Windows (from Command Prompt or PowerShell):
 
       ```cmd
-      certutil -hashfile path\to\AudioBug-[version].jar
+      certutil -hashfile path\to\AudioBug-[version].jar SHA256
       ```
 
       Where "path\to\AudioBug-[version].jar" is the path to the AudioBug JAR archive on your computer that you
@@ -79,15 +80,11 @@ code.
   under the heading "Install Plugin From Disk" for instructions on installing the plugin from disk.
 - Once installed, restart the IDE.
 
-### IMPORTANT
-
-AudioBug will not announce that it is installed. To ensure that it is running after you restart the IDE, press
-alt/option+R in an open editor. The active screen
-reader should announce either "No errors or warnings" or, if there is an error or warning associated with the current
-line, its description (e.g., "';' expected").
-
 ## Important Notes
 
+- In AudioBug 0.2.2 and later, it will play a sound when it starts. However, this happens long before the editor is
+  open. As such, when the editor is open and ready, it will announce "AudioBug is ready." Please be aware that this
+  announcement may be interrupted by other screen reader activity.
 - This software is stable in my testing, however it is still in early development. I have not tested it in all JetBrains
   IDEs. Please set your expectations
   accordingly.
