@@ -12,8 +12,8 @@ development for the blind and visually impaired more accessible in more environm
 JetBrains IDEs are incredibly powerful and popular tools used by many software engineers around the world. One of their
 biggest advantages is their code intelligence features. However, these features heavily rely on immediate visual
 feedback within the editor, making it difficult to use those features if the user is blind or visually impaired. A
-sighted user can quickly glance at the squiggles or lightbulbs without leaving the editor. By contrast, someone
-who uses a screen reader has to toggle back and forth between the editor and problems view to get that same
+sighted user can quickly glance at visual landmarks, such as squiggles or light bulbs, without leaving the editor. By contrast, someone
+who uses a screen reader has to toggle between the editor and problems view to get that same
 information. AudioBug bridges this gap by providing spoken and auditory feedback to convey the presence of errors and
 warnings where the cursor is located, allowing for the same level of immediate feedback while navigating and editing
 code.
