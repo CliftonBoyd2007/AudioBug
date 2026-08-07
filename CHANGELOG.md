@@ -18,7 +18,7 @@
 
 ## [0.2] - 2026-08-05
 
-> > > > > > > components/AudioBugStartupNotification
+### Added
 
 - Added error/warning cycling for when multiple errors or warnings exist on the same line.
 
