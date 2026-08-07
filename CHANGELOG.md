@@ -4,6 +4,7 @@
 
 ## [Unreleased]
 
+
 ## [0.2] - 2026-08-05
 
 - Added error/warning cycling for when multiple errors or warnings exist on the same line.
