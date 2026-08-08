@@ -28,7 +28,7 @@ code.
 
 ## Requirements
 
-- JetBrains IDE (version 2025.3 or later)
+- A JetBrains IDE (version 2025.3 or later)
 - Active screen reader
 - Gradle 9.5.0 or later (if building from source)
 
