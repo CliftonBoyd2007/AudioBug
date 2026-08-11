@@ -57,7 +57,7 @@ public final class HighlightAnnouncerService {
      *
      * @return true if the list of errors is not empty.
      */
-    public boolean shouldMakeErrorCallout() {
+    public boolean shouldAnnounceError() {
         return !this.errors.isEmpty();
     }
 
@@ -66,7 +66,7 @@ public final class HighlightAnnouncerService {
      *
      * @return true if the list of warnings is not empty and the list of errors is empty.
      */
-    public boolean shouldMakeWarningCallout() {
+    public boolean shouldAnnounceWarning() {
         return !this.warnings.isEmpty() && this.errors.isEmpty();
     }
 
@@ -78,10 +78,10 @@ public final class HighlightAnnouncerService {
      */
     private void announceHighlightType() {
         FeedbackService feedbackService = this.project.getService(FeedbackService.class);
-        if (shouldMakeErrorCallout()) {
+        if (shouldAnnounceError()) {
             feedbackService.player.playCue_Error();
             feedbackService.announce("Error.", false);
-        } else if (shouldMakeWarningCallout()) {
+        } else if (shouldAnnounceWarning()) {
             feedbackService.player.playCue_Warning();
             feedbackService.announce("Warning.", false);
         }
@@ -111,7 +111,7 @@ public final class HighlightAnnouncerService {
         }
 
 
-        if (shouldMakeErrorCallout()) {
+        if (shouldAnnounceError()) {
             if (indexOfHighlight >= this.errors.size()) {
                 this.highlightIndex = 0; // wrap around
                 announceHighlightDescription(this.highlightIndex);
@@ -123,7 +123,7 @@ public final class HighlightAnnouncerService {
             this.highlightIndex++;
 
 
-        } else if (shouldMakeWarningCallout()) {
+        } else if (shouldAnnounceWarning()) {
             if (indexOfHighlight >= this.warnings.size()) {
                 this.highlightIndex = 0; // wrap around
                 announceHighlightDescription(this.highlightIndex);
