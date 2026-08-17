@@ -1,5 +1,6 @@
 package com.CliftonBoyd2007.AudioBug.accessibility;
 
+import com.CliftonBoyd2007.AudioBug.audioutils.Cue;
 import com.CliftonBoyd2007.AudioBug.core.services.FeedbackService;
 import com.CliftonBoyd2007.AudioBug.core.services.HighlightStateService;
 import com.intellij.codeInsight.daemon.impl.HighlightInfo;
@@ -79,10 +80,10 @@ public final class HighlightAnnouncerService {
     private void announceHighlightType() {
         FeedbackService feedbackService = this.project.getService(FeedbackService.class);
         if (shouldAnnounceError()) {
-            feedbackService.player.playCue_Error();
+            feedbackService.playCue(Cue.ERROR);
             feedbackService.announce("Error.", false);
         } else if (shouldAnnounceWarning()) {
-            feedbackService.player.playCue_Warning();
+            feedbackService.playCue(Cue.WARNING);
             feedbackService.announce("Warning.", false);
         }
     }

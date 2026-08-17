@@ -10,7 +10,7 @@ import com.intellij.util.ui.accessibility.AccessibleAnnouncerUtil;
 
 import javax.accessibility.Accessible;
 import javax.swing.*;
-
+import com.CliftonBoyd2007.AudioBug.audioutils.Cue;
 
 /**
  * Service responsible for user-facing feedback.
@@ -21,7 +21,7 @@ import javax.swing.*;
  */
 @Service(Service.Level.PROJECT)
 public final class FeedbackService {
-    public final CuePlayer player = new CuePlayer();
+    private final CuePlayer player = new CuePlayer();
     private final Project project;
     private Accessible accessibleEditorUIComponent;
 
@@ -50,4 +50,10 @@ public final class FeedbackService {
 
 
     }
+
+    public void playCue(Cue cue) {
+        this.player.playCue(cue);
+    }
+
+
 }

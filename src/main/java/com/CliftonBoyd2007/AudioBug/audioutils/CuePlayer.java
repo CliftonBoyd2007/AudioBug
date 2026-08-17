@@ -39,8 +39,8 @@ public class CuePlayer {
      * Constructor.
      */
     public CuePlayer() {
-         loadAudioResources();
-
+        // loadAudioResources();
+        loadAudioFiles_Map();
     }
 
     private void loadAudioFiles_Map() {
@@ -51,9 +51,9 @@ public class CuePlayer {
         }
     }
 
-    /**
-     * Loads audio files into CuePlayer.
-     */
+    /*
+        /// Loads audio files into CuePlayer.
+
     private void loadAudioResources() {
         ClassLoader cl = getClass().getClassLoader();
         this.cue_Breakpoint = cl.getResource(Cue.BREAKPOINT.getResourcePath());
@@ -61,6 +61,7 @@ public class CuePlayer {
         this.cue_Warning = cl.getResource(Cue.WARNING.getResourcePath());
         this.cue_Start = cl.getResource(Cue.STARTUP.getResourcePath());
     }
+    */
 
 
     /**
@@ -85,34 +86,12 @@ public class CuePlayer {
         }
     }
 
-    /**
-     * Plays the cue for errors.
-     */
-    public void playCue_Error() {
-        play(this.cue_Error);
-    }
+    public void playCue(Cue cue) {
+        play(this.audioResources.get(cue));
 
-    /**
-     * Plays the cue for breakpoints.
-     */
-    public void playCue_Breakpoint() {
-        play(this.cue_Breakpoint);
 
     }
 
-    /**
-     * Plays the cue for warnings.
-     */
-    public void playCue_Warning() {
-        play(this.cue_Warning);
-    }
-
-    /**
-     * Plays the cue for AudioBug startup.
-     */
-    public void playCue_Start() {
-        play(this.cue_Start);
-    }
 
 
 }

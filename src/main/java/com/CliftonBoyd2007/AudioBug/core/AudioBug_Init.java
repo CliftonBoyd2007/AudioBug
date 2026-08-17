@@ -1,6 +1,7 @@
 package com.CliftonBoyd2007.AudioBug.core;
 
 
+import com.CliftonBoyd2007.AudioBug.audioutils.Cue;
 import com.CliftonBoyd2007.AudioBug.core.services.FeedbackService;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.event.EditorFactoryEvent;
@@ -43,7 +44,7 @@ public final class AudioBug_Init implements EditorFactoryListener {
      */
     private void audioBugStartupNotifier(FeedbackService feedbackService) {
         if (!this.notifiedUserOfStartup) {
-            feedbackService.player.playCue_Start();
+            feedbackService.playCue(Cue.STARTUP);
             feedbackService.announce("AudioBug is ready.", true);
             this.notifiedUserOfStartup = true;
         }
