@@ -6,6 +6,8 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.sound.sampled.LineUnavailableException;
 import java.net.URL;
+import java.util.HashMap;
+
 
 /**
  * Facilitates audio file playback for error, warning, and breakpoint cues.
@@ -31,14 +33,22 @@ public class CuePlayer {
      * The cue to be played when AudioBug starts.
      */
     private URL cue_Start;
-
+    private HashMap<Cue, URL> audioResources = new HashMap<>();
 
     /**
      * Constructor.
      */
     public CuePlayer() {
-        loadAudioResources();
+         loadAudioResources();
 
+    }
+
+    private void loadAudioFiles_Map() {
+        ClassLoader cl = getClass().getClassLoader();
+        for (Cue cue : Cue.values()) {
+            URL audioResource = cl.getResource(cue.getResourcePath());
+            audioResources.put(cue, audioResource);
+        }
     }
 
     /**
@@ -51,8 +61,6 @@ public class CuePlayer {
         this.cue_Warning = cl.getResource(Cue.WARNING.getResourcePath());
         this.cue_Start = cl.getResource(Cue.STARTUP.getResourcePath());
     }
-
-
 
 
     /**
