@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## [0.2.4] - 2026-08-17 
+
+### Changed 
+
+- Changed audio playback subsystem resource management for easier future expansion.
+
 ## [0.2.3] - 2026-08-17
 
 ### Changed
