@@ -31,17 +31,14 @@ public class CuePlayer {
      * The cue to be played when AudioBug starts.
      */
     private URL cue_Start;
-    /**
-     * Indicates whether  all audio files are available.
-     */
-    private boolean allFilesAvailable;
+
 
     /**
      * Constructor.
      */
     public CuePlayer() {
         loadAudioResources();
-        this.allFilesAvailable = verifyFilesAvailable();
+
     }
 
     /**
@@ -124,12 +121,5 @@ public class CuePlayer {
         play(this.cue_Start);
     }
 
-    /**
-     * Getter for {@link this#allFilesAvailable}.
-     *
-     * @return {@link this#allFilesAvailable}.
-     */
-    public boolean getAllFilesAvailable() {
-        return this.allFilesAvailable;
-    }
+
 }
