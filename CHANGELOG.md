@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## [0.2.3] - 2026-08-17
+
+### Changed
+
+- Changed where resource paths for audio cues are stored in preparation for CuePlayer rewrite.
+
 ## [0.2.2] - 2026-08-07
 
 ### Added
