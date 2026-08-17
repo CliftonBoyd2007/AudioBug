@@ -46,24 +46,13 @@ public class CuePlayer {
      */
     private void loadAudioResources() {
         ClassLoader cl = getClass().getClassLoader();
-        this.cue_Breakpoint = cl.getResource("Sounds/Breakpoint.wav");
-        this.cue_Error = cl.getResource("Sounds/Error.wav");
-        this.cue_Warning = cl.getResource("Sounds/Warning.wav");
-        this.cue_Start = cl.getResource("Sounds/AudioBug_Started.wav");
+        this.cue_Breakpoint = cl.getResource(Cue.BREAKPOINT.getResourcePath());
+        this.cue_Error = cl.getResource(Cue.ERROR.getResourcePath());
+        this.cue_Warning = cl.getResource(Cue.WARNING.getResourcePath());
+        this.cue_Start = cl.getResource(Cue.STARTUP.getResourcePath());
     }
 
-    /**
-     * @return true if all URLs are not null.
-     */
-    private boolean verifyFilesAvailable() {
-        if (this.cue_Breakpoint == null || this.cue_Error == null || this.cue_Warning == null) {
-            return false;
-        }
-        return this.cue_Breakpoint != null
-                && this.cue_Error != null
-                && this.cue_Warning != null;
 
-    }
 
 
     /**
@@ -82,10 +71,6 @@ public class CuePlayer {
             Clip clip = AudioSystem.getClip();
             clip.open(inputStream);
             clip.start();
-        } catch (LineUnavailableException e) {
-            System.out.println(e.getMessage());
-        } catch (UnsupportedAudioFileException e) {
-            System.out.println(e.getMessage());
         } catch (Exception e) {
             System.out.println(e.getMessage());
 
