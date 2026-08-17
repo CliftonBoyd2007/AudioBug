@@ -17,51 +17,24 @@ import java.util.HashMap;
  */
 public class CuePlayer {
 
-    /**
-     * The cue to be played when an error is encountered.
-     */
-    private URL cue_Error;
-    /**
-     * The cue to be played when a breakpoint is encountered.
-     */
-    private URL cue_Breakpoint;
-    /**
-     * The cue to be played when a warning is encountered.
-     */
-    private URL cue_Warning;
-    /**
-     * The cue to be played when AudioBug starts.
-     */
-    private URL cue_Start;
-    private HashMap<Cue, URL> audioResources = new HashMap<>();
+
+    private final HashMap<Cue, URL> audioResources = new HashMap<>();
 
     /**
      * Constructor.
      */
     public CuePlayer() {
-        // loadAudioResources();
-        loadAudioFiles_Map();
+
+        loadAudioFiles();
     }
 
-    private void loadAudioFiles_Map() {
+    private void loadAudioFiles() {
         ClassLoader cl = getClass().getClassLoader();
         for (Cue cue : Cue.values()) {
             URL audioResource = cl.getResource(cue.getResourcePath());
             audioResources.put(cue, audioResource);
         }
     }
-
-    /*
-        /// Loads audio files into CuePlayer.
-
-    private void loadAudioResources() {
-        ClassLoader cl = getClass().getClassLoader();
-        this.cue_Breakpoint = cl.getResource(Cue.BREAKPOINT.getResourcePath());
-        this.cue_Error = cl.getResource(Cue.ERROR.getResourcePath());
-        this.cue_Warning = cl.getResource(Cue.WARNING.getResourcePath());
-        this.cue_Start = cl.getResource(Cue.STARTUP.getResourcePath());
-    }
-    */
 
 
     /**
@@ -91,7 +64,6 @@ public class CuePlayer {
 
 
     }
-
 
 
 }
