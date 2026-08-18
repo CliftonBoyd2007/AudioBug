@@ -19,10 +19,13 @@ import org.jetbrains.annotations.NotNull;
  * @author Clifton Boyd
  */
 public final class AudioBug_Init implements EditorFactoryListener {
+    /**
+     * Indicates whether AudioBug has played the startup cue and made the startup announcement.
+     */
     private boolean notifiedUserOfStartup;
 
     /**
-     * Registers a new instance of {@link WatchCaret} with the caret model of the newly-created editor.
+     * Registers a new instance of {@link WatchCaret} with the caret model of the newly-created editor so the caret can be tracked.
      *
      * @param event The event containing information about the editor.
      */
@@ -38,9 +41,9 @@ public final class AudioBug_Init implements EditorFactoryListener {
     }
 
     /**
-     * Notifies the user when AudioBug initially starts.
+     * Plays the startup sound cue and makes a readiness announcement upon startup.
      *
-     * @param feedbackService The service to produce auditory feedback.
+     * @param feedbackService The service to produce spoken and auditory feedback.
      */
     private void audioBugStartupNotifier(FeedbackService feedbackService) {
         if (!this.notifiedUserOfStartup) {
