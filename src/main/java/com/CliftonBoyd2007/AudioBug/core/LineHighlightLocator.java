@@ -44,17 +44,16 @@ public class LineHighlightLocator {
     /**
      * Backing store for error highlights.
      */
-    private ArrayList<HighlightInfo> errors;
+    private final ArrayList<HighlightInfo> errors = new ArrayList<>();
 
     /**
      * Backing store for warning highlights.
      */
-    private ArrayList<HighlightInfo> warnings;
+    private final ArrayList<HighlightInfo> warnings = new ArrayList<>();
 
 
     public LineHighlightLocator(@NotNull CaretEvent event) {
-        this.errors = new ArrayList<>();
-        this.warnings = new ArrayList<>();
+
         this.project = event.getEditor().getProject();
         this.document = event.getEditor().getDocument();
         update(event);
