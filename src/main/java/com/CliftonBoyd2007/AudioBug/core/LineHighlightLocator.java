@@ -79,8 +79,10 @@ public class LineHighlightLocator {
      * @param event The event containing information about the caret.
      */
     public void update(@NotNull CaretEvent event) {
-        this.lineOffsets = getLineOffsets(event);
+
+        // Update the document before trying to update line offsets; otherwise we will throw a NullPointerException
         updateDocument(event.getEditor().getDocument());
+        this.lineOffsets = getLineOffsets(event);
         // Clear the lists before retrieving new highlights to avoid retaining stale highlights.
         clearErrorAndWarningLists();
 
