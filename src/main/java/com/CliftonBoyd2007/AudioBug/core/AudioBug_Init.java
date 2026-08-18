@@ -23,7 +23,7 @@ public final class AudioBug_Init implements EditorFactoryListener {
      * Indicates whether AudioBug has played the startup cue and made the startup announcement.
      */
     private boolean notifiedUserOfStartup;
-    private WatchCaret caretWatcher = new WatchCaret();
+
     /**
      * Registers a new instance of {@link WatchCaret} with the caret model of the newly-created editor so the caret can be tracked.
      *
@@ -32,7 +32,7 @@ public final class AudioBug_Init implements EditorFactoryListener {
     @Override
     public void editorCreated(@NotNull EditorFactoryEvent event) {
         CaretModel caretModel = event.getEditor().getCaretModel();
-        caretModel.addCaretListener(this.caretWatcher);
+        caretModel.addCaretListener(new WatchCaret());
         Project project = event.getEditor().getProject();
         assert project != null;
         FeedbackService feedbackService = project.getService(FeedbackService.class);
