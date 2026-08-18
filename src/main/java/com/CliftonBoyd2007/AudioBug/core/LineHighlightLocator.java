@@ -55,7 +55,6 @@ public class LineHighlightLocator {
     public LineHighlightLocator(@NotNull CaretEvent event) {
 
         this.project = event.getEditor().getProject();
-        this.document = event.getEditor().getDocument();
         update(event);
 
     }
@@ -80,7 +79,7 @@ public class LineHighlightLocator {
      */
     public void update(@NotNull CaretEvent event) {
         this.lineOffsets = getLineOffsets(event);
-        updateDocumentIfChanged(this.document, event.getEditor().getDocument());
+        updateDocument(event.getEditor().getDocument());
         // Clear the lists before retrieving new highlights to avoid retaining stale highlights.
         clearErrorAndWarningLists();
 
@@ -103,17 +102,14 @@ public class LineHighlightLocator {
 
 
     /**
-     * Updates the document instance field if the current document has changed.
+     * Updates the document instance field.
+     * We must do this to ensure that we are not pulling from a stale Document when the end-user moves from one to another.
      *
-     * @param oldDocument the previous document in which the user was working.
      * @param newDocument The document the user has moved to.
      */
-    private void updateDocumentIfChanged(Document oldDocument, Document newDocument) {
+    private void updateDocument(Document newDocument) {
 
-        if (!oldDocument.equals(newDocument)) {
-            this.document = newDocument;
-
-        }
+        this.document = newDocument;
     }
 
 
