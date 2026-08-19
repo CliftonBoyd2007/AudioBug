@@ -10,6 +10,7 @@ import com.intellij.util.ui.accessibility.AccessibleAnnouncerUtil;
 
 import javax.accessibility.Accessible;
 import javax.swing.*;
+
 import com.CliftonBoyd2007.AudioBug.audioutils.Cue;
 
 /**
@@ -22,11 +23,13 @@ import com.CliftonBoyd2007.AudioBug.audioutils.Cue;
 @Service(Service.Level.PROJECT)
 public final class FeedbackService {
     private final CuePlayer player = new CuePlayer();
-    private final Project project;
+
     private Accessible accessibleEditorUIComponent;
 
-    public FeedbackService(Project project) {
-        this.project = project;
+    public FeedbackService() {
+        // Exists for valid construction.
+        // Don't do anything here if you don't have to.
+        // This is here so that the IntelliJ Platform can instantiate this service.
     }
 
     /**

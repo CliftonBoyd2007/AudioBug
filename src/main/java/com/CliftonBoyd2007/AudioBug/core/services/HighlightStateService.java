@@ -28,10 +28,9 @@ public final class HighlightStateService {
      */
     private ArrayList<HighlightInfo> warnings;
 
-    private final Project project;
 
-    public HighlightStateService(Project project) {
-        this.project = project;
+    public HighlightStateService() {
+
         this.errors = new ArrayList<>();
         this.warnings = new ArrayList<>();
 
