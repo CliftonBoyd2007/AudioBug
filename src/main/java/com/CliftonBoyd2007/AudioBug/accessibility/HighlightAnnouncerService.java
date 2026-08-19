@@ -27,17 +27,27 @@ public final class HighlightAnnouncerService {
      * Temporary storage for warning highlights from {@link HighlightStateService}.
      */
     private List<HighlightInfo> warnings;
-    /**
-     * The current project from which we obtain required services.
-     */
-    private final Project project;
+
     /**
      * The index of the highlight whose description we want to announce.
      */
     private int highlightIndex;
+    /**
+     * The project from which we obtain required services.
+     */
+    private final Project project;
 
+    /**
+     * Constructor.
+     * <p>
+     * Please do not call this yourself.
+     * This exists for the IntelliJ Platform so that it can construct this service when it is required.
+     * To obtain this service elsewhere, use {@link Project#getService(Class)}.
+     * </p>
+     *
+     * @param project the project from which we obtain required services
+     */
     public HighlightAnnouncerService(Project project) {
-
         this.project = project;
         this.highlightIndex = 0;
     }

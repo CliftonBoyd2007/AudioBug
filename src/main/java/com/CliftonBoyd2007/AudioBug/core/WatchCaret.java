@@ -18,18 +18,21 @@ import org.jetbrains.annotations.NotNull;
  */
 public class WatchCaret implements CaretListener {
     /**
-     * Object responsible for querying for highlights on the line where the caret is located.
+     * Queries for and collects error/warning highlights.
      */
     private LineHighlightLocator locator;
 
     /**
-     * Constructs an instance of the WatchCaret class.
+     * Constructor.
      * <p>
      * Please DO NOT call this yourself. This is only here for {@link AudioBug_Init}.
+     * </p>
      */
     WatchCaret() {
-        // Unless you are testing something, leave this method alone.
-        // This only exists to make sure that this object is correctly constructed.
+
+        // locator is managed by highlightLocatorUpdateHelper().
+        // We do not initialize locator here because we cannot correctly construct it without a CaretEvent.
+
 
     }
 
@@ -64,7 +67,8 @@ public class WatchCaret implements CaretListener {
     }
 
     /**
-     * Helper method for updating the {@link LineHighlightLocator} safely.
+     * Helper method for maintaining the LineHighlightLocator instance.
+     * We do this here to avoid throwing {@link NullPointerException} when updating it.
      *
      * @param event the event containing information about the caret.
      */

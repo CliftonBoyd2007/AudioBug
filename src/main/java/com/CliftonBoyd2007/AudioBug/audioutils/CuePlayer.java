@@ -17,17 +17,23 @@ import java.util.HashMap;
  */
 public class CuePlayer {
 
-
+    /**
+     * Maps each {@link Cue} to its corresponding audio file in the JAR.
+     * We use a map because adding cues does not require extra methods, and it also allows for O(1) lookup time on average.
+     */
     private final HashMap<Cue, URL> audioResources = new HashMap<>();
 
     /**
-     * Constructor.
+     * Loads audio files into memory immediately upon construction so that they are always available to be played.
      */
     public CuePlayer() {
 
         loadAudioFiles();
     }
 
+    /**
+     * Establishes the mapping of {@link Cue} to their corresponding file's {@link URL}.
+     */
     private void loadAudioFiles() {
         ClassLoader cl = getClass().getClassLoader();
         for (Cue cue : Cue.values()) {
@@ -39,7 +45,6 @@ public class CuePlayer {
 
     /**
      * Plays the specified file with the Java Clip sound API.
-     * If any exception is thrown, audio playback will be disabled, regardless of the availability of the audio files.
      *
      * @param file the audio file to be played.
      * @throws UnsupportedAudioFileException When an unsupported file is specified.
@@ -59,6 +64,12 @@ public class CuePlayer {
         }
     }
 
+    /**
+     * Plays the given audio cue.
+     *
+     * @param cue the cue to be played
+     * @see Cue
+     */
     public void playCue(Cue cue) {
         play(this.audioResources.get(cue));
 

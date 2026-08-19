@@ -28,7 +28,14 @@ public final class HighlightStateService {
      */
     private ArrayList<HighlightInfo> warnings;
 
-
+    /**
+     * Constructor.
+     * <p>
+     * Please do not call this yourself.
+     * This exists for the IntelliJ Platform so that it can construct this service when it is required.
+     * To obtain this service elsewhere, use {@link Project#getService(Class)}.
+     * </p>
+     */
     public HighlightStateService() {
 
         this.errors = new ArrayList<>();
@@ -48,18 +55,20 @@ public final class HighlightStateService {
     }
 
     /**
-     * Returns an unmodifiable copy of errors for the current line.
+     * Returns an unmodifiable view of errors for the current line.
+     * We do this to allow other parts of AudioBug to consume error/warning highlights without delegating the responsibility of ensuring immutability to those components.
      *
-     * @return unmodifiable list of error highlights.
+     * @return unmodifiable view of the list of error highlights.
      */
     public List<HighlightInfo> getErrors() {
         return Collections.unmodifiableList(this.errors);
     }
 
     /**
-     * Returns an unmodifiable copy of warnings for the current line.
+     * Returns an unmodifiable view of warnings for the current line.
+     * We do this to allow other parts of AudioBug to consume error/warning highlights without delegating the responsibility of ensuring immutability to those components.
      *
-     * @return unmodifiable list of warning highlights.
+     * @return unmodifiable view of the list of warning highlights.
      */
     public List<HighlightInfo> getWarnings() {
         return Collections.unmodifiableList(this.warnings);

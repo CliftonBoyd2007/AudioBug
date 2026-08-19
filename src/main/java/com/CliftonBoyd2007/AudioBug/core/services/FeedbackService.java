@@ -24,18 +24,27 @@ import com.CliftonBoyd2007.AudioBug.audioutils.Cue;
 public final class FeedbackService {
     private final CuePlayer player = new CuePlayer();
 
+    /**
+     * The UI component from which screen reader announcements will originate.
+     */
     private Accessible accessibleEditorUIComponent;
 
+    /**
+     * Constructor.
+     * <p>
+     * Please do not call this yourself.
+     * This exists for the IntelliJ Platform so that it can construct this service when it is required.
+     * To obtain this service elsewhere, use {@link Project#getService(Class)}.
+     * </p>
+     */
     public FeedbackService() {
-        // Exists for valid construction.
-        // Don't do anything here if you don't have to.
-        // This is here so that the IntelliJ Platform can instantiate this service.
+
     }
 
     /**
      * Make an announcement with the active screen reader.
      *
-     * @param message                      the message to announce.
+     * @param message                      the string to announce.
      * @param interruptCurrentSpeechOutput determine whether to interrupt current screen reader speech for this announcement.
      */
     public void announce(String message, boolean interruptCurrentSpeechOutput) {
@@ -45,6 +54,7 @@ public final class FeedbackService {
     /**
      * Update the editor UI component from which screen reader announcements will originate.
      * This must only be called in {@link AudioBug_Init#editorCreated(EditorFactoryEvent)}. Please do not call this yourself.
+     * We do this because we must ensure that the {@link Accessible} we are using to make screen reader announcements with is valid.
      *
      * @param editorComponent the component to retrieve accessible context from.
      */
@@ -54,6 +64,12 @@ public final class FeedbackService {
 
     }
 
+    /**
+     * Plays the given audio cue.
+     *
+     * @param cue the cue to be played
+     * @see Cue
+     */
     public void playCue(Cue cue) {
         this.player.playCue(cue);
     }

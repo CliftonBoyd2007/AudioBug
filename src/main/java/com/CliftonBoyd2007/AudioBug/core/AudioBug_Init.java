@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Initializes AudioBug for newly-created editor instances.
  * <p>
- * When an editor is created, this will attach an instance of {@link WatchCaret} to the caret model of the editor that was just created.
+ * When an editor is created, this will attach an instance of {@link WatchCaret} to the caret model of the editor that was just created so that AudioBug can monitor the caret.
  * </p>
  * Copyright Clifton Boyd and AudioBug Contributors.
  *
