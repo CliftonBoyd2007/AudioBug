@@ -10,9 +10,9 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Implements facilities for obtaining information about highlights received from a {@link LineHighlightLocator} instance.
+ * Project-level service for maintaining the state of highlights on the current line for other services to query.
  * <p>
- * Copyright Clifton Boyd and AudioBug Contributors.
+ * This service is populated from {@link LineHighlightLocator}
  * </p>
  *
  * @author Clifton Boyd

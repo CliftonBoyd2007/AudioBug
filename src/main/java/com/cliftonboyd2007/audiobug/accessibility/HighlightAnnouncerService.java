@@ -10,10 +10,11 @@ import com.intellij.openapi.project.Project;
 import java.util.List;
 
 /**
- * Decides which highlight type should be announced to the user.
- * AudioBug prioritizes errors over warnings to avoid overwhelming the user with information. This is particularly important if both errors and warnings coexist on the same line.
- * With this in mind, please do not modify that logic.
- * Copyright Clifton Boyd and AudioBug Contributors.
+ * Project-level service that decides what highlight type gets announced.
+ * <p>
+ * If errors and warnings coexist on the same line, this service will only announce the errors.
+ * This is to avoid overwhelming the user with excessive feedback.
+ * </p>
  *
  * @author Clifton Boyd
  */

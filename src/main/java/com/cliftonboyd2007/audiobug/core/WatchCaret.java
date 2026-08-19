@@ -10,9 +10,8 @@ import org.jetbrains.annotations.NotNull;
  * Listens to caret movement and determines whether AudioBug should respond when the caret changes position.
  *
  * <p>
- * It distinguishes between vertical and lateral movement to avoid overwhelming the user with feedback.
+ * It distinguishes between vertical and lateral movement to avoid overwhelming the user with feedback and to determine if AudioBug should begin querying for error/warning highlights.
  * </p>
- * Copyright Clifton Boyd and AudioBug Contributors.
  *
  * @author Clifton Boyd
  */

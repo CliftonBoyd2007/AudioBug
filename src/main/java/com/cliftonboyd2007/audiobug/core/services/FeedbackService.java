@@ -14,9 +14,11 @@ import javax.swing.*;
 import com.cliftonboyd2007.audiobug.audioutils.Cue;
 
 /**
- * Service responsible for user-facing feedback.
- * It controls both speech and audio cue playback.
- * Copyright Clifton Boyd and AudioBug Contributors.
+ * Project-level service responsible for coordinating user-facing feedback.
+ *
+ * <p>
+ * This service provides a single entry point for both speech and audio feedback so that other components can request speech and/or audio without interacting with internal implementation details.
+ * </p>
  *
  * @author Clifton Boyd
  */
@@ -53,10 +55,17 @@ public final class FeedbackService {
 
     /**
      * Update the editor UI component from which screen reader announcements will originate.
-     * This must only be called in {@link AudioBug_Init#editorCreated(EditorFactoryEvent)}. Please do not call this yourself.
+     * <p>
+     * This must only be called in {@link AudioBug_Init#editorCreated(EditorFactoryEvent)}.
      * We do this because we must ensure that the {@link Accessible} we are using to make screen reader announcements with is valid.
+     * If it is not, we cannot make any announcements.
+     * </p>
+     * <p>
+     * For more info about making announcements, see <a href="https://plugins.jetbrains.com/docs/intellij/accessibility.html#announcing-live-changes"/>
      *
      * @param editorComponent the component to retrieve accessible context from.
+     * @see Accessible
+     * @see AccessibleAnnouncerUtil
      */
     public void updateAccessibleEditorUIComponent(JComponent editorComponent) {
         this.accessibleEditorUIComponent = editorComponent.getAccessibleContext().getAccessibleParent();
