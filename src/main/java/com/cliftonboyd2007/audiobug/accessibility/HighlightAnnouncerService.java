@@ -84,9 +84,6 @@ public final class HighlightAnnouncerService {
 
     /**
      * Announces the highlight type of greatest precedence.
-     * Note that the precedence model is:
-     * Error > Warning
-     * In other words, even if errors and warnings coexist on the same line, because errors have greatest precedence, only the error announcement should be made.
      */
     private void announceHighlightType() {
         FeedbackService feedbackService = this.project.getService(FeedbackService.class);
@@ -98,7 +95,6 @@ public final class HighlightAnnouncerService {
             feedbackService.announce("Warning.", false);
         }
     }
-
 
     /**
      * Announces the description of the highlight with the highest precedence.
