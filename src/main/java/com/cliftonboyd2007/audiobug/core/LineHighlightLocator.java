@@ -1,9 +1,9 @@
-package com.CliftonBoyd2007.AudioBug.core;
+package com.cliftonboyd2007.audiobug.core;
 
 
 import java.util.ArrayList;
 
-import com.CliftonBoyd2007.AudioBug.core.services.HighlightStateService;
+import com.cliftonboyd2007.audiobug.core.services.HighlightStateService;
 import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.codeInsight.daemon.impl.DaemonCodeAnalyzerEx;
 import com.intellij.codeInsight.daemon.impl.HighlightInfo;
@@ -12,7 +12,7 @@ import com.intellij.openapi.editor.event.CaretEvent;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.util.Processor;
-import com.CliftonBoyd2007.AudioBug.accessibility.HighlightAnnouncerService;
+import com.cliftonboyd2007.audiobug.accessibility.HighlightAnnouncerService;
 
 /**
  * Responsible for querying highlights for the current line of the caret for AudioBug to announce.
@@ -44,12 +44,12 @@ public class LineHighlightLocator {
     /**
      * Backing store for error highlights.
      */
-    private ArrayList<HighlightInfo> errors;
+    private final ArrayList<HighlightInfo> errors;
 
     /**
      * Backing store for warning highlights.
      */
-    private ArrayList<HighlightInfo> warnings;
+    private final ArrayList<HighlightInfo> warnings;
 
     /**
      * Constructor.
@@ -87,7 +87,7 @@ public class LineHighlightLocator {
         // Update the document before trying to update line offsets; otherwise we will throw a NullPointerException
         updateDocument(event.getEditor().getDocument());
         this.lineOffsets = getLineOffsets(event);
-        //  Avoid retaining stale highlights before retrieving new ones.
+        // Avoid retaining stale highlights before retrieving new ones.
         clearErrorAndWarningLists();
 
         getHighlights();

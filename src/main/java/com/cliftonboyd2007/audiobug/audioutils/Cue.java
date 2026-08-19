@@ -1,5 +1,5 @@
 
-package com.CliftonBoyd2007.AudioBug.audioutils;
+package com.cliftonboyd2007.audiobug.audioutils;
 
 /**
  * Represents each sounde cue that can be played in AudioBug.

@@ -1,4 +1,4 @@
-package com.CliftonBoyd2007.AudioBug.audioutils;
+package com.cliftonboyd2007.audiobug.audioutils;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;

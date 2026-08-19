@@ -1,6 +1,6 @@
-package com.CliftonBoyd2007.AudioBug.core.services;
+package com.cliftonboyd2007.audiobug.core.services;
 
-import com.CliftonBoyd2007.AudioBug.core.LineHighlightLocator;
+import com.cliftonboyd2007.audiobug.core.LineHighlightLocator;
 import com.intellij.codeInsight.daemon.impl.HighlightInfo;
 import com.intellij.openapi.components.Service;
 import com.intellij.openapi.project.Project;

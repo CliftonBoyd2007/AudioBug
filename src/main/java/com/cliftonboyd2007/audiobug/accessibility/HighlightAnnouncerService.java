@@ -1,8 +1,8 @@
-package com.CliftonBoyd2007.AudioBug.accessibility;
+package com.cliftonboyd2007.audiobug.accessibility;
 
-import com.CliftonBoyd2007.AudioBug.audioutils.Cue;
-import com.CliftonBoyd2007.AudioBug.core.services.FeedbackService;
-import com.CliftonBoyd2007.AudioBug.core.services.HighlightStateService;
+import com.cliftonboyd2007.audiobug.audioutils.Cue;
+import com.cliftonboyd2007.audiobug.core.services.FeedbackService;
+import com.cliftonboyd2007.audiobug.core.services.HighlightStateService;
 import com.intellij.codeInsight.daemon.impl.HighlightInfo;
 import com.intellij.openapi.components.Service;
 import com.intellij.openapi.project.Project;

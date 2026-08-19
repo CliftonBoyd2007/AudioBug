@@ -1,6 +1,6 @@
-package com.CliftonBoyd2007.AudioBug.core.actions;
+package com.cliftonboyd2007.audiobug.core.actions;
 
-import com.CliftonBoyd2007.AudioBug.accessibility.HighlightAnnouncerService;
+import com.cliftonboyd2007.audiobug.accessibility.HighlightAnnouncerService;
 import com.intellij.openapi.actionSystem.AnAction;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;

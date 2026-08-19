@@ -1,8 +1,8 @@
-package com.CliftonBoyd2007.AudioBug.core;
+package com.cliftonboyd2007.audiobug.core;
 
 
-import com.CliftonBoyd2007.AudioBug.audioutils.Cue;
-import com.CliftonBoyd2007.AudioBug.core.services.FeedbackService;
+import com.cliftonboyd2007.audiobug.audioutils.Cue;
+import com.cliftonboyd2007.audiobug.core.services.FeedbackService;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.event.EditorFactoryEvent;
 import com.intellij.openapi.editor.event.EditorFactoryListener;

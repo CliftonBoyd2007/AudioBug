@@ -1,9 +1,9 @@
-package com.CliftonBoyd2007.AudioBug.core.services;
+package com.cliftonboyd2007.audiobug.core.services;
 
 
-import com.CliftonBoyd2007.AudioBug.core.AudioBug_Init;
+import com.cliftonboyd2007.audiobug.core.AudioBug_Init;
 import com.intellij.openapi.components.Service;
-import com.CliftonBoyd2007.AudioBug.audioutils.CuePlayer;
+import com.cliftonboyd2007.audiobug.audioutils.CuePlayer;
 import com.intellij.openapi.editor.event.EditorFactoryEvent;
 import com.intellij.openapi.project.Project;
 import com.intellij.util.ui.accessibility.AccessibleAnnouncerUtil;
@@ -11,7 +11,7 @@ import com.intellij.util.ui.accessibility.AccessibleAnnouncerUtil;
 import javax.accessibility.Accessible;
 import javax.swing.*;
 
-import com.CliftonBoyd2007.AudioBug.audioutils.Cue;
+import com.cliftonboyd2007.audiobug.audioutils.Cue;
 
 /**
  * Service responsible for user-facing feedback.

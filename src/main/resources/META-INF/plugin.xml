@@ -1,6 +1,6 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <id>com.CliftonBoyd2007.AudioBug</id>
+    <id>com.cliftonboyd2007.audiobug</id>
 
     <name>AudioBug</name>
     <version>0.2.6</version>
@@ -19,12 +19,12 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <editorFactoryListener implementation="com.CliftonBoyd2007.AudioBug.core.AudioBug_Init"/>
+        <editorFactoryListener implementation="com.cliftonboyd2007.audiobug.core.AudioBug_Init"/>
     </extensions>
 
     <actions>
-        <action id="com.CliftonBoyd2007.AudioBug.core.actions.ReadHighlightDescriptionAction"
-                class="com.CliftonBoyd2007.AudioBug.core.actions.ReadHighlightDescriptionAction"
+        <action id="com.cliftonboyd2007.audiobug.core.actions.ReadHighlightDescriptionAction"
+                class="com.cliftonboyd2007.audiobug.core.actions.ReadHighlightDescriptionAction"
         >
             <keyboard-shortcut keymap="$default" first-keystroke="alt R"/>
         </action>

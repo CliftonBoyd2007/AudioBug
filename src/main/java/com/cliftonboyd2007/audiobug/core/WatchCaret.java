@@ -1,4 +1,4 @@
-package com.CliftonBoyd2007.AudioBug.core;
+package com.cliftonboyd2007.audiobug.core;
 
 import com.intellij.openapi.editor.LogicalPosition;
 import com.intellij.openapi.editor.event.CaretEvent;
@@ -49,9 +49,6 @@ public class WatchCaret implements CaretListener {
         boolean caretHasMovedToNewLine = hasCaretMovedToNewLine(oldPosition, newPosition);
         if (caretHasMovedToNewLine) {
             highlightLocatorUpdateHelper(event);
-        } else {
-            return;
-
         }
     }
 
