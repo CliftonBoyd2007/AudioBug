@@ -15,9 +15,9 @@ import com.intellij.util.Processor;
 import com.cliftonboyd2007.audiobug.accessibility.HighlightAnnouncerService;
 
 /**
- * Responsible for querying highlights for the current line of the caret for AudioBug to announce.
+ * Queries for highlights associated with the line containing the caret.
  * <p>
- * Copyright Clifton Boyd and AudioBug Contributors.
+ * When found, the lists of highlights are passed to the {@link HighlightStateService} for storage and retrieval by other services and components.
  * </p>
  *
  * @author Clifton Boyd
@@ -53,6 +53,9 @@ public class LineHighlightLocator {
 
     /**
      * Constructor.
+     * <p>
+     * We begin querying for highlights immediately upon construction so that highlight state is always accurate and up-to-date.
+     * </p>
      *
      * @param event the event from which we can retrieve relevant information necessary for retrieving highlights
      */

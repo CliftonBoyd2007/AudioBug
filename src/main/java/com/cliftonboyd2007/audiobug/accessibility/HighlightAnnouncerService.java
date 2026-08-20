@@ -106,7 +106,7 @@ public final class HighlightAnnouncerService {
 
     /**
      * Announces the highlight description at the given index in either list of highlights.
-     * When the end of either list is reached, AudioBug will then wrap around back to the start of the list.
+     * When the end of either list is reached, AudioBug will then wrap around back to the start of the list to allow for continuous cycling by the user.
      *
      * @param indexOfHighlight the index of the highlight whose description we want to announce
      */
