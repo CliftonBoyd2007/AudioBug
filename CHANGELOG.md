@@ -4,9 +4,27 @@
 
 ## [Unreleased]
 
-## [0.2.4] - 2026-08-17 
+## [0.2.8] - 2026-08-19
 
-### Changed 
+- No user-facing improvements
+- Code cleanup build
+
+## [0.2.6] - 2026-08-19
+
+- Code cleanup build
+
+### Fixed
+
+- Fixed bug that would cause NullPointerExceptions when querying for highlights.
+
+## [0.2.5] - 2026-08-18
+
+- No user-facing improvements
+- Code cleanup build
+
+## [0.2.4] - 2026-08-17
+
+### Changed
 
 - Changed audio playback subsystem resource management for easier future expansion.
 
