@@ -10,8 +10,11 @@ import java.util.HashMap;
 
 
 /**
- * Facilitates audio file playback for error, warning, and breakpoint cues.
- * Copyright Clifton Boyd and AudioBug Contributors.
+ * Manages audio resource loading and playback.
+ *
+ * <p>
+ * Audio resources are loaded immediately upon construction so that they are always available to play when requested.
+ * </p>
  *
  * @author Clifton Boyd
  */

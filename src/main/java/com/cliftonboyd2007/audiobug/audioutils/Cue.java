@@ -2,7 +2,7 @@
 package com.cliftonboyd2007.audiobug.audioutils;
 
 /**
- * Represents each sounde cue that can be played in AudioBug.
+ * Represents each sound cue that can be played in AudioBug.
  */
 public enum Cue {
     /**

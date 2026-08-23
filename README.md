@@ -2,18 +2,16 @@
 
 AudioBug is a plugin for JetBrains IDEs that provides non-visual editor feedback to someone using a screen reader.
 Inspired by some of the accessibility features of Visual Studio and Visual Studio Code, AudioBug brings a similar
-experience to
-JetBrains IDEs by utilizing audio cues and spoken feedback to convey information rather than visuals in order to make
-software
-development for the blind and visually impaired more accessible in more environments.
+experience to JetBrains IDEs by utilizing audio cues and spoken feedback to convey information rather than visuals in
+order to make software development for the blind and visually impaired more accessible in more environments.
 
 ## Why AudioBug?
 
 JetBrains IDEs are incredibly powerful and popular tools used by many software engineers around the world. One of their
 biggest advantages is their code intelligence features. However, these features heavily rely on immediate visual
 feedback within the editor, making it difficult to use those features if the user is blind or visually impaired. A
-sighted user can quickly glance at visual landmarks, such as squiggles or light bulbs, without leaving the editor. By contrast, someone
-who uses a screen reader has to toggle between the editor and problems view to get that same
+sighted user can quickly glance at visual landmarks, such as squiggles or light bulbs, without leaving the editor. By
+contrast, someone who uses a screen reader has to toggle between the editor and problems view to get that same
 information. AudioBug bridges this gap by providing spoken and auditory feedback to convey the presence of errors and
 warnings where the cursor is located, allowing for the same level of immediate feedback while navigating and editing
 code.
@@ -23,8 +21,8 @@ code.
 - Automatic Diagnostic Announcements - Sound cues and spoken feedback for errors and warnings associated with the
   current line.
 - Read Error/Warning Descriptions - When alt/option+R is pressed, read the description of the error or warning
-  associated
-  with the current line. If multiple errors/warnings are present, repeatedly press the keystroke to cycle through them.
+  associated with the current line. If multiple errors/warnings are present, repeatedly press the keystroke to cycle
+  through them.
 
 ## Requirements
 
@@ -37,7 +35,11 @@ code.
 - NVDA 2025.3.2 up to and including 2026.1.1
 - JAWS 2024
 - VoiceOver on macOS 26.6 (25G72)
-- Rider, IntelliJ IDEA, CLion (2025.3 up to and including 2026.2)
+- JetBrains IDEs:
+    - IntelliJ Idea 2025.3.3 - 2026.2.1
+    - JetBrains Rider 2025.3.5 - 2026.2.0.2
+    - CLion 2025.3.6.1 - 2026.2.1
+    - PyCharm 2025.3.6.1 - 2026.2.1
 
 ## Installation
 
@@ -82,11 +84,15 @@ code.
 
 ## Important Notes
 
+- To users upgrading from AudioBug < 0.2.6: Before installing AudioBug 0.2.6 and newer, you must remove the old AudioBug
+  installation before installing the new one. Not doing so will cause two AudioBug instances to run within the IDE.
 - In AudioBug 0.2.2 and later, a sound will be played upon startup. However, this happens long before the editor is
   open. As such, when the editor is open and ready, it will announce "AudioBug is ready." Please be aware that this
-  announcement may be interrupted by other screen reader activity. To check that it is running when the editor opens, press alt+R (Windows) or option+R (macOS). It will either announce "No errors or warnings," or--if the cursor lands on a line with errors or warnings--its description (e.g., "Cannot resolve symbol 'undeclaredVariable'").
-- This software is stable in the environments that I have tested it in. I have not tested it in every JetBrains
-  IDE or configuration. Constructive feedback is welcome and encouraged.
-- VoiceOver users - VoiceOver suppresses automatic diagnostic announcements from AudioBug. On-demand
-  announcements are still spoken by VoiceOver and shown on a connected Braille display.
+  announcement may be interrupted by other screen reader activity. To check that it is running when the editor opens,
+  press alt+R (Windows) or option+R (macOS). It will either announce "No errors or warnings," or--if the cursor lands on
+  a line with errors or warnings--its description (e.g., "Cannot resolve symbol 'undeclaredVariable'").
+- This software is stable in the environments that I have tested it in. I have not tested it in every JetBrains IDE or
+  configuration. Constructive feedback is welcome and encouraged.
+- VoiceOver users - VoiceOver suppresses automatic diagnostic announcements from AudioBug. On-demand announcements are
+  still spoken by VoiceOver and shown on a connected Braille display.
 - JAWS and NVDA users - AudioBug announcements do not appear as flash messages on a connected Braille display.

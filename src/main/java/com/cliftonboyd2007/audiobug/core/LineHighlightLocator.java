@@ -23,6 +23,12 @@ import com.cliftonboyd2007.audiobug.accessibility.HighlightAnnouncerService;
  * @author Clifton Boyd
  */
 public class LineHighlightLocator {
+    /**
+     * Record constructor for LineOffsets.
+     *
+     * @param startOffset the start offset of the line of the caret
+     * @param endOffset   the end offset of the line of the caret
+     */
     private record LineOffsets(int startOffset, int endOffset) {
     }
 
@@ -133,12 +139,14 @@ public class LineHighlightLocator {
      * {@link DaemonCodeAnalyzerEx#processHighlights(Document, Project,
      * HighlightSeverity, int, int, Processor)} because it is the only API
      * that exposes the {@link HighlightInfo} objects required by AudioBug.
-     *
-     * <p>Note:
+     * </p>
+     * <p>
+     * Note:
      * {@code processHighlights()} is currently marked
      * {@code @ApiStatus.Experimental}. Future IntelliJ Platform releases
      * may replace or remove this API. If a stable replacement becomes
      * available, this method should be updated accordingly.
+     * </p>
      */
     private void getHighlights() {
         Processor<HighlightInfo> highlightProcessor = (HighlightInfo info) -> {
