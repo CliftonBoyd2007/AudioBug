@@ -62,6 +62,7 @@ public class WatchCaret implements CaretListener {
         return oldPosition.line != newPosition.line;
     }
 
+
     /**
      * Helper method for maintaining the LineHighlightLocator instance.
      * We do this here to avoid throwing {@link NullPointerException} when updating it.

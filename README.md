@@ -28,11 +28,11 @@ code.
 
 - A JetBrains IDE (version 2025.3 or later)
 - Active screen reader
-- Gradle 9.5.0 or later (if building from source)
+- Gradle 9.5.0 (if building from source)
 
 ### Tested With
 
-- NVDA 2025.3.2 up to and including 2026.1.1
+- NVDA 2025.3.2 - 2026.1.1
 - JAWS 2024
 - VoiceOver on macOS 26.6 (25G72)
 - JetBrains IDEs:
@@ -78,13 +78,13 @@ code.
       The output will simply be the computed hash. Compare it to the one displayed on the GitHub releases page for the
       version you downloaded.
 - Once the file hash has been verified, refer
-  to [the instructions given by JetBrains here](https://www.jetbrains.com/help/idea/managing-plugins.html#install_plugin_from_disk)
-  under the heading "Install Plugin From Disk" for instructions on installing the plugin from disk.
+  to [the instructions given here by JetBrains](https://www.jetbrains.com/help/idea/managing-plugins.html#install_plugin_from_disk)
+
 - Once installed, restart the IDE.
 
 ## Important Notes
 
-- To users upgrading from AudioBug < 0.2.6: Before installing AudioBug 0.2.6 and newer, you must remove the old AudioBug
+- To users upgrading from AudioBug  0.2.4 and older: Before installing AudioBug 0.2.6 and newer, you must remove the old AudioBug
   installation before installing the new one. Not doing so will cause two AudioBug instances to run within the IDE.
 - In AudioBug 0.2.2 and later, a sound will be played upon startup. However, this happens long before the editor is
   open. As such, when the editor is open and ready, it will announce "AudioBug is ready." Please be aware that this
