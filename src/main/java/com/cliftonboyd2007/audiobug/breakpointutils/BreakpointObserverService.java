@@ -1,16 +1,38 @@
 ﻿package com.cliftonboyd2007.audiobug.breakpointutils;
 
 import com.cliftonboyd2007.audiobug.core.services.FeedbackService;
+import com.intellij.openapi.components.Service;
 import com.intellij.xdebugger.breakpoints.XBreakpoint;
 import com.intellij.xdebugger.breakpoints.XBreakpointListener;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 
-
-public class BreakpointObserver implements XBreakpointListener {
+/**
+ * Project-level service for querying breakpoint state on the current line of the caret.
+ * <p>
+ * It provides user-facing feedback when breakpoints are created and removed, as well as allowing the user to determine whether a breakpoint exists on the current line of the caret.
+ * </p>
+ *
+ * @author Clifton Boyd
+ */
+@Service(Service.Level.PROJECT)
+public final class BreakpointObserverService implements XBreakpointListener {
+    /**
+     * The project from which we obtain {@link FeedbackService}.
+     */
     private final Project project;
 
-    public BreakpointObserver(Project project) {
+    /**
+     * Constructor.
+     * <p>
+     * Please do not call this yourself.
+     * This exists for the IntelliJ Platform so that it can construct this service when it is required.
+     * To obtain this service elsewhere, use {@link Project#getService(Class)}.
+     * </p>
+     *
+     * @param project the project the user is currently working with
+     */
+    public BreakpointObserverService(Project project) {
         this.project = project;
     }
 
@@ -33,6 +55,7 @@ public class BreakpointObserver implements XBreakpointListener {
     @Override
     public void breakpointRemoved(@NotNull XBreakpoint breakpoint) {
         // Only announce "Breakpoint removed, Line n," where n is the line number
+
     }
 
     /**
