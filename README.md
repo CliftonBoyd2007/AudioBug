@@ -20,7 +20,7 @@ code.
 
 - Automatic Diagnostic Announcements - Sound cues and spoken feedback for errors and warnings associated with the
   current line.
-- Read Error/Warning Descriptions - When alt/option+R is pressed, read the description of the error or warning
+- Read Error/Warning Descriptions - When alt/option+P is pressed, read the description of the error or warning
   associated with the current line. If multiple errors/warnings are present, repeatedly press the keystroke to cycle
   through them.
 
@@ -77,14 +77,14 @@ code.
       The output will simply be the computed hash. Compare it to the one displayed on the GitHub releases page for the
       version you downloaded.
 - Once the file hash has been verified, refer
-  to [the instructions given here by JetBrains](https://www.jetbrains.com/help/idea/managing-plugins.html#install_plugin_from_disk).
+  to [the instructions given here by JetBrains](https://www.jetbrains.com/help/idea/managing-plugins.html#install_plugin_from_disk) for installing the plugin from disk.
 - Once installed, restart the IDE.
 
 ## IMPORTANT UPGRADE NOTE
 
 To users upgrading from AudioBug < 0.2.6 to AudioBug >= 0.2.6: Before installing AudioBug 0.2.6 and newer, you must
 remove the old AudioBug installation before installing the new one. Not doing so will cause two AudioBug instances to
-run within the IDE.
+run simultaneously within the IDE.
 
 ## Important Notes
 
@@ -92,7 +92,7 @@ run within the IDE.
 - In AudioBug 0.2.2 and later, a sound will be played upon startup. However, this happens long before the editor is
   open. As such, when the editor is open and ready, it will announce "AudioBug is ready." Please be aware that this
   announcement may be interrupted by other screen reader activity. To check that it is running when the editor opens,
-  press alt+R (Windows) or option+R (macOS). It will either announce "No errors or warnings," or--if the cursor lands on
+  press alt+P (Windows) or option+P (macOS). It will either announce "No errors or warnings," or--if the cursor lands on
   a line with errors or warnings--its description (e.g., "Cannot resolve symbol 'undeclaredVariable'").
 - This software is stable in the environments that I have tested it in. I have not tested it in every JetBrains IDE or
   configuration. Constructive feedback is welcome and encouraged.

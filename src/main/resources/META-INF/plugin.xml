@@ -26,7 +26,7 @@
         <action id="com.cliftonboyd2007.audiobug.core.actions.ReadHighlightDescriptionAction"
                 class="com.cliftonboyd2007.audiobug.core.actions.ReadHighlightDescriptionAction"
         >
-            <keyboard-shortcut keymap="$default" first-keystroke="alt R"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="alt P"/>
         </action>
     </actions>
 <!--    <resource-bundle>messages.MyMessageBundle</resource-bundle>-->
