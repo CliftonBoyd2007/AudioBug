@@ -2,7 +2,11 @@
 
 # AudioBug Changelog
 
-## [Unreleased]
+## [0.2.9] - 2026-09-05
+
+### Changed
+
+- Changed keyboard shortcut for reading highlight descriptions aloud. The new shortcut is option/alt+P.
 
 ## [0.2.8] - 2026-08-19
 
