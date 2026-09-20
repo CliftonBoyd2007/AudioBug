@@ -3,6 +3,7 @@ package com.cliftonboyd2007.audiobug.core.services.highlightutils;
 
 import java.util.ArrayList;
 
+import com.cliftonboyd2007.audiobug.core.listeners.CaretWatcher;
 import com.cliftonboyd2007.audiobug.core.services.accessibility.HighlightAnnouncerService;
 import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.codeInsight.daemon.impl.DaemonCodeAnalyzerEx;
@@ -59,7 +60,7 @@ public class LineHighlightLocator {
 
     /**
      * Constructor.
-     * The only purpose of this constructor's existence is to make sure that LineHighlightLocator ITSELF is NEVER NULL in {@link com.cliftonboyd2007.audiobug.core.listeners.CaretListener}
+     * The only purpose of this constructor's existence is to make sure that LineHighlightLocator ITSELF is NEVER NULL in {@link CaretWatcher}
      * Do not do anything meaningful here, particularly if it interacts with a method that requires any fields -- ALL FIELDS except the backing error/warning lists WILL BE NULL until {@link #update(CaretEvent)} is called.
      */
     public LineHighlightLocator() {}
@@ -84,7 +85,7 @@ public class LineHighlightLocator {
      * @param event The event containing information about the caret.
      */
     public void update(@NotNull CaretEvent event) {
-
+        this.project = event.getEditor().getProject();
         // Update the document before trying to update line offsets, otherwise we will be getting line offsets for the wrong document.
         updateDocument(event.getEditor().getDocument());
         this.lineOffsets = getLineOffsets(event);

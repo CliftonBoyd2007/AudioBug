@@ -2,7 +2,7 @@ package com.cliftonboyd2007.audiobug.core;
 
 
 import com.cliftonboyd2007.audiobug.audioutils.Cue;
-import com.cliftonboyd2007.audiobug.core.listeners.CaretListener;
+import com.cliftonboyd2007.audiobug.core.listeners.CaretWatcher;
 import com.cliftonboyd2007.audiobug.core.services.accessibility.FeedbackService;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.event.EditorFactoryEvent;
@@ -13,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Initializes AudioBug for newly-created editor instances.
  * <p>
- * When an editor is created, this will attach an instance of {@link CaretListener} to the caret model of the editor that was just created so that AudioBug can monitor the caret.
+ * When an editor is created, this will attach an instance of {@link CaretWatcher} to the caret model of the editor that was just created so that AudioBug can monitor the caret.
  * </p>
  *
  * @author Clifton Boyd
@@ -25,14 +25,14 @@ public final class AudioBug_Init implements EditorFactoryListener {
     private boolean notifiedUserOfStartup;
 
     /**
-     * Registers a new instance of {@link CaretListener} with the caret model of the newly-created editor so the caret can be tracked.
+     * Registers a new instance of {@link CaretWatcher} with the caret model of the newly-created editor so the caret can be tracked.
      *
      * @param event The event containing information about the editor.
      */
     @Override
     public void editorCreated(@NotNull EditorFactoryEvent event) {
         CaretModel caretModel = event.getEditor().getCaretModel();
-        caretModel.addCaretListener(new CaretListener());
+        caretModel.addCaretListener(new CaretWatcher());
         Project project = event.getEditor().getProject();
         assert project != null;
         FeedbackService feedbackService = project.getService(FeedbackService.class);

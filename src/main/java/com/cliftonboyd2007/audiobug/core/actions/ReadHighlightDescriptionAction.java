@@ -4,6 +4,7 @@ import com.cliftonboyd2007.audiobug.core.services.accessibility.HighlightAnnounc
 import com.intellij.openapi.actionSystem.AnAction;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import org.jetbrains.annotations.NotNull;
 
 
 /**
@@ -27,8 +28,8 @@ public class ReadHighlightDescriptionAction extends AnAction {
      * @see HighlightAnnouncerService#announceHighlightDescription()
      */
     @Override
-    public void actionPerformed(AnActionEvent event) {
-        assert event.getProject() != null;
+    public void actionPerformed(@NotNull AnActionEvent event) {
+
         HighlightAnnouncerService announcerService = event.getProject().getService(HighlightAnnouncerService.class);
         announcerService.announceHighlightDescription();
     }

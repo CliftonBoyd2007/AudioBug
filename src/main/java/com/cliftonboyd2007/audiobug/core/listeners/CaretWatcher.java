@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Clifton Boyd
  */
-public class CaretListener implements com.intellij.openapi.editor.event.CaretListener {
+public class CaretWatcher implements com.intellij.openapi.editor.event.CaretListener {
     /**
      * Queries for and collects error/warning highlights.
      */
@@ -28,10 +28,8 @@ public class CaretListener implements com.intellij.openapi.editor.event.CaretLis
      * Please DO NOT call this yourself. This is only here for {@link AudioBug_Init}.
      * </p>
      */
-    public CaretListener() {
+    public CaretWatcher() {
 
-        // locator is managed by highlightLocatorUpdateHelper().
-        // We do not initialize locator here because we cannot correctly construct it without a CaretEvent.
 
 
     }
