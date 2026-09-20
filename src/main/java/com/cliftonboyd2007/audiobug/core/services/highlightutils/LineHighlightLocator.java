@@ -28,7 +28,8 @@ public class LineHighlightLocator {
      * @param startOffset the start offset of the line of the caret
      * @param endOffset   the end offset of the line of the caret
      */
-    private record LineOffsets(int startOffset, int endOffset) {}
+    private record LineOffsets(int startOffset, int endOffset) {
+    }
 
     /**
      * The document the user is currently working with.
@@ -48,12 +49,12 @@ public class LineHighlightLocator {
     /**
      * Backing store for error highlights.
      */
-    private final ArrayList<HighlightInfo> errors;
+    private final ArrayList<HighlightInfo> errors = new ArrayList<>();
 
     /**
      * Backing store for warning highlights.
      */
-    private final ArrayList<HighlightInfo> warnings;
+    private final ArrayList<HighlightInfo> warnings = new ArrayList<>();
 
     /**
      * Constructor.
@@ -64,12 +65,11 @@ public class LineHighlightLocator {
      * @param event the event from which we can retrieve relevant information necessary for retrieving highlights
      */
     public LineHighlightLocator(@NotNull CaretEvent event) {
-        this.errors = new ArrayList<>();
-        this.warnings = new ArrayList<>();
         this.project = event.getEditor().getProject();
         update(event);
 
     }
+
 
     /**
      * Gets the start and end offsets for the caret's current line.
@@ -91,7 +91,7 @@ public class LineHighlightLocator {
      */
     public void update(@NotNull CaretEvent event) {
 
-        // Update the document before trying to update line offsets; otherwise we will throw a NullPointerException
+        // Update the document before trying to update line offsets, otherwise we will be getting line offsets for the wrong document.
         updateDocument(event.getEditor().getDocument());
         this.lineOffsets = getLineOffsets(event);
         // Avoid retaining stale highlights before retrieving new ones.
