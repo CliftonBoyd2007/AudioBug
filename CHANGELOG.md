@@ -2,10 +2,14 @@
 
 # AudioBug Changelog
 
+## [0.2.11] - 2026-09-20
 
-## [0.2.10] - 2026-09-20 
+- No user-facing improvements
+- Code restructuring for better organization and maintainability.
 
-- No user-facing changes. 
+## [0.2.10] - 2026-09-20
+
+- No user-facing changes.
 - Internal code structure change for organization.
 
 ## [0.2.9] - 2026-09-05

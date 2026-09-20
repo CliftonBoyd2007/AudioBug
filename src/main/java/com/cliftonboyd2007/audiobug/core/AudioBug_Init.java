@@ -3,7 +3,7 @@ package com.cliftonboyd2007.audiobug.core;
 
 import com.cliftonboyd2007.audiobug.audioutils.Cue;
 import com.cliftonboyd2007.audiobug.core.listeners.CaretListener;
-import com.cliftonboyd2007.audiobug.core.services.FeedbackService;
+import com.cliftonboyd2007.audiobug.core.services.accessibility.FeedbackService;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.event.EditorFactoryEvent;
 import com.intellij.openapi.editor.event.EditorFactoryListener;

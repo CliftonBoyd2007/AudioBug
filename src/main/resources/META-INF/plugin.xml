@@ -3,7 +3,7 @@
     <id>com.cliftonboyd2007.audiobug</id>
 
     <name>AudioBug</name>
-    <version>0.2.10</version>
+    <version>0.2.11</version>
 
     <vendor url="https://github.com/CliftonBoyd2007/AudioBug"/>
 
@@ -29,5 +29,5 @@
             <keyboard-shortcut keymap="$default" first-keystroke="alt P"/>
         </action>
     </actions>
-<!--    <resource-bundle>messages.MyMessageBundle</resource-bundle>-->
+    <!--    <resource-bundle>messages.MyMessageBundle</resource-bundle>-->
 </idea-plugin>

@@ -1,7 +1,7 @@
 package com.cliftonboyd2007.audiobug.core.listeners;
 
 import com.cliftonboyd2007.audiobug.core.AudioBug_Init;
-import com.cliftonboyd2007.audiobug.core.LineHighlightLocator;
+import com.cliftonboyd2007.audiobug.core.services.highlightutils.LineHighlightLocator;
 import com.intellij.openapi.editor.LogicalPosition;
 import com.intellij.openapi.editor.event.CaretEvent;
 import org.jetbrains.annotations.NotNull;
