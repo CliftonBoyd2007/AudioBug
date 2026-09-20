@@ -3,6 +3,7 @@ package com.cliftonboyd2007.audiobug.core.services.highlightutils;
 import com.intellij.codeInsight.daemon.impl.HighlightInfo;
 import com.intellij.openapi.components.Service;
 import com.intellij.openapi.project.Project;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,7 +49,7 @@ public final class HighlightStateService {
      * @param newErrors   The new list of error highlights.
      * @param newWarnings The new list of warning highlights.
      */
-    public void updateHighlights(final ArrayList<HighlightInfo> newErrors, final ArrayList<HighlightInfo> newWarnings) {
+    public void updateHighlights(@NotNull final ArrayList<HighlightInfo> newErrors, @NotNull final ArrayList<HighlightInfo> newWarnings) {
         this.errors = newErrors;
         this.warnings = newWarnings;
     }
@@ -59,7 +60,7 @@ public final class HighlightStateService {
      *
      * @return unmodifiable view of the list of error highlights.
      */
-    public List<HighlightInfo> getErrors() {
+    public @NotNull List<HighlightInfo> getErrors() {
         return Collections.unmodifiableList(this.errors);
     }
 
@@ -69,7 +70,7 @@ public final class HighlightStateService {
      *
      * @return unmodifiable view of the list of warning highlights.
      */
-    public List<HighlightInfo> getWarnings() {
+    public @NotNull List<HighlightInfo> getWarnings() {
         return Collections.unmodifiableList(this.warnings);
     }
 

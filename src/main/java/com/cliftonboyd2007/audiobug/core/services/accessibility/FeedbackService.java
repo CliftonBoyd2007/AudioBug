@@ -12,6 +12,7 @@ import javax.accessibility.Accessible;
 import javax.swing.*;
 
 import com.cliftonboyd2007.audiobug.audioutils.Cue;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Project-level service responsible for coordinating user-facing feedback.
@@ -49,7 +50,7 @@ public final class FeedbackService {
      * @param message                      the string to announce.
      * @param interruptCurrentSpeechOutput determine whether to interrupt current screen reader speech for this announcement.
      */
-    public void announce(String message, boolean interruptCurrentSpeechOutput) {
+    public void announce(@NotNull String message, boolean interruptCurrentSpeechOutput) {
         AccessibleAnnouncerUtil.announce(this.accessibleEditorUIComponent, message, interruptCurrentSpeechOutput);
     }
 
@@ -67,7 +68,7 @@ public final class FeedbackService {
      * @see Accessible
      * @see AccessibleAnnouncerUtil
      */
-    public void updateAccessibleEditorUIComponent(JComponent editorComponent) {
+    public void updateAccessibleEditorUIComponent(@NotNull JComponent editorComponent) {
         this.accessibleEditorUIComponent = editorComponent.getAccessibleContext().getAccessibleParent();
 
 
@@ -79,7 +80,7 @@ public final class FeedbackService {
      * @param cue the cue to be played
      * @see Cue
      */
-    public void playCue(Cue cue) {
+    public void playCue(@NotNull Cue cue) {
         this.player.playCue(cue);
     }
 

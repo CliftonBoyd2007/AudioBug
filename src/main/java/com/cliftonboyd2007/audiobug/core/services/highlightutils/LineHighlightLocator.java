@@ -28,8 +28,7 @@ public class LineHighlightLocator {
      * @param startOffset the start offset of the line of the caret
      * @param endOffset   the end offset of the line of the caret
      */
-    private record LineOffsets(int startOffset, int endOffset) {
-    }
+    private record LineOffsets(int startOffset, int endOffset) {}
 
     /**
      * The document the user is currently working with.
@@ -122,7 +121,7 @@ public class LineHighlightLocator {
      *
      * @param newDocument The document the user has moved to.
      */
-    private void updateDocument(Document newDocument) {
+    private void updateDocument(@NotNull Document newDocument) {
 
         this.document = newDocument;
     }

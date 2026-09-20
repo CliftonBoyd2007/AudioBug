@@ -5,6 +5,7 @@ import com.cliftonboyd2007.audiobug.core.services.highlightutils.HighlightStateS
 import com.intellij.codeInsight.daemon.impl.HighlightInfo;
 import com.intellij.openapi.components.Service;
 import com.intellij.openapi.project.Project;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -47,7 +48,7 @@ public final class HighlightAnnouncerService {
      *
      * @param project the project from which we obtain required services
      */
-    public HighlightAnnouncerService(Project project) {
+    public HighlightAnnouncerService(@NotNull Project project) {
         this.project = project;
         this.highlightIndex = 0;
     }

@@ -15,7 +15,6 @@ import org.jetbrains.annotations.NotNull;
  * <p>
  * When an editor is created, this will attach an instance of {@link CaretListener} to the caret model of the editor that was just created so that AudioBug can monitor the caret.
  * </p>
- * Copyright Clifton Boyd and AudioBug Contributors.
  *
  * @author Clifton Boyd
  */
@@ -38,7 +37,7 @@ public final class AudioBug_Init implements EditorFactoryListener {
         assert project != null;
         FeedbackService feedbackService = project.getService(FeedbackService.class);
         feedbackService.updateAccessibleEditorUIComponent(event.getEditor().getComponent());
-        audioBugStartupNotifier(feedbackService);
+        audioBugStartupNotification(feedbackService);
     }
 
     /**
@@ -46,7 +45,7 @@ public final class AudioBug_Init implements EditorFactoryListener {
      *
      * @param feedbackService The service to produce spoken and auditory feedback.
      */
-    private void audioBugStartupNotifier(FeedbackService feedbackService) {
+    private void audioBugStartupNotification(FeedbackService feedbackService) {
         if (!this.notifiedUserOfStartup) {
             feedbackService.playCue(Cue.STARTUP);
             feedbackService.announce("AudioBug is ready.", true);

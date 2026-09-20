@@ -1,5 +1,7 @@
 package com.cliftonboyd2007.audiobug.audioutils;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -55,7 +57,7 @@ public class CuePlayer {
      * @see javax.sound.sampled.LineUnavailableException
      *
      */
-    private void play(URL file) {
+    private void play(@NotNull URL file) {
         try {
             AudioInputStream inputStream = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();
@@ -73,7 +75,7 @@ public class CuePlayer {
      * @param cue the cue to be played
      * @see Cue
      */
-    public void playCue(Cue cue) {
+    public void playCue(@NotNull Cue cue) {
         play(this.audioResources.get(cue));
 
 
