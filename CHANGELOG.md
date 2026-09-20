@@ -2,6 +2,16 @@
 
 # AudioBug Changelog
 
+## [0.2.14] - 2026-09-20
+
+- No user-facing improvements.
+- Code cleanup build.
+
+## [0.2.13] - 2026-09-20
+
+- No user-facing improvements.
+- Code improvements.
+
 ## [0.2.12] - 2026-09-20
 
 - No user-facing improvements.

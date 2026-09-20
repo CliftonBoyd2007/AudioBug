@@ -39,7 +39,7 @@ public class LineHighlightLocator {
     /**
      * The project in which the current document is located.
      */
-    private final Project project;
+    private Project project;
 
     /**
      * Start and end line offsets for the current line.
@@ -56,19 +56,13 @@ public class LineHighlightLocator {
      */
     private final ArrayList<HighlightInfo> warnings = new ArrayList<>();
 
+
     /**
      * Constructor.
-     * <p>
-     * We begin querying for highlights immediately upon construction so that highlight state is always accurate and up-to-date.
-     * </p>
-     *
-     * @param event the event from which we can retrieve relevant information necessary for retrieving highlights
+     * The only purpose of this constructor's existence is to make sure that LineHighlightLocator ITSELF is NEVER NULL in {@link com.cliftonboyd2007.audiobug.core.listeners.CaretListener}
+     * Do not do anything meaningful here, particularly if it interacts with a method that requires any fields -- ALL FIELDS except the backing error/warning lists WILL BE NULL until {@link #update(CaretEvent)} is called.
      */
-    public LineHighlightLocator(@NotNull CaretEvent event) {
-        this.project = event.getEditor().getProject();
-        update(event);
-
-    }
+    public LineHighlightLocator() {}
 
 
     /**

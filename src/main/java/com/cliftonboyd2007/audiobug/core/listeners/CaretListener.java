@@ -20,7 +20,7 @@ public class CaretListener implements com.intellij.openapi.editor.event.CaretLis
     /**
      * Queries for and collects error/warning highlights.
      */
-    private LineHighlightLocator locator;
+    private LineHighlightLocator locator = new LineHighlightLocator();
 
     /**
      * Constructor.
@@ -48,7 +48,7 @@ public class CaretListener implements com.intellij.openapi.editor.event.CaretLis
         LogicalPosition newPosition = event.getNewPosition();
         boolean caretHasMovedToNewLine = hasCaretMovedToNewLine(oldPosition, newPosition);
         if (caretHasMovedToNewLine) {
-            highlightLocatorUpdateHelper(event);
+            locator.update(event);
         }
     }
 
@@ -63,17 +63,4 @@ public class CaretListener implements com.intellij.openapi.editor.event.CaretLis
         return oldPosition.line != newPosition.line;
     }
 
-    /**
-     * Helper method for maintaining the LineHighlightLocator instance.
-     * We do this here to avoid throwing {@link NullPointerException} when updating it.
-     *
-     * @param event the event containing information about the caret.
-     */
-    private void highlightLocatorUpdateHelper(@NotNull CaretEvent event) {
-        if (this.locator == null) {
-            this.locator = new LineHighlightLocator(event);
-        } else {
-            this.locator.update(event);
-        }
-    }
 }
