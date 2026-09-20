@@ -7,6 +7,7 @@ import com.intellij.openapi.components.Service;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,11 +24,11 @@ public final class HighlightAnnouncerService {
     /**
      * Temporary storage for error highlights from {@link HighlightStateService}.
      */
-    private List<HighlightInfo> errors;
+    private List<HighlightInfo> errors = new ArrayList<>();
     /**
      * Temporary storage for warning highlights from {@link HighlightStateService}.
      */
-    private List<HighlightInfo> warnings;
+    private List<HighlightInfo> warnings = new ArrayList<>();
 
     /**
      * The index of the highlight whose description we want to announce.
@@ -50,7 +51,6 @@ public final class HighlightAnnouncerService {
      */
     public HighlightAnnouncerService(@NotNull Project project) {
         this.project = project;
-        this.highlightIndex = 0;
     }
 
 
