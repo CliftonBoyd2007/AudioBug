@@ -22,11 +22,11 @@ public final class HighlightStateService {
     /**
      * Backing store for error highlights.
      */
-    private ArrayList<HighlightInfo> errors;
+    private ArrayList<HighlightInfo> errors = new ArrayList<>();
     /**
      * Backing store for warning highlights.
      */
-    private ArrayList<HighlightInfo> warnings;
+    private ArrayList<HighlightInfo> warnings = new ArrayList<>();
 
     /**
      * Constructor.
@@ -36,12 +36,7 @@ public final class HighlightStateService {
      * To obtain this service elsewhere, use {@link Project#getService(Class)}.
      * </p>
      */
-    public HighlightStateService() {
-
-        this.errors = new ArrayList<>();
-        this.warnings = new ArrayList<>();
-
-    }
+    public HighlightStateService() {}
 
     /**
      * Updates the list of errors and warnings.
