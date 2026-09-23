@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
  * If multiple highlights exist, the user can repeatedly invoke this action to cycle through each one. Once the last highlight is reached, invoking this action again will read the first highlight description.
  * </p>
  * <p>
- * This action can be invoked by pressing alt+R on Windows or option+R on macOS.
+ * This action can be invoked by pressing alt+P on Windows or option+P on macOS.
  * </p>
  *
  * @author Clifton Boyd

@@ -23,14 +23,6 @@ import com.intellij.util.Processor;
  * @author Clifton Boyd
  */
 public class LineHighlightLocator {
-    /**
-     * Record constructor for LineOffsets.
-     *
-     * @param startOffset the start offset of the line of the caret
-     * @param endOffset   the end offset of the line of the caret
-     */
-    private record LineOffsets(int startOffset, int endOffset) {
-    }
 
     /**
      * The document the user is currently working with.
@@ -45,7 +37,7 @@ public class LineHighlightLocator {
     /**
      * Start and end line offsets for the current line.
      */
-    private LineOffsets lineOffsets;
+    @NotNull private LineOffsetRange lineOffsetRange = new LineOffsetRange();
 
     /**
      * Backing store for error highlights.
@@ -63,20 +55,20 @@ public class LineHighlightLocator {
      * The only purpose of this constructor's existence is to make sure that LineHighlightLocator ITSELF is NEVER NULL in {@link CaretWatcher}
      * Do not do anything meaningful here, particularly if it interacts with a method that requires any fields -- ALL FIELDS except the backing error/warning lists WILL BE NULL until {@link #update(CaretEvent)} is called.
      */
-    public LineHighlightLocator() {}
+    public LineHighlightLocator() {
+    }
 
 
     /**
-     * Gets the start and end offsets for the caret's current line.
+     * Updates the start and end offsets for the caret's current line.
      *
      * @param event Event containing relevant information about the caret.
-     * @return start and end offsets for the line of the caret.
      */
-    private LineOffsets getLineOffsets(@NotNull CaretEvent event) {
+    private void updateLineOffsets(@NotNull CaretEvent event) {
         int line = event.getNewPosition().line;
         int startOffset = this.document.getLineStartOffset(line);
         int endOffset = this.document.getLineEndOffset(line);
-        return new LineOffsets(startOffset, endOffset);
+        lineOffsetRange.updateOffsets(startOffset, endOffset);
     }
 
     /**
@@ -88,7 +80,7 @@ public class LineHighlightLocator {
         this.project = event.getEditor().getProject();
         // Update the document before trying to update line offsets, otherwise we will be getting line offsets for the wrong document.
         updateDocument(event.getEditor().getDocument());
-        this.lineOffsets = getLineOffsets(event);
+        updateLineOffsets(event);
         // Avoid retaining stale highlights before retrieving new ones.
         clearErrorAndWarningLists();
 
@@ -151,7 +143,7 @@ public class LineHighlightLocator {
             return true;
         };
 
-        DaemonCodeAnalyzerEx.processHighlights(this.document, this.project, HighlightSeverity.WARNING, lineOffsets.startOffset, lineOffsets.endOffset, highlightProcessor);
+        DaemonCodeAnalyzerEx.processHighlights(this.document, this.project, HighlightSeverity.WARNING, lineOffsetRange.startOffset, lineOffsetRange.endOffset, highlightProcessor);
     }
 
 

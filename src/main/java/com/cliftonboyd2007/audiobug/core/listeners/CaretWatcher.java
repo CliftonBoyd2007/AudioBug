@@ -22,6 +22,7 @@ public class CaretWatcher implements com.intellij.openapi.editor.event.CaretList
      */
     private LineHighlightLocator locator = new LineHighlightLocator();
 
+
     /**
      * Constructor.
      * <p>
