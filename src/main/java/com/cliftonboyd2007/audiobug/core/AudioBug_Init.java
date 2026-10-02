@@ -5,6 +5,7 @@ import com.cliftonboyd2007.audiobug.audioutils.Cue;
 import com.cliftonboyd2007.audiobug.core.listeners.CaretWatcher;
 import com.cliftonboyd2007.audiobug.core.services.accessibility.FeedbackService;
 import com.intellij.openapi.editor.CaretModel;
+import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.event.EditorFactoryEvent;
 import com.intellij.openapi.editor.event.EditorFactoryListener;
 import com.intellij.openapi.project.Project;
@@ -23,6 +24,15 @@ public final class AudioBug_Init implements EditorFactoryListener {
      * Indicates whether AudioBug has played the startup cue and made the startup announcement.
      */
     private boolean notifiedUserOfStartup;
+    /**
+     * Tracks the caret within an active editor.
+     * <p>
+     * An "active" editor, in the case of AudioBug, refers to the editor in which the user is working in. It does not refer to an editor that is displayed on screen.
+     * We re-use this CaretWatcher for every editor because a screen-reader user cannot generally operate in more than one editor at a time, even if more than one is open on the screen. It also avoids UI jitter when switching between editors.
+     * </p>
+     */
+    private final CaretWatcher caretWatcher = new CaretWatcher();
+
 
     /**
      * Registers a new instance of {@link CaretWatcher} with the caret model of the newly-created editor so the caret can be tracked.
@@ -32,12 +42,27 @@ public final class AudioBug_Init implements EditorFactoryListener {
     @Override
     public void editorCreated(@NotNull EditorFactoryEvent event) {
         CaretModel caretModel = event.getEditor().getCaretModel();
-        caretModel.addCaretListener(new CaretWatcher());
+        caretModel.addCaretListener(this.caretWatcher);
         Project project = event.getEditor().getProject();
         assert project != null;
         FeedbackService feedbackService = project.getService(FeedbackService.class);
         feedbackService.updateAccessibleEditorUIComponent(event.getEditor().getComponent());
-        audioBugStartupNotification(feedbackService);
+        audioBugStartupNotifier(feedbackService);
+    }
+
+    /**
+     * Removes the caret listener when an editor is released.
+     * <p>
+     * An editor is released when it is closed, not when the user switches away from it.
+     * </p>
+     *
+     * @param event the event resulting from an  editor being released
+     */
+    @Override
+    public void editorReleased(@NotNull EditorFactoryEvent event) {
+        Editor releasedEditor = event.getEditor();
+        releasedEditor.getCaretModel().removeCaretListener(this.caretWatcher);
+
     }
 
     /**
@@ -45,7 +70,7 @@ public final class AudioBug_Init implements EditorFactoryListener {
      *
      * @param feedbackService The service to produce spoken and auditory feedback.
      */
-    private void audioBugStartupNotification(FeedbackService feedbackService) {
+    private void audioBugStartupNotifier(FeedbackService feedbackService) {
         if (!this.notifiedUserOfStartup) {
             feedbackService.playCue(Cue.STARTUP);
             feedbackService.announce("AudioBug is ready.", true);

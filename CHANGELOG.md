@@ -2,6 +2,11 @@
 
 # AudioBug Changelog
 
+## [0.2.16] - 2026-10-02
+
+- No user-facing improvements.
+- Add functionality to remove the CaretWatcher when an editor is released.
+
 ## [0.2.15] - 2026-09-22
 
 - No user-facing improvements.
