@@ -4,6 +4,7 @@ package com.cliftonboyd2007.audiobug.core;
 import com.cliftonboyd2007.audiobug.audioutils.Cue;
 import com.cliftonboyd2007.audiobug.core.listeners.CaretWatcher;
 import com.cliftonboyd2007.audiobug.core.services.accessibility.FeedbackService;
+import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.event.EditorFactoryEvent;
@@ -43,11 +44,12 @@ public final class AudioBug_Init implements EditorFactoryListener {
     public void editorCreated(@NotNull EditorFactoryEvent event) {
         CaretModel caretModel = event.getEditor().getCaretModel();
         caretModel.addCaretListener(this.caretWatcher);
+        updateEditorStateService(event);
         Project project = event.getEditor().getProject();
         assert project != null;
-        FeedbackService feedbackService = project.getService(FeedbackService.class);
-        feedbackService.updateAccessibleEditorUIComponent(event.getEditor().getComponent());
-        audioBugStartupNotifier(feedbackService);
+//        FeedbackService feedbackService = project.getService(FeedbackService.class);
+//        feedbackService.updateAccessibleEditorUIComponent(event.getEditor().getComponent());
+//        audioBugStartupNotifier(feedbackService);
     }
 
     /**
@@ -63,6 +65,14 @@ public final class AudioBug_Init implements EditorFactoryListener {
         Editor releasedEditor = event.getEditor();
         releasedEditor.getCaretModel().removeCaretListener(this.caretWatcher);
 
+    }
+
+    private void updateEditorStateService(@NotNull EditorFactoryEvent event) {
+        assert event.getEditor().getProject() != null;
+        EditorStateService editorStateService = event.getEditor().getProject().getService(EditorStateService.class);
+        Editor editor = event.getEditor();
+        Caret primaryCaretOfEditor = editor.getCaretModel().getPrimaryCaret();
+        editorStateService.updatePrimaryCaret(primaryCaretOfEditor);
     }
 
     /**

@@ -3,7 +3,7 @@
     <id>com.cliftonboyd2007.audiobug</id>
 
     <name>AudioBug</name>
-    <version>0.2.16</version>
+    <version>0.3-beta1</version>
 
     <vendor url="https://github.com/CliftonBoyd2007/AudioBug"/>
 
@@ -27,6 +27,12 @@
                 class="com.cliftonboyd2007.audiobug.core.actions.ReadHighlightDescriptionAction"
         >
             <keyboard-shortcut keymap="$default" first-keystroke="alt P"/>
+        </action>
+        <action id="com.cliftonboyd2007.audiobug.core.actions.ReadCurrentLineNumberAction"
+                class="com.cliftonboyd2007.audiobug.core.actions.ReadCurrentLineNumberAction"
+                text="Announce Line Number"
+                description="Announces the number of the line on which the cursor is located.">
+            <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt G"/>
         </action>
     </actions>
     <!--    <resource-bundle>messages.MyMessageBundle</resource-bundle>-->

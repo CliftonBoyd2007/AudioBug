@@ -1,17 +1,17 @@
-﻿package com.cliftonboyd2007.audiobug.core;
+package com.cliftonboyd2007.audiobug.core;
 
 import com.intellij.openapi.components.Service;
 import com.intellij.openapi.editor.Caret;
 import org.jetbrains.annotations.NotNull;
 
 @Service(Service.Level.PROJECT)
-public final class AudioBugEditorStateModelService {
+public final class EditorStateService {
     /**
      * The primary caret of the editor to be tracked.
      */
     private Caret primaryCaret;
 
-    public AudioBugEditorStateModelService() {
+    public EditorStateService() {
     }
 
     /**
@@ -27,6 +27,6 @@ public final class AudioBugEditorStateModelService {
      * @return the current line of the primary caret
      */
     public int getCurrentLineOfPrimaryCaret() {
-        return this.primaryCaret.getLogicalPosition().line;
+        return this.primaryCaret.getVisualPosition().line;
     }
 }

@@ -1,6 +1,13 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
 # AudioBug Changelog
+## [Unreleased]
+## [0.3.0-beta1] - 2026-10-02
+
+### Added
+
+- Added ability to have AudioBug announce the line number of the line on which the caret is located by pressing
+  Ctrl+Alt+Shift+G.
 
 ## [0.2.16] - 2026-10-02
 
