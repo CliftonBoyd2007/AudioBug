@@ -50,8 +50,8 @@ public class CaretWatcher implements com.intellij.openapi.editor.event.CaretList
         boolean caretHasMovedToNewLine = hasCaretMovedToNewLine(oldPosition, newPosition);
         if (caretHasMovedToNewLine) {
             locator.update(event);
-            updatecaretStateService(event);
         }
+        updatecaretStateService(event);
     }
 
     /**
@@ -68,6 +68,6 @@ public class CaretWatcher implements com.intellij.openapi.editor.event.CaretList
         Project project = event.getEditor().getProject();
         assert project != null;
         CaretStateService caretStateService = project.getService(CaretStateService.class);
-        caretStateService.updateWithCaretEvent(event);
+        caretStateService.update(event);
     }
 }

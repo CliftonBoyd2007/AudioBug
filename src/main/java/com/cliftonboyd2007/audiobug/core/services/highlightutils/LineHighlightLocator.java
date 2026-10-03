@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.cliftonboyd2007.audiobug.core.listeners.CaretWatcher;
 import com.cliftonboyd2007.audiobug.core.services.accessibility.HighlightAnnouncerService;
+import com.cliftonboyd2007.audiobug.core.services.caretutils.CaretStateService;
 import com.cliftonboyd2007.audiobug.core.services.caretutils.LineOffsetRange;
 import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.codeInsight.daemon.impl.DaemonCodeAnalyzerEx;
@@ -144,8 +145,9 @@ public class LineHighlightLocator {
             }
             return true;
         };
-
-        DaemonCodeAnalyzerEx.processHighlights(this.document, this.project, HighlightSeverity.WARNING, lineOffsetRange.startOffset, lineOffsetRange.endOffset, highlightProcessor);
+        CaretStateService caretStateService = this.project.getService(CaretStateService.class);
+        LineOffsetRange lineOffsets = caretStateService.getLineOffsets();
+        DaemonCodeAnalyzerEx.processHighlights(this.document, this.project, HighlightSeverity.WARNING, lineOffsets.getStartOffset(), lineOffsets.getEndOffset(), highlightProcessor);
     }
 
 

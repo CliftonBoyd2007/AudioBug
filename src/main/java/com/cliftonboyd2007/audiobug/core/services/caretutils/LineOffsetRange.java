@@ -7,8 +7,8 @@ package com.cliftonboyd2007.audiobug.core.services.caretutils;
  */
 public class LineOffsetRange {
 
-    public int startOffset;
-    public int endOffset;
+    private int startOffset;
+    private int endOffset;
 
     public LineOffsetRange() {
         // Please do not do anything in here. This constructor exists to make sure this object is not null.
@@ -23,5 +23,19 @@ public class LineOffsetRange {
     public void updateOffsets(final int newStartOffset, final int newEndOffset) {
         this.startOffset = newStartOffset;
         this.endOffset = newEndOffset;
+    }
+
+    /**
+     * @return the start offset of the current line
+     */
+    public int getStartOffset() {
+        return this.startOffset;
+    }
+
+    /**
+     * @return the end offset of the current line
+     */
+    public int getEndOffset() {
+        return this.endOffset;
     }
 }
