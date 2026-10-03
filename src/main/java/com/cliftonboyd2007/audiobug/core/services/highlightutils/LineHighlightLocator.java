@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.cliftonboyd2007.audiobug.core.listeners.CaretWatcher;
 import com.cliftonboyd2007.audiobug.core.services.accessibility.HighlightAnnouncerService;
+import com.cliftonboyd2007.audiobug.core.services.caretutils.LineOffsetRange;
 import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.codeInsight.daemon.impl.DaemonCodeAnalyzerEx;
 import com.intellij.codeInsight.daemon.impl.HighlightInfo;
@@ -78,6 +79,7 @@ public class LineHighlightLocator {
      */
     public void update(@NotNull CaretEvent event) {
         this.project = event.getEditor().getProject();
+
         // Update the document before trying to update line offsets, otherwise we will be getting line offsets for the wrong document.
         updateDocument(event.getEditor().getDocument());
         updateLineOffsets(event);

@@ -1,6 +1,6 @@
 package com.cliftonboyd2007.audiobug.core.actions;
 
-import com.cliftonboyd2007.audiobug.core.EditorStateService;
+import com.cliftonboyd2007.audiobug.core.services.caretutils.CaretStateService;
 import com.cliftonboyd2007.audiobug.core.services.accessibility.FeedbackService;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -13,8 +13,8 @@ public class ReadCurrentLineNumberAction extends AnAction {
     public void actionPerformed(@NotNull AnActionEvent event) {
         Project project = event.getProject();
         assert project != null;
-        EditorStateService editorStateService = project.getService(EditorStateService.class);
+        CaretStateService caretStateService = project.getService(CaretStateService.class);
         FeedbackService feedbackService = project.getService(FeedbackService.class);
-        feedbackService.announce(String.format("Line %d", editorStateService.getCurrentLineNum()), true);
+        feedbackService.announce(String.format("Line %d", caretStateService.getUserFacingLineNum()), true);
     }
 }

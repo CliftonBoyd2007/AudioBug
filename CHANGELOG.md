@@ -4,6 +4,15 @@
 
 ## [Unreleased]
 
+## [0.3.0-beta4] - 2026-10-03
+
+- Begin migrating caret-based functionality from LineHighlightLocator to CaretStateService.
+
+### Added 
+
+- Added line offset storage in CaretStateService. This functionality wil eventually be removed from LineHighlightLocator.
+ 
+
 ## [0.3.0-beta3] - 2026-10-02
 
 ### Changed 
@@ -15,6 +24,7 @@
 
 - Fixed line numbers that were off by one.
 - Fixed erroneous and nonsensicle line numbers (e.g., line 0).
+- Fixed bug that prevented line numbers from being updated reliably.
 
 ### Removed 
 
