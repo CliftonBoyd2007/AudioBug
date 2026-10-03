@@ -1,32 +1,30 @@
 package com.cliftonboyd2007.audiobug.core;
 
 import com.intellij.openapi.components.Service;
-import com.intellij.openapi.editor.Caret;
-import org.jetbrains.annotations.NotNull;
 
 @Service(Service.Level.PROJECT)
 public final class EditorStateService {
     /**
-     * The primary caret of the editor to be tracked.
+     * The line number of the line the caret is currently located on.
      */
-    private Caret primaryCaret;
+    private int currentLineNum;
 
     public EditorStateService() {
     }
 
     /**
-     * Updates the primary caret to be tracked.
+     * Updates the current line number instance field.
      *
-     * @param newCaret the new primary caret
+     * @param newLineNum the line number of the line that the caret has entered
      */
-    public void updatePrimaryCaret(@NotNull final Caret newCaret) {
-        this.primaryCaret = newCaret;
+    public void updateCurrentLine(final int newLineNum) {
+        this.currentLineNum = newLineNum;
     }
 
     /**
-     * @return the current line of the primary caret
+     * @return the current line number
      */
-    public int getCurrentLineOfPrimaryCaret() {
-        return this.primaryCaret.getVisualPosition().line;
+    public int getCurrentLineNum() {
+        return this.currentLineNum + 1;
     }
 }

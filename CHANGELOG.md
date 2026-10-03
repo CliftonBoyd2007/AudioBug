@@ -1,7 +1,31 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
 # AudioBug Changelog
+
 ## [Unreleased]
+
+## [0.3.0-beta3] - 2026-10-02
+
+### Changed 
+
+- Changed EditorStateService so that it stores the line numbers directly. 
+- Move the logic for updating it so that it happens when the caret moves lines. 
+
+### Fixed 
+
+- Fixed line numbers that were off by one.
+- Fixed erroneous and nonsensicle line numbers (e.g., line 0).
+
+### Removed 
+
+- Removed startup sound and announcement.
+
+## [0.3.0-beta2] - 2026-10-02
+
+### Changed
+
+- Change logic to determine current line to use visual position instead of logical position.
+
 ## [0.3.0-beta1] - 2026-10-02
 
 ### Added

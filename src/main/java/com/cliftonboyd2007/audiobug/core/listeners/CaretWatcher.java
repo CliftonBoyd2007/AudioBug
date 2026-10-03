@@ -1,9 +1,11 @@
 package com.cliftonboyd2007.audiobug.core.listeners;
 
 import com.cliftonboyd2007.audiobug.core.AudioBug_Init;
+import com.cliftonboyd2007.audiobug.core.EditorStateService;
 import com.cliftonboyd2007.audiobug.core.services.highlightutils.LineHighlightLocator;
 import com.intellij.openapi.editor.LogicalPosition;
 import com.intellij.openapi.editor.event.CaretEvent;
+import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -20,7 +22,7 @@ public class CaretWatcher implements com.intellij.openapi.editor.event.CaretList
     /**
      * Queries for and collects error/warning highlights.
      */
-    private LineHighlightLocator locator = new LineHighlightLocator();
+    private final LineHighlightLocator locator = new LineHighlightLocator();
 
 
     /**
@@ -48,6 +50,7 @@ public class CaretWatcher implements com.intellij.openapi.editor.event.CaretList
         boolean caretHasMovedToNewLine = hasCaretMovedToNewLine(oldPosition, newPosition);
         if (caretHasMovedToNewLine) {
             locator.update(event);
+            updateEditorStateService(event);
         }
     }
 
@@ -61,5 +64,10 @@ public class CaretWatcher implements com.intellij.openapi.editor.event.CaretList
     private boolean hasCaretMovedToNewLine(LogicalPosition oldPosition, LogicalPosition newPosition) {
         return oldPosition.line != newPosition.line;
     }
-
+    private void updateEditorStateService(@NotNull CaretEvent event) {
+        Project project = event.getEditor().getProject();
+        assert project != null;
+        EditorStateService editorStateService = project.getService(EditorStateService.class);
+        editorStateService.updateCurrentLine(event.getNewPosition().line);
+    }
 }

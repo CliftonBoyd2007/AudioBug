@@ -44,12 +44,7 @@ public final class AudioBug_Init implements EditorFactoryListener {
     public void editorCreated(@NotNull EditorFactoryEvent event) {
         CaretModel caretModel = event.getEditor().getCaretModel();
         caretModel.addCaretListener(this.caretWatcher);
-        updateEditorStateService(event);
-        Project project = event.getEditor().getProject();
-        assert project != null;
-//        FeedbackService feedbackService = project.getService(FeedbackService.class);
-//        feedbackService.updateAccessibleEditorUIComponent(event.getEditor().getComponent());
-//        audioBugStartupNotifier(feedbackService);
+
     }
 
     /**
@@ -67,24 +62,5 @@ public final class AudioBug_Init implements EditorFactoryListener {
 
     }
 
-    private void updateEditorStateService(@NotNull EditorFactoryEvent event) {
-        assert event.getEditor().getProject() != null;
-        EditorStateService editorStateService = event.getEditor().getProject().getService(EditorStateService.class);
-        Editor editor = event.getEditor();
-        Caret primaryCaretOfEditor = editor.getCaretModel().getPrimaryCaret();
-        editorStateService.updatePrimaryCaret(primaryCaretOfEditor);
-    }
 
-    /**
-     * Plays the startup sound cue and makes a readiness announcement upon startup.
-     *
-     * @param feedbackService The service to produce spoken and auditory feedback.
-     */
-    private void audioBugStartupNotifier(FeedbackService feedbackService) {
-        if (!this.notifiedUserOfStartup) {
-            feedbackService.playCue(Cue.STARTUP);
-            feedbackService.announce("AudioBug is ready.", true);
-            this.notifiedUserOfStartup = true;
-        }
-    }
 }

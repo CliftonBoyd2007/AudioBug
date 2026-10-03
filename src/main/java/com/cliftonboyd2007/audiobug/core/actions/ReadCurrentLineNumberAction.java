@@ -15,6 +15,6 @@ public class ReadCurrentLineNumberAction extends AnAction {
         assert project != null;
         EditorStateService editorStateService = project.getService(EditorStateService.class);
         FeedbackService feedbackService = project.getService(FeedbackService.class);
-        feedbackService.announce(String.format("Line %d", editorStateService.getCurrentLineOfPrimaryCaret()), true);
+        feedbackService.announce(String.format("Line %d", editorStateService.getCurrentLineNum()), true);
     }
 }
