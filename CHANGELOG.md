@@ -6,17 +6,20 @@
 
 ## [0.3.0-beta3] - 2026-10-02
 
-### Changed 
+### Changed
 
-- Changed EditorStateService so that it stores the line numbers directly. 
-- Move the logic for updating it so that it happens when the caret moves lines. 
+- Changed EditorStateService so that it stores the line numbers directly.
+- Move the logic for updating it so that it happens when the caret moves lines.
+- Revert to using LogicalPosition for determining line numbers.
 
-### Fixed 
+### Fixed
 
 - Fixed line numbers that were off by one.
 - Fixed erroneous and nonsensicle line numbers (e.g., line 0).
+- Fixed bug that prevented line numbers from updating reliably.
 
-### Removed 
+
+### Removed
 
 - Removed startup sound and announcement.
 
@@ -37,6 +40,7 @@
 
 - No user-facing improvements.
 - Add functionality to remove the CaretWatcher when an editor is released.
+- Last 0.2.x release. Consider this stable.
 
 ## [0.2.15] - 2026-09-22
 

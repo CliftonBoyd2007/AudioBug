@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.cliftonboyd2007.audiobug.core.listeners.CaretWatcher;
 import com.cliftonboyd2007.audiobug.core.services.accessibility.HighlightAnnouncerService;
+import com.cliftonboyd2007.audiobug.core.services.editorutils.LineOffsetRange;
 import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.codeInsight.daemon.impl.DaemonCodeAnalyzerEx;
 import com.intellij.codeInsight.daemon.impl.HighlightInfo;
@@ -13,6 +14,7 @@ import com.intellij.openapi.editor.event.CaretEvent;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.util.Processor;
+import com.cliftonboyd2007.audiobug.core.services.editorutils.LineOffsetRange;
 
 /**
  * Queries for highlights associated with the line containing the caret.

@@ -1,6 +1,6 @@
 package com.cliftonboyd2007.audiobug.core.actions;
 
-import com.cliftonboyd2007.audiobug.core.EditorStateService;
+import com.cliftonboyd2007.audiobug.core.services.editorutils.EditorStateService;
 import com.cliftonboyd2007.audiobug.core.services.accessibility.FeedbackService;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -15,6 +15,6 @@ public class ReadCurrentLineNumberAction extends AnAction {
         assert project != null;
         EditorStateService editorStateService = project.getService(EditorStateService.class);
         FeedbackService feedbackService = project.getService(FeedbackService.class);
-        feedbackService.announce(String.format("Line %d", editorStateService.getCurrentLineNum()), true);
+        feedbackService.announce(String.format("Line %d", editorStateService.getCurrentUserFacingLineNum()), true);
     }
 }

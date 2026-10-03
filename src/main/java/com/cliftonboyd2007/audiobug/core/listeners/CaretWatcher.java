@@ -1,7 +1,7 @@
 package com.cliftonboyd2007.audiobug.core.listeners;
 
 import com.cliftonboyd2007.audiobug.core.AudioBug_Init;
-import com.cliftonboyd2007.audiobug.core.EditorStateService;
+import com.cliftonboyd2007.audiobug.core.services.editorutils.EditorStateService;
 import com.cliftonboyd2007.audiobug.core.services.highlightutils.LineHighlightLocator;
 import com.intellij.openapi.editor.LogicalPosition;
 import com.intellij.openapi.editor.event.CaretEvent;
@@ -34,7 +34,6 @@ public class CaretWatcher implements com.intellij.openapi.editor.event.CaretList
     public CaretWatcher() {
 
 
-
     }
 
     /**
@@ -64,6 +63,13 @@ public class CaretWatcher implements com.intellij.openapi.editor.event.CaretList
     private boolean hasCaretMovedToNewLine(LogicalPosition oldPosition, LogicalPosition newPosition) {
         return oldPosition.line != newPosition.line;
     }
+
+    /**
+     * Updates the line number stored in the {@link EditorStateService}.
+     *
+     * @param event the event resulting from caret movement.
+     * @see #caretPositionChanged(CaretEvent)
+     */
     private void updateEditorStateService(@NotNull CaretEvent event) {
         Project project = event.getEditor().getProject();
         assert project != null;

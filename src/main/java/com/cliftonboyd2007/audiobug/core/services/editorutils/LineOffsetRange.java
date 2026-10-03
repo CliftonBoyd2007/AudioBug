@@ -1,4 +1,4 @@
-package com.cliftonboyd2007.audiobug.core.services.highlightutils;
+package com.cliftonboyd2007.audiobug.core.services.editorutils;
 
 /**
  * Represents a given range of text in the editor.
@@ -7,10 +7,10 @@ package com.cliftonboyd2007.audiobug.core.services.highlightutils;
  */
 public class LineOffsetRange {
 
-    int startOffset;
-    int endOffset;
+    public int startOffset;
+    public int endOffset;
 
-    LineOffsetRange() {
+    public LineOffsetRange() {
         // Please do not do anything in here. This constructor exists to make sure this object is not null.
     }
 
@@ -20,7 +20,7 @@ public class LineOffsetRange {
      * @param newStartOffset The new starting offset of the caret's current line
      * @param newEndOffset   the new ending offsets of the caret's current line.
      */
-    void updateOffsets(final int newStartOffset, final int newEndOffset) {
+    public void updateOffsets(final int newStartOffset, final int newEndOffset) {
         this.startOffset = newStartOffset;
         this.endOffset = newEndOffset;
     }
