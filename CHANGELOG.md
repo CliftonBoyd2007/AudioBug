@@ -4,8 +4,20 @@
 
 ## [Unreleased]
 
-## [0.3.0-beta 7] - 2026-10-11
+## [0.3.0-beta9] - 2026-10-11
+### Changed 
 
+- The parent of the PSI elemtn at the caret is now spoken instead of the element directly at the caret. 
+
+## [0.3.0-beta8] - 2026-10-11 
+
+- Change keyboard shortcut to invoke the action. The shortcut is NOw ctrl Alt Shift Space. 
+
+## [0.3.0-beta7] - 2026-10-11
+
+### Added 
+
+- Added ability to read the PSI element at the caret with the active screen reader. This is very much not stable. 
 
 
 ## [0.3.0-beta4] - 2026-10-03

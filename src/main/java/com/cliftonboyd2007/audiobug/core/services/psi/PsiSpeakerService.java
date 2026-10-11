@@ -17,12 +17,16 @@ public final class PsiSpeakerService {
 
     public void speakPsiElement() {
         PsiService psiService = this.project.getService(PsiService.class);
-        PsiElement elementToSpeak = psiService.getPsiElementAtCaret();
+        PsiElement elementToSpeak_Leaf = psiService.getPsiElementAtCaret();
+        PsiElement elementToSpeak_Parent;
+        elementToSpeak_Parent = elementToSpeak_Leaf.getParent().getParent();
+
+
         FeedbackService feedbackService = this.project.getService(FeedbackService.class);
-        if (elementToSpeak != null) {
-            feedbackService.announce(elementToSpeak.toString(), true);
+        if (elementToSpeak_Parent    != null ) {
+            feedbackService.announce(elementToSpeak_Parent.toString(), true);
             return;
         }
-        feedbackService.announce("No valid PSI element.", true);
+        feedbackService.announce("No PSI element.", true);
     }
 }
