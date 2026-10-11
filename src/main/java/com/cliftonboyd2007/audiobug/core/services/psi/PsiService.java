@@ -1,4 +1,4 @@
-﻿package com.cliftonboyd2007.audiobug.core.services.psi;
+package com.cliftonboyd2007.audiobug.core.services.psi;
 
 import com.cliftonboyd2007.audiobug.core.services.caretutils.CaretStateService;
 import com.intellij.openapi.components.Service;

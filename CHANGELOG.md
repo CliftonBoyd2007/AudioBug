@@ -4,6 +4,10 @@
 
 ## [Unreleased]
 
+## [0.3.0-beta 7] - 2026-10-11
+
+
+
 ## [0.3.0-beta4] - 2026-10-03
 
 - Begin migrating caret-based functionality from LineHighlightLocator to CaretStateService.

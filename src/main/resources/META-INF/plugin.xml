@@ -3,7 +3,7 @@
     <id>com.cliftonboyd2007.audiobug</id>
 
     <name>AudioBug</name>
-    <version>0.3-beta6</version>
+    <version>0.3-beta7</version>
 
     <vendor url="https://github.com/CliftonBoyd2007/AudioBug"/>
 
@@ -38,7 +38,7 @@
                 class="com.cliftonboyd2007.audiobug.core.actions.ReadPsiElementActionPrototype"
                 text="Read PSI Element At Caret"
                 description="Announce the PSI element under the caret with the active screen reader. This is a prototype; this is not to remain in a public release.">
-            <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl SPACE"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt SPACE"/>
         </action>
     </actions>
     <!--    <resource-bundle>messages.MyMessageBundle</resource-bundle>-->

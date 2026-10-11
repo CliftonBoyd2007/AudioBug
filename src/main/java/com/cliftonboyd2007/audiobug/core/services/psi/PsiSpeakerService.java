@@ -1,4 +1,4 @@
-﻿package com.cliftonboyd2007.audiobug.core.services.psi;
+package com.cliftonboyd2007.audiobug.core.services.psi;
 
 import com.intellij.openapi.components.Service;
 import com.cliftonboyd2007.audiobug.core.services.accessibility.FeedbackService;
