@@ -48,7 +48,7 @@ public class CaretWatcher implements com.intellij.openapi.editor.event.CaretList
         LogicalPosition newPosition = event.getNewPosition();
         boolean caretHasMovedToNewLine = hasCaretMovedToNewLine(oldPosition, newPosition);
         // We update the CaretStateService before we check for highlights to ensure cues and announcements for errors and warnings are made at the correct line.
-        updatecaretStateService(event);
+        updateCaretStateService(event);
         if (caretHasMovedToNewLine) {
             locator.update(event);
         }
@@ -66,7 +66,7 @@ public class CaretWatcher implements com.intellij.openapi.editor.event.CaretList
         return oldPosition.line != newPosition.line;
     }
 
-    private void updatecaretStateService(@NotNull CaretEvent event) {
+    private void updateCaretStateService(@NotNull CaretEvent event) {
         Project project = event.getEditor().getProject();
         assert project != null;
         CaretStateService caretStateService = project.getService(CaretStateService.class);

@@ -39,7 +39,8 @@ public class LineHighlightLocator {
     /**
      * Start and end line offsets for the current line.
      */
-    @NotNull private LineOffsetRange lineOffsetRange = new LineOffsetRange();
+    @NotNull
+    private LineOffsetRange lineOffsetRange = new LineOffsetRange();
 
     /**
      * Backing store for error highlights.
@@ -55,7 +56,8 @@ public class LineHighlightLocator {
     /**
      * Constructor.
      * The only purpose of this constructor's existence is to make sure that LineHighlightLocator ITSELF is NEVER NULL in {@link CaretWatcher}
-     * Do not do anything meaningful here, particularly if it interacts with a method that requires any fields -- ALL FIELDS except the backing error/warning lists WILL BE NULL until {@link #update(CaretEvent)} is called.
+     * Do not do anything meaningful here, particularly if it interacts with a method that requires any fields.
+     * ALL FIELDS except the backing error/warning lists WILL BE NULL until {@link #update(CaretEvent)} is called.
      */
     public LineHighlightLocator() {
     }

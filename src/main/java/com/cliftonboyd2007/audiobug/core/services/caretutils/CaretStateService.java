@@ -8,6 +8,11 @@ import com.intellij.openapi.editor.event.CaretEvent;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * Maintains queriable state of the caret for other AudioBug components.
+ *
+ * @author Clifton Boyd
+ */
 @Service(Service.Level.PROJECT)
 public final class CaretStateService {
     /**
@@ -20,7 +25,7 @@ public final class CaretStateService {
     private int caretOffset;
 
     /**
-     * The document the user is working with
+     * The document from which we calculate offsets.
      */
     private Document document;
 
@@ -41,7 +46,12 @@ public final class CaretStateService {
     public CaretStateService() {
     }
 
-    public void update(@NotNull CaretEvent event) {
+    /**
+     * Updates stored information about the current caret when a {@link CaretEvent} is received.
+     *
+     * @param event the event resulting from caret movement
+     */
+    public void update(@NotNull final CaretEvent event) {
         updateDocument(event.getEditor().getDocument());
         this.currentLineNum = event.getNewPosition().line;
         updateCaretOffset(event);
@@ -53,7 +63,6 @@ public final class CaretStateService {
      *
      */
     private void updateLineOffsets() {
-
         int startOffset = this.document.getLineStartOffset(this.currentLineNum);
         int endOffset = this.document.getLineEndOffset(this.currentLineNum);
         lineOffsetRange.updateOffsets(startOffset, endOffset);
@@ -62,7 +71,7 @@ public final class CaretStateService {
     /**
      * Updates the stored offset of the current caret.
      * <p>
-     * The offset tells us exactly where the caret is located in the editor. This is useful for many things, particularly if we are looking for something at the caret's current location.
+     * The offset tells us exactly where the caret is located in the editor. This is useful for many things, particularly if we are looking for something at the caret's current location, such as PSI elements.
      * </p>
      *
      * @param event the event resulting from caret movement
@@ -74,6 +83,9 @@ public final class CaretStateService {
 
     /**
      * Updates the document instance field.
+     * <p>
+     * We must update the document to ensure we are calculating offsets for the right one.
+     * </p>
      *
      * @param newDocument the document the caret is located in
      */
@@ -83,8 +95,10 @@ public final class CaretStateService {
 
     /**
      * @return the current line number displayed to the user
-     * currentLineNum is incremented because the line number obtained from {@link LogicalPosition#line} is 0based.
+     * <p>
+     * currentLineNum is incremented because the line number obtained from {@link LogicalPosition#line} is 0-based.
      * Incrementing currentLineNum ensures that line numbers reported in the editor UI and the line number reported by AudioBug will match.
+     * </p>
      */
     public int getUserFacingLineNum() {
         return this.currentLineNum + 1;
@@ -107,7 +121,7 @@ public final class CaretStateService {
     /**
      * @return the line offsets for the current line
      */
-    public LineOffsetRange getLineOffsets() {
+    public @NotNull LineOffsetRange getLineOffsets() {
         return this.lineOffsetRange;
     }
 }
