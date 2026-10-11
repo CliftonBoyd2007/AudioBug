@@ -17,7 +17,7 @@ public final class PsiSpeakerService {
 
     public void speakPsiElement() {
         PsiService psiService = this.project.getService(PsiService.class);
-        PsiElement elementToSpeak = psiService.getE
+        PsiElement elementToSpeak = psiService.getPsiElementAtCaret();
         FeedbackService feedbackService = this.project.getService(FeedbackService.class);
         if (elementToSpeak != null) {
             feedbackService.announce(elementToSpeak.toString(), true);
