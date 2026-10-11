@@ -1,5 +1,6 @@
 package com.cliftonboyd2007.audiobug.core.services.caretutils;
 
+import com.cliftonboyd2007.audiobug.core.services.psi.PsiService;
 import com.intellij.openapi.components.Service;
 import com.intellij.openapi.editor.Caret;
 import com.intellij.openapi.editor.Document;
@@ -34,6 +35,7 @@ public final class CaretStateService {
      */
     private final LineOffsetRange lineOffsetRange = new LineOffsetRange();
 
+    private Project project;
 
     /**
      * Constructor.
@@ -43,7 +45,8 @@ public final class CaretStateService {
      * To obtain this service elsewhere, use {@link Project#getService(Class)}.
      * </p>
      */
-    public CaretStateService() {
+    public CaretStateService(@NotNull final Project project) {
+        this.project = project;
     }
 
     /**
@@ -56,6 +59,11 @@ public final class CaretStateService {
         this.currentLineNum = event.getNewPosition().line;
         updateCaretOffset(event);
         updateLineOffsets();
+        updatePsiService(event);
+    }
+    private void updatePsiService(@NotNull final CaretEvent event) {
+        PsiService psiService = this.project.getService(PsiService.class);
+        psiService.update(event);
     }
 
     /**

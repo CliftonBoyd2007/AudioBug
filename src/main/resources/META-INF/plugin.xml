@@ -34,6 +34,12 @@
                 description="Announces the number of the line on which the cursor is located.">
             <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt G"/>
         </action>
+        <action id="com.cliftonboyd2007.audiobug.core.actions.ReadPsiElementActionPrototype"
+                class="com.cliftonboyd2007.audiobug.core.actions.ReadPsiElementActionPrototype"
+                text="Read PSI Element At Caret"
+                description="Announce the PSI element under the caret with the active screen reader. This is a prototype; this is not to remain in a public release.">
+            <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl SPACE"/>
+        </action>
     </actions>
     <!--    <resource-bundle>messages.MyMessageBundle</resource-bundle>-->
 </idea-plugin>
