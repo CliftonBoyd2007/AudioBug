@@ -3,6 +3,17 @@
 # AudioBug Changelog
 
 ## [Unreleased]
+## [0.3.0-beta11] - 2026-10-12 
+
+### Changed 
+
+- Revert to PSI behavior from 0.3.0-beta9.
+
+## [0.3.0-beta10] - 2026-10-11
+
+### Changed 
+
+- Read the node two levels up from the leaf node at the caret.
 
 ## [0.3.0-beta9] - 2026-10-11
 ### Changed 
@@ -11,7 +22,7 @@
 
 ## [0.3.0-beta8] - 2026-10-11 
 
-- Change keyboard shortcut to invoke the action. The shortcut is NOw ctrl Alt Shift Space. 
+- Change keyboard shortcut to invoke the action. The shortcut is now ctrl Alt Shift Space. 
 
 ## [0.3.0-beta7] - 2026-10-11
 
