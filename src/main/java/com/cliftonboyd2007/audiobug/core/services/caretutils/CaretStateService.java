@@ -35,7 +35,10 @@ public final class CaretStateService {
      */
     private final LineOffsetRange lineOffsetRange = new LineOffsetRange();
 
-    private Project project;
+    /**
+     * the project from which we obtain required services.
+     */
+    private Project project; 
 
     /**
      * Constructor.
@@ -61,6 +64,7 @@ public final class CaretStateService {
         updateLineOffsets();
         updatePsiService(event);
     }
+
     private void updatePsiService(@NotNull final CaretEvent event) {
         PsiService psiService = this.project.getService(PsiService.class);
         psiService.update(event);
@@ -84,7 +88,7 @@ public final class CaretStateService {
      *
      * @param event the event resulting from caret movement
      */
-    private void updateCaretOffset(@NotNull CaretEvent event) {
+    private void updateCaretOffset(@NotNull final CaretEvent event) {
         Caret currentCaret = event.getCaret();
         this.caretOffset = currentCaret.getOffset();
     }

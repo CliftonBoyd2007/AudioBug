@@ -3,57 +3,65 @@
 # AudioBug Changelog
 
 ## [Unreleased]
-## [0.3.0-beta11] - 2026-10-12 
 
-### Changed 
+## [0.3.0-beta12] - 2026-10-17
+
+### Changed
+
+- Move line offset storage/retrieval/calculation from LineHighlightLocator to CaretStateService. This is because future
+  features of AudioBug require them, and they are no longer exclusively needed for only retrieving highlights.
+
+## [0.3.0-beta11] - 2026-10-12
+
+### Changed
 
 - Revert to PSI behavior from 0.3.0-beta9.
 
 ## [0.3.0-beta10] - 2026-10-11
 
-### Changed 
+### Changed
 
 - Read the node two levels up from the leaf node at the caret.
 
 ## [0.3.0-beta9] - 2026-10-11
-### Changed 
 
-- The parent of the PSI elemtn at the caret is now spoken instead of the element directly at the caret. 
+### Changed
 
-## [0.3.0-beta8] - 2026-10-11 
+- The parent of the PSI elemtn at the caret is now spoken instead of the element directly at the caret.
 
-- Change keyboard shortcut to invoke the action. The shortcut is now ctrl Alt Shift Space. 
+## [0.3.0-beta8] - 2026-10-11
+
+- Change keyboard shortcut to invoke the action. The shortcut is now ctrl Alt Shift Space.
 
 ## [0.3.0-beta7] - 2026-10-11
 
-### Added 
+### Added
 
-- Added ability to read the PSI element at the caret with the active screen reader. This is very much not stable. 
-
+- Added ability to read the PSI element at the caret with the active screen reader. This is very much not stable.
 
 ## [0.3.0-beta4] - 2026-10-03
 
 - Begin migrating caret-based functionality from LineHighlightLocator to CaretStateService.
 
-### Added 
+### Added
 
-- Added line offset storage in CaretStateService. This functionality wil eventually be removed from LineHighlightLocator.
- 
+- Added line offset storage in CaretStateService. This functionality wil eventually be removed from
+  LineHighlightLocator.
 
 ## [0.3.0-beta3] - 2026-10-02
 
-### Changed 
+### Changed
 
-- Changed EditorStateService so that it stores the line numbers directly. 
-- Move the logic for updating it so that it happens when the caret moves lines. 
+- Changed EditorStateService so that it stores the line numbers directly.
+- Move the logic for updating it so that it happens when the caret moves lines.
 
-### Fixed 
+### Fixed
 
 - Fixed line numbers that were off by one.
 - Fixed erroneous and nonsensicle line numbers (e.g., line 0).
 - Fixed bug that prevented line numbers from being updated reliably.
 
-### Removed 
+### Removed
 
 - Removed startup sound and announcement.
 

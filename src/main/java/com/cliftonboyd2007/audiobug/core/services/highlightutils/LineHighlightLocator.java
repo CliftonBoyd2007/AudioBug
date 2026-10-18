@@ -85,7 +85,7 @@ public class LineHighlightLocator {
 
         // Update the document before trying to update line offsets, otherwise we will be getting line offsets for the wrong document.
         updateDocument(event.getEditor().getDocument());
-        updateLineOffsets(event);
+
         // Avoid retaining stale highlights before retrieving new ones.
         clearErrorAndWarningLists();
 

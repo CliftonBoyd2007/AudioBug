@@ -66,6 +66,10 @@ public class CaretWatcher implements com.intellij.openapi.editor.event.CaretList
         return oldPosition.line != newPosition.line;
     }
 
+    /**
+     * Update the CaretStateService with information needed to maintain an accurate model of the caret.
+     * @param event the resulting event from caret movement. It contains all of he information we need
+     */
     private void updateCaretStateService(@NotNull CaretEvent event) {
         Project project = event.getEditor().getProject();
         assert project != null;
