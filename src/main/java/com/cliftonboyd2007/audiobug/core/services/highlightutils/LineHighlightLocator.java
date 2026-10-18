@@ -36,11 +36,6 @@ public class LineHighlightLocator {
      */
     private Project project;
 
-    /**
-     * Start and end line offsets for the current line.
-     */
-    @NotNull
-    private LineOffsetRange lineOffsetRange = new LineOffsetRange();
 
     /**
      * Backing store for error highlights.
@@ -62,18 +57,6 @@ public class LineHighlightLocator {
     public LineHighlightLocator() {
     }
 
-
-    /**
-     * Updates the start and end offsets for the caret's current line.
-     *
-     * @param event Event containing relevant information about the caret.
-     */
-    private void updateLineOffsets(@NotNull CaretEvent event) {
-        int line = event.getNewPosition().line;
-        int startOffset = this.document.getLineStartOffset(line);
-        int endOffset = this.document.getLineEndOffset(line);
-        lineOffsetRange.updateOffsets(startOffset, endOffset);
-    }
 
     /**
      * Updates and removes stale information when the caret moves to a new line.
