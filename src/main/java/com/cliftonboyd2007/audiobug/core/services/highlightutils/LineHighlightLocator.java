@@ -3,7 +3,7 @@ package com.cliftonboyd2007.audiobug.core.services.highlightutils;
 
 import java.util.ArrayList;
 
-import com.cliftonboyd2007.audiobug.core.listeners.CaretWatcher;
+import com.cliftonboyd2007.audiobug.core.services.caretutils.listeners.CaretWatcher;
 import com.cliftonboyd2007.audiobug.core.services.accessibility.HighlightAnnouncerService;
 import com.cliftonboyd2007.audiobug.core.services.caretutils.CaretStateService;
 import com.cliftonboyd2007.audiobug.core.services.caretutils.LineOffsetRange;

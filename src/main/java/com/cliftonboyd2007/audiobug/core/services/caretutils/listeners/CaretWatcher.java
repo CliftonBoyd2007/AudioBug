@@ -1,4 +1,4 @@
-package com.cliftonboyd2007.audiobug.core.listeners;
+package com.cliftonboyd2007.audiobug.core.services.caretutils.listeners;
 
 import com.cliftonboyd2007.audiobug.core.AudioBug_Init;
 import com.cliftonboyd2007.audiobug.core.services.caretutils.CaretStateService;

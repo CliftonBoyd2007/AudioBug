@@ -8,6 +8,18 @@ import com.intellij.psi.PsiReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * DO NOT USE THIS SERVICE!
+ * <p>
+ * This was an experiment, and is almost certainly broken. Do not call anything in here in a public release.
+ * </p>
+ * <p>
+ * If you do decide to use this in your own local builds, may God, luck, and the force be with you.
+ * </p>
+ *
+ * @author Clifton Boyd
+ */
+
 @Service(Service.Level.PROJECT)
 public final class PsiSpeakerService {
     /**

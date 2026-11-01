@@ -6,6 +6,15 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 
+/**
+ * DO NOT REGISTER OR USE THIS ACTION.
+ * <p>
+ * This was an experiment, and I'm foregoing it. I'm keeping it around for possible future implementation ideas for other features and nothing more. Again, do not use this under any circumstance in a public release.
+ * And if you do decide to use this and the other AudioBug PSI-related abstractions (which I have also advised against using), in your own local builds, may God, luck, and patience be with you.
+ * </p>
+ *
+ * @author Clifton Boyd
+ */
 public class ReadPsiElementActionPrototype extends AnAction {
 
     @Override
