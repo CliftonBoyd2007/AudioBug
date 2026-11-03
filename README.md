@@ -32,11 +32,11 @@ code.
 
 ### Tested With
 
-- NVDA 2025.3.2 - 2026.2
+- NVDA 2025.3.2 - 2026.3
 - JAWS 2024
 - JetBrains IDEs:
-    - IntelliJ Idea 2025.3.3 - 2026.2.1
-    - JetBrains Rider 2025.3.5 - 2026.2.0.2
+    - IntelliJ Idea 2025.3.3 - 2026.2.4
+    - JetBrains Rider 2025.3.5 - 2026.2.4
     - CLion 2025.3.6.1 - 2026.2.1
     - PyCharm 2025.3.6.1 - 2026.2.1
 
