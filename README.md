@@ -32,11 +32,12 @@ code.
 
 ### Tested With
 
-- NVDA 2025.3.2 - 2026.2
+- NVDA 2025.3.2 - 2026.3
 - JAWS 2024
-- JetBrains IDEs:
-    - IntelliJ Idea 2025.3.3 - 2026.2.1
-    - JetBrains Rider 2025.3.5 - 2026.2.0.2
+- VoiceOver on macOS 15.8.1 (24H32)
+- Tested JetBrains IDEs:
+    - IntelliJ Idea 2025.3.3 - 2026.2.4
+    - JetBrains Rider 2025.3.5 - 2026.2.4
     - CLion 2025.3.6.1 - 2026.2.1
     - PyCharm 2025.3.6.1 - 2026.2.1
 
@@ -77,7 +78,8 @@ code.
       The output will simply be the computed hash. Compare it to the one displayed on the GitHub releases page for the
       version you downloaded.
 - Once the file hash has been verified, refer
-  to [the instructions given here by JetBrains](https://www.jetbrains.com/help/idea/managing-plugins.html#install_plugin_from_disk) for installing the plugin from disk.
+  to [the instructions given here by JetBrains](https://www.jetbrains.com/help/idea/managing-plugins.html#install_plugin_from_disk)
+  for installing the plugin from disk.
 - Once installed, restart the IDE.
 
 ## IMPORTANT UPGRADE NOTE
@@ -88,7 +90,6 @@ run simultaneously within the IDE.
 
 ## Important Notes
 
-- VoiceOver has not been tested with AudioBug > 0.2.2.
 - In AudioBug 0.2.2 and later, a sound will be played upon startup. However, this happens long before the editor is
   open. As such, when the editor is open and ready, it will announce "AudioBug is ready." Please be aware that this
   announcement may be interrupted by other screen reader activity. To check that it is running when the editor opens,
