@@ -33,11 +33,9 @@ code.
 ### Tested With
 
 - NVDA 2025.3.2 - 2026.3
-- JAWS 2024
-  <<<<<<< HEAD
+- JAWS 2024.2411.16 
 - VoiceOver on macOS 15.8.1 (24H32)
 - Tested JetBrains IDEs:
-
     - IntelliJ Idea 2025.3.3 - 2026.2.4
     - JetBrains Rider 2025.3.5 - 2026.2.4
     - CLion 2025.3.6.1 - 2026.2.1
