@@ -8,16 +8,17 @@ import com.cliftonboyd2007.audiobug.core.services.caretutils.CaretStateService;
 public class InlayListener implements InlayModel.Listener {
 
 
+
     public InlayListener() {
     }
 
     @Override
-    public void onAdded(@NotNull Inlay<?> inlay) {
+    public void onAdded(@NotNull final Inlay<?> inlay) {
 
     }
 
     @Override
-    public void onUpdated(@NotNull Inlay<?> inlay) {
+    public void onUpdated(@NotNull final Inlay<?> inlay) {
 
     }
 }
