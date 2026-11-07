@@ -10,7 +10,7 @@ import com.intellij.openapi.editor.event.EditorFactoryEvent;
 import com.intellij.openapi.editor.event.EditorFactoryListener;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
-
+import com.intellij.openapi.application.ApplicationInfo;
 /**
  * Initializes AudioBug for newly-created editor instances.
  * <p>

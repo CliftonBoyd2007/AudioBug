@@ -1,5 +1,6 @@
 package com.cliftonboyd2007.audiobug.audioutils;
 
+import com.intellij.openapi.application.ApplicationInfo;
 import org.jetbrains.annotations.NotNull;
 
 import javax.sound.sampled.AudioInputStream;
@@ -27,12 +28,19 @@ public class CuePlayer {
      * We use a map because adding cues does not require extra methods, and it also allows for O(1) lookup time on average.
      */
     private final HashMap<Cue, URL> audioResources = new HashMap<>();
+    /**
+     * Determines whether CuePlayer  is disabled.
+     * <p>
+     * In IntelliJ Idea 2026.3 (and other JetBrains IDEs version 2026.3), JetBrains implemented their own cues. Therefore, this is set to true if we are running a JetBrains IDE >= 2026.3 to avoid duplicated output.
+     * </p>
+     */
+    private boolean isCuePlayerDisabled = false;
 
     /**
      * Loads audio files into memory immediately upon construction so that they are always available to be played.
      */
     public CuePlayer() {
-
+        disableCuePlayerOnIDETooNew();
         loadAudioFiles();
     }
 
@@ -47,6 +55,22 @@ public class CuePlayer {
         }
     }
 
+    private void disableCuePlayerOnIDETooNew() {
+        ApplicationInfo applicationInfo = ApplicationInfo.getInstance();
+        String ideMajorVersionString = applicationInfo.getMajorVersion();
+        String ideMinorVersionString = applicationInfo.getMinorVersion();
+        // We convert the IDE major version ot an Integer because we need to be able to use < and > operators.
+        try {
+            int ideMajorVersion = Integer.parseInt(ideMajorVersionString);
+            int ideMinorVersion = Integer.parseInt(ideMinorVersionString);
+            if ((ideMajorVersion > 2026) || (ideMajorVersion == 2026 && ideMinorVersion >= 3))
+                this.isCuePlayerDisabled = true;
+
+        } catch (NumberFormatException e) {
+            // Disable them anyway. If we can't determine the version number, it's probably best to turn them off, in case we're running an EAP. The user can re-enable them manually if they need.
+            this.isCuePlayerDisabled = true;
+        }
+    }
 
     /**
      * Plays the specified file with the Java Clip sound API.
@@ -58,6 +82,7 @@ public class CuePlayer {
      *
      */
     private void play(@NotNull URL file) {
+        if (isCuePlayerDisabled) return;
         try {
             AudioInputStream inputStream = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();

@@ -2,6 +2,7 @@ package com.cliftonboyd2007.audiobug.core.services.accessibility;
 
 
 import com.cliftonboyd2007.audiobug.core.AudioBug_Init;
+import com.intellij.openapi.application.ApplicationInfo;
 import com.intellij.openapi.components.Service;
 import com.cliftonboyd2007.audiobug.audioutils.CuePlayer;
 import com.intellij.openapi.editor.event.EditorFactoryEvent;
@@ -27,6 +28,8 @@ import org.jetbrains.annotations.NotNull;
 public final class FeedbackService {
     private final CuePlayer player = new CuePlayer();
 
+
+
     /**
      * The UI component from which screen reader announcements will originate.
      */
@@ -42,7 +45,10 @@ public final class FeedbackService {
      */
     public FeedbackService() {
 
+
+
     }
+
 
     /**
      * Make an announcement with the active screen reader.

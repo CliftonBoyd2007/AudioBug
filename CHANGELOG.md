@@ -2,6 +2,15 @@
 
 # AudioBug Changelog
 
+## [0.2.17] - 2026-11-06
+
+### Changed
+
+- In JetBrains IDEs version 2026.3 and newer, AudioBug disables its cues by default. This is because JetBrains
+  has
+  implemented their own cues. this is to prevent excessive feedback. Error/warning announcements are still enabled by
+  default, and will remain as such for the time being.
+
 ## [0.2.16] - 2026-10-02
 
 - No user-facing improvements.
