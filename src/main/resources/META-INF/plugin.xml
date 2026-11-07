@@ -28,6 +28,11 @@
         >
             <keyboard-shortcut keymap="$default" first-keystroke="alt P"/>
         </action>
+        <action id="com.cliftonboyd2007.audiobug.core.actions.ToggleAudioBugCuesAction"
+                class="com.cliftonboyd2007.audiobug.core.actions.ToggleAudioBugCuesAction"
+                text="Toggle AudioBug Sound Cues" description="Enables or disables Audiobug sound cues.">
+            <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt A"/>
+        </action>
     </actions>
     <!--    <resource-bundle>messages.MyMessageBundle</resource-bundle>-->
 </idea-plugin>

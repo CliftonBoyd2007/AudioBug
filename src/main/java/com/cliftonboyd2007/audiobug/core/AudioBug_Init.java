@@ -52,6 +52,7 @@ public final class AudioBug_Init implements EditorFactoryListener {
         audioBugStartupNotifier(feedbackService);
         if (!ideVersionHasBeenChecked) {
             disableCuePlayerOnIDETooNew(feedbackService);
+            this.ideVersionHasBeenChecked = true;
         }
     }
 

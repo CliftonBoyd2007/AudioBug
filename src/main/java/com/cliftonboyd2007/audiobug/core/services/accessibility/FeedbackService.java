@@ -111,4 +111,17 @@ public final class FeedbackService {
         this.isAudioBugCuesDisabled = value;
     }
 
+    /**
+     * Called by {@link com.cliftonboyd2007.audiobug.core.actions.ToggleAudioBugCuesAction}.
+     */
+    public void toggleIsAudioBugCuesDisabled() {
+        this.isAudioBugCuesDisabled = !this.isAudioBugCuesDisabled;
+    }
+
+
+
+    public boolean getIsAudioBugCuesDisabled() {
+        return this.isAudioBugCuesDisabled;
+    }
+
 }
