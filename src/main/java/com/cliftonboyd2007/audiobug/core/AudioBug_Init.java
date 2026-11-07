@@ -11,6 +11,7 @@ import com.intellij.openapi.editor.event.EditorFactoryListener;
 import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.application.ApplicationInfo;
+
 /**
  * Initializes AudioBug for newly-created editor instances.
  * <p>
@@ -33,6 +34,7 @@ public final class AudioBug_Init implements EditorFactoryListener {
      */
     private final CaretWatcher caretWatcher = new CaretWatcher();
 
+    private boolean ideVersionHasBeenChecked = false;
 
     /**
      * Registers a new instance of {@link CaretWatcher} with the caret model of the newly-created editor so the caret can be tracked.
@@ -48,6 +50,9 @@ public final class AudioBug_Init implements EditorFactoryListener {
         FeedbackService feedbackService = project.getService(FeedbackService.class);
         feedbackService.updateAccessibleEditorUIComponent(event.getEditor().getComponent());
         audioBugStartupNotifier(feedbackService);
+        if (!ideVersionHasBeenChecked) {
+            disableCuePlayerOnIDETooNew(feedbackService);
+        }
     }
 
     /**
@@ -77,4 +82,32 @@ public final class AudioBug_Init implements EditorFactoryListener {
             this.notifiedUserOfStartup = true;
         }
     }
+
+    /**
+     * Disables AudioBug's own cues if running a JetBrains IDE version >= 2026.3.
+     * <p>
+     * In IDE versions >= 2026.3, JetBrains has implemented their own cues. AudioBug disables its own cues to avoid duplicated auditory feedback. Spoken announcements by AudioBug are still enabled.
+     * </p>
+     *
+     * @param feedbackService The service producing spoken and auditory feedback.
+     */
+    private void disableCuePlayerOnIDETooNew(@NotNull final FeedbackService feedbackService) {
+        ApplicationInfo applicationInfo = ApplicationInfo.getInstance();
+        String ideMajorVersionString = applicationInfo.getMajorVersion();
+        String ideMinorVersionString = applicationInfo.getMinorVersion();
+        // We convert the IDE major version to an Integer because we need to be able to use < and > operators.
+        try {
+            int ideMajorVersion = Integer.parseInt(ideMajorVersionString);
+            int ideMinorVersion = Integer.parseInt(ideMinorVersionString);
+            feedbackService.setIsAudioBugCuesDisabled(
+                    (ideMajorVersion > 2026)
+                            || (ideMajorVersion == 2026 && ideMinorVersion >= 3));
+
+
+        } catch (NumberFormatException e) {
+            // Disable them anyway. If we can't determine the version number, it's probably best to turn them off in case we're running an EAP. The user can re-enable them manually if they so choose.
+            feedbackService.setIsAudioBugCuesDisabled(true);
+        }
+    }
+
 }

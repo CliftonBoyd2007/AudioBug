@@ -28,6 +28,13 @@ import org.jetbrains.annotations.NotNull;
 public final class FeedbackService {
     private final CuePlayer player = new CuePlayer();
 
+    /**
+     * Determines whether CuePlayer  is disabled.
+     * <p>
+     * In JetBrains IDEs version >= 2026.3, JetBrains implemented their own cues. AudioBug cues are disabled when running an IDE >= 2026.3 to prevent duplicated auditory feedback. AudioBug's spoken announcements are still available.
+     * </p>
+     */
+    private boolean isAudioBugCuesDisabled = false;
 
 
     /**
@@ -44,7 +51,6 @@ public final class FeedbackService {
      * </p>
      */
     public FeedbackService() {
-
 
 
     }
@@ -87,8 +93,22 @@ public final class FeedbackService {
      * @see Cue
      */
     public void playCue(@NotNull Cue cue) {
+        if (this.isAudioBugCuesDisabled) return;
         this.player.playCue(cue);
     }
 
+    /**
+     * Setter for {@link #isAudioBugCuesDisabled}.
+     * <p>
+     * This can be called in two places:
+     * <li>In {@link AudioBug_Init}, and</li>
+     * <li>[Placeholder for action class name]</li>
+     * </p>
+     *
+     * @param value the value to set the class field to
+     */
+    public void setIsAudioBugCuesDisabled(final boolean value) {
+        this.isAudioBugCuesDisabled = value;
+    }
 
 }
