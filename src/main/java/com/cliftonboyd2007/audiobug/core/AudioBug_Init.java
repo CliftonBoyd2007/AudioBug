@@ -21,10 +21,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public final class AudioBug_Init implements EditorFactoryListener {
     /**
-     * Indicates whether AudioBug has played the startup cue and made the startup announcement.
-     */
-    private boolean notifiedUserOfStartup;
-    /**
      * Tracks the caret within an active editor.
      * <p>
      * An "active" editor, in the case of AudioBug, refers to the editor in which the user is working in. It does not refer to an editor that is displayed on screen.
@@ -34,6 +30,9 @@ public final class AudioBug_Init implements EditorFactoryListener {
     private final CaretWatcher caretWatcher = new CaretWatcher();
 
 
+    /**
+     * Indicates whether the version of the running IDE has been checked by AudioBug.
+     */
     private boolean ideVersionHasBeenChecked = false;
 
     /**
@@ -47,8 +46,9 @@ public final class AudioBug_Init implements EditorFactoryListener {
         caretModel.addCaretListener(this.caretWatcher);
         Project project = event.getEditor().getProject();
         if (!ideVersionHasBeenChecked) {
-            assert project != null;
-            disableCuePlayerOnIDETooNew(project);
+            if (project != null) {
+                disableCuePlayerOnIDETooNew(project);
+            }
             this.ideVersionHasBeenChecked = true;
         }
     }
@@ -59,7 +59,7 @@ public final class AudioBug_Init implements EditorFactoryListener {
      * In IDE versions >= 2026.3, JetBrains has implemented their own cues. AudioBug disables its own cues to avoid duplicated auditory feedback. Spoken announcements by AudioBug are still available.
      * </p>
      *
-     * @param feedbackService The service producing spoken and auditory feedback.
+     * @param project the project from which we obtain other services to configure
      */
     private void disableCuePlayerOnIDETooNew(@NotNull final Project project) {
         ApplicationInfo applicationInfo = ApplicationInfo.getInstance();

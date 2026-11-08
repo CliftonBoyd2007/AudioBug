@@ -2,7 +2,6 @@ package com.cliftonboyd2007.audiobug.core.services.accessibility;
 
 
 import com.cliftonboyd2007.audiobug.core.AudioBug_Init;
-import com.intellij.openapi.application.ApplicationInfo;
 import com.intellij.openapi.components.Service;
 import com.cliftonboyd2007.audiobug.audioutils.CuePlayer;
 import com.intellij.openapi.editor.event.EditorFactoryEvent;
@@ -100,9 +99,8 @@ public final class FeedbackService {
     /**
      * Setter for {@link #isAudioBugCuesDisabled}.
      * <p>
-     * This can be called in two places:
-     * <li>In {@link AudioBug_Init}, and</li>
-     * <li>[Placeholder for action class name]</li>
+     * For toggling AudioBug's cues, use {@link #toggleAudioBugCues()}.
+     * This is for setting the initial state of AudioBug's cues, not toggling them.
      * </p>
      *
      * @param value the value to set the class field to
@@ -112,14 +110,20 @@ public final class FeedbackService {
     }
 
     /**
-     * Called by {@link com.cliftonboyd2007.audiobug.core.actions.ToggleAudioBugCuesAction}.
+     * Toggles audio cues on or off.
+     *
+     * @see com.cliftonboyd2007.audiobug.core.actions.ToggleAudioBugCuesAction
      */
-    public void toggleIsAudioBugCuesDisabled() {
+    public void toggleAudioBugCues() {
         this.isAudioBugCuesDisabled = !this.isAudioBugCuesDisabled;
     }
 
 
-     
+    /**
+     * Getter for {@link #isAudioBugCuesDisabled}
+     *
+     * @return the value of {@link #isAudioBugCuesDisabled}
+     */
     public boolean getIsAudioBugCuesDisabled() {
         return this.isAudioBugCuesDisabled;
     }
