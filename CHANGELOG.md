@@ -2,6 +2,13 @@
 
 # AudioBug Changelog
 
+## [0.2.18] - 2026-11-08
+
+### Fixed
+
+- Fixed failed IDE version check which caused Audiobug to incorrectly disable its own cues in versions of IDEs where
+  JetBrains' cues were not present.
+
 ## [0.2.17] - 2026-11-06
 
 ### Changed
