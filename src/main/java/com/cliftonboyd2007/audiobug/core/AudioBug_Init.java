@@ -77,7 +77,7 @@ public final class AudioBug_Init implements EditorFactoryListener {
      * @param feedbackService The service to produce spoken and auditory feedback.
      */
     private void audioBugStartupNotifier(FeedbackService feedbackService) {
-        if (!this.notifiedUserOfStartup) {
+    if (!this.notifiedUserOfStartup) {
             feedbackService.playCue(Cue.STARTUP);
             feedbackService.announce("AudioBug is ready.", true);
             this.notifiedUserOfStartup = true;
@@ -87,7 +87,7 @@ public final class AudioBug_Init implements EditorFactoryListener {
     /**
      * Disables AudioBug's own cues if running a JetBrains IDE version >= 2026.3.
      * <p>
-     * In IDE versions >= 2026.3, JetBrains has implemented their own cues. AudioBug disables its own cues to avoid duplicated auditory feedback. Spoken announcements by AudioBug are still enabled.
+     * In IDE versions >= 2026.3, JetBrains has implemented their own cues. AudioBug disables its own cues to avoid duplicated auditory feedback. Spoken announcements by AudioBug are still available.
      * </p>
      *
      * @param feedbackService The service producing spoken and auditory feedback.
@@ -95,8 +95,9 @@ public final class AudioBug_Init implements EditorFactoryListener {
     private void disableCuePlayerOnIDETooNew(@NotNull final FeedbackService feedbackService) {
         ApplicationInfo applicationInfo = ApplicationInfo.getInstance();
         String ideMajorVersionString = applicationInfo.getMajorVersion();
-        String ideMinorVersionString = applicationInfo.getMinorVersion();
+        String ideMinorVersionString = applicationInfo.getMinorVersionMainPart();
         // We convert the IDE major version to an Integer because we need to be able to use < and > operators.
+        // Or we try to, anyway.
         try {
             int ideMajorVersion = Integer.parseInt(ideMajorVersionString);
             int ideMinorVersion = Integer.parseInt(ideMinorVersionString);
@@ -108,6 +109,9 @@ public final class AudioBug_Init implements EditorFactoryListener {
         } catch (NumberFormatException e) {
             // Disable them anyway. If we can't determine the version number, it's probably best to turn them off in case we're running an EAP. The user can re-enable them manually if they so choose.
             feedbackService.setIsAudioBugCuesDisabled(true);
+            feedbackService.announce(
+                    "Failed to check IDE version. AudioBug sound cues now disabled. To enable them, press Control + Alt/Option + L.",
+                    true);
         }
     }
 

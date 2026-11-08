@@ -30,8 +30,8 @@
         </action>
         <action id="com.cliftonboyd2007.audiobug.core.actions.ToggleAudioBugCuesAction"
                 class="com.cliftonboyd2007.audiobug.core.actions.ToggleAudioBugCuesAction"
-                text="Toggle AudioBug Sound Cues" description="Enables or disables Audiobug sound cues.">
-            <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt A"/>
+                text="Toggle AudioBug Sound Cues" description="Enables or disables AudioBug sound cues.">
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt L"/>
         </action>
     </actions>
     <!--    <resource-bundle>messages.MyMessageBundle</resource-bundle>-->

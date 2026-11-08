@@ -11,6 +11,7 @@ public class ToggleAudioBugCuesAction extends AnAction {
     @Override
     public void actionPerformed(@NotNull final AnActionEvent event) {
         Project project = event.getProject();
+        assert project != null;
         FeedbackService feedbackService = project.getService(FeedbackService.class);
 
         /*

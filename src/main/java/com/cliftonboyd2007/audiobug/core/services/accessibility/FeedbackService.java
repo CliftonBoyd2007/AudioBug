@@ -119,7 +119,7 @@ public final class FeedbackService {
     }
 
 
-
+     
     public boolean getIsAudioBugCuesDisabled() {
         return this.isAudioBugCuesDisabled;
     }
