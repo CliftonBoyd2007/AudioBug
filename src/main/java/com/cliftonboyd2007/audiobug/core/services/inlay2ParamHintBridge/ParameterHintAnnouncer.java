@@ -1,5 +1,6 @@
-﻿package com.cliftonboyd2007.audiobug.core.services.inlay2ParamHintBridge;
+package com.cliftonboyd2007.audiobug.core.services.inlay2ParamHintBridge;
 
+import com.cliftonboyd2007.audiobug.core.services.inlayBridge.InlayListener;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.InlayModel;
 import com.intellij.openapi.project.Project;

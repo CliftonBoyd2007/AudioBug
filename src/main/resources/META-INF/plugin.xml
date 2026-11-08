@@ -3,7 +3,9 @@
     <id>com.cliftonboyd2007.audiobug</id>
 
     <name>AudioBug</name>
-    <version>0.3-beta12</version>
+
+    <version>0.3-beta13</version>
+
 
     <vendor url="https://github.com/CliftonBoyd2007/AudioBug"/>
 
@@ -28,11 +30,18 @@
         >
             <keyboard-shortcut keymap="$default" first-keystroke="alt P"/>
         </action>
+
         <action id="com.cliftonboyd2007.audiobug.core.actions.ReadCurrentLineNumberAction"
                 class="com.cliftonboyd2007.audiobug.core.actions.ReadCurrentLineNumberAction"
                 text="Announce Line Number"
                 description="Announces the number of the line on which the cursor is located.">
             <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt G"/>
+        </action>
+
+        <action id="com.cliftonboyd2007.audiobug.core.actions.ToggleAudioBugCuesAction"
+                class="com.cliftonboyd2007.audiobug.core.actions.ToggleAudioBugCuesAction"
+                text="Toggle AudioBug Sound Cues" description="Enables or disables AudioBug sound cues.">
+            <keyboard-shortcut keymap="$default" first-keystroke="ctrl alt L"/>
         </action>
 
     </actions>

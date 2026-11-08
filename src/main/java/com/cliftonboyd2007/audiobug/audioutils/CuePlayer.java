@@ -1,5 +1,6 @@
 package com.cliftonboyd2007.audiobug.audioutils;
 
+
 import org.jetbrains.annotations.NotNull;
 
 import javax.sound.sampled.AudioInputStream;
@@ -32,7 +33,6 @@ public class CuePlayer {
      * Loads audio files into memory immediately upon construction so that they are always available to be played.
      */
     public CuePlayer() {
-
         loadAudioFiles();
     }
 
@@ -46,7 +46,6 @@ public class CuePlayer {
             audioResources.put(cue, audioResource);
         }
     }
-
 
     /**
      * Plays the specified file with the Java Clip sound API.

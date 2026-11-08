@@ -4,6 +4,12 @@
 
 ## [Unreleased]
 
+## [0.3.0-beta13] - 2026-11-08
+
+### Added
+
+- Ported changes from 0.2.18 to current beta.
+
 ## [0.3.0-beta12] - 2026-10-17
 
 ### Changed
@@ -77,6 +83,22 @@
 
 - Added ability to have AudioBug announce the line number of the line on which the caret is located by pressing
   Ctrl+Alt+Shift+G.
+
+## [0.2.18] - 2026-11-08
+
+### Fixed
+
+- Fixed failed IDE version check. This caused Audiobug to incorrectly disable its own cues in versions of IDEs where
+  JetBrains' cues were not present.
+
+## [0.2.17] - 2026-11-06
+
+### Changed
+
+- In JetBrains IDEs version 2026.3 and newer, AudioBug disables its cues by default. This is because JetBrains
+  has
+  implemented their own cues. this is to prevent excessive feedback. Error/warning announcements are still enabled by
+  default, and will remain as such for the time being.
 
 ## [0.2.16] - 2026-10-02
 

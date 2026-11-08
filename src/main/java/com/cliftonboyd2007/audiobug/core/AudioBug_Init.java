@@ -1,11 +1,14 @@
 package com.cliftonboyd2007.audiobug.core;
 
 
+import com.cliftonboyd2007.audiobug.core.services.accessibility.FeedbackService;
 import com.cliftonboyd2007.audiobug.core.services.caretutils.listeners.CaretWatcher;
+import com.intellij.openapi.application.ApplicationInfo;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.event.EditorFactoryEvent;
 import com.intellij.openapi.editor.event.EditorFactoryListener;
+import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -31,6 +34,8 @@ public final class AudioBug_Init implements EditorFactoryListener {
     private final CaretWatcher caretWatcher = new CaretWatcher();
 
 
+    private boolean ideVersionHasBeenChecked = false;
+
     /**
      * Registers a new instance of {@link CaretWatcher} with the caret model of the newly-created editor so the caret can be tracked.
      *
@@ -40,23 +45,44 @@ public final class AudioBug_Init implements EditorFactoryListener {
     public void editorCreated(@NotNull EditorFactoryEvent event) {
         CaretModel caretModel = event.getEditor().getCaretModel();
         caretModel.addCaretListener(this.caretWatcher);
-
+        Project project = event.getEditor().getProject();
+        if (!ideVersionHasBeenChecked) {
+            assert project != null;
+            disableCuePlayerOnIDETooNew(project);
+            this.ideVersionHasBeenChecked = true;
+        }
     }
 
     /**
-     * Removes the caret listener when an editor is released.
+     * Disables AudioBug's own cues if running a JetBrains IDE version >= 2026.3.
      * <p>
-     * An editor is released when it is closed, not when the user switches away from it.
+     * In IDE versions >= 2026.3, JetBrains has implemented their own cues. AudioBug disables its own cues to avoid duplicated auditory feedback. Spoken announcements by AudioBug are still available.
      * </p>
      *
-     * @param event the event resulting from an  editor being released
+     * @param feedbackService The service producing spoken and auditory feedback.
      */
-    @Override
-    public void editorReleased(@NotNull EditorFactoryEvent event) {
-        Editor releasedEditor = event.getEditor();
-        releasedEditor.getCaretModel().removeCaretListener(this.caretWatcher);
+    private void disableCuePlayerOnIDETooNew(@NotNull final Project project) {
+        ApplicationInfo applicationInfo = ApplicationInfo.getInstance();
+        String ideMajorVersionString = applicationInfo.getMajorVersion();
+        String ideMinorVersionString = applicationInfo.getMinorVersionMainPart();
+        FeedbackService feedbackService = project.getService(FeedbackService.class);
 
+        // We convert the IDE major version to an Integer because we need to be able to use < and > operators.
+        // Or we try to, anyway.
+        try {
+            int ideMajorVersion = Integer.parseInt(ideMajorVersionString);
+            int ideMinorVersion = Integer.parseInt(ideMinorVersionString);
+            feedbackService.setIsAudioBugCuesDisabled(
+                    (ideMajorVersion > 2026)
+                            || (ideMajorVersion == 2026 && ideMinorVersion >= 3));
+
+
+        } catch (NumberFormatException e) {
+            // Disable them anyway. If we can't determine the version number, it's probably best to turn them off in case we're running an EAP. The user can re-enable them manually if they so choose.
+            feedbackService.setIsAudioBugCuesDisabled(true);
+            feedbackService.announce(
+                    "Failed to check IDE version. AudioBug sound cues now disabled. To enable them, press Control + Alt/Option + L.",
+                    true);
+        }
     }
-
-
 }

@@ -1,4 +1,4 @@
-﻿package com.cliftonboyd2007.audiobug.core.services.inlayBridge;
+package com.cliftonboyd2007.audiobug.core.services.inlayBridge;
 
 import com.intellij.openapi.editor.Inlay;
 import com.intellij.openapi.editor.InlayModel;

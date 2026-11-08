@@ -2,6 +2,7 @@ package com.cliftonboyd2007.audiobug.core.services.accessibility;
 
 
 import com.cliftonboyd2007.audiobug.core.AudioBug_Init;
+import com.intellij.openapi.application.ApplicationInfo;
 import com.intellij.openapi.components.Service;
 import com.cliftonboyd2007.audiobug.audioutils.CuePlayer;
 import com.intellij.openapi.editor.event.EditorFactoryEvent;
@@ -28,6 +29,15 @@ public final class FeedbackService {
     private final CuePlayer player = new CuePlayer();
 
     /**
+     * Determines whether CuePlayer  is disabled.
+     * <p>
+     * In JetBrains IDEs version >= 2026.3, JetBrains implemented their own cues. AudioBug cues are disabled when running an IDE >= 2026.3 to prevent duplicated auditory feedback. AudioBug's spoken announcements are still available.
+     * </p>
+     */
+    private boolean isAudioBugCuesDisabled = false;
+
+
+    /**
      * The UI component from which screen reader announcements will originate.
      */
     private Accessible accessibleEditorUIComponent;
@@ -42,7 +52,9 @@ public final class FeedbackService {
      */
     public FeedbackService() {
 
+
     }
+
 
     /**
      * Make an announcement with the active screen reader.
@@ -81,8 +93,35 @@ public final class FeedbackService {
      * @see Cue
      */
     public void playCue(@NotNull Cue cue) {
+        if (this.isAudioBugCuesDisabled) return;
         this.player.playCue(cue);
     }
 
+    /**
+     * Setter for {@link #isAudioBugCuesDisabled}.
+     * <p>
+     * This can be called in two places:
+     * <li>In {@link AudioBug_Init}, and</li>
+     * <li>[Placeholder for action class name]</li>
+     * </p>
+     *
+     * @param value the value to set the class field to
+     */
+    public void setIsAudioBugCuesDisabled(final boolean value) {
+        this.isAudioBugCuesDisabled = value;
+    }
+
+    /**
+     * Called by {@link com.cliftonboyd2007.audiobug.core.actions.ToggleAudioBugCuesAction}.
+     */
+    public void toggleIsAudioBugCuesDisabled() {
+        this.isAudioBugCuesDisabled = !this.isAudioBugCuesDisabled;
+    }
+
+
+     
+    public boolean getIsAudioBugCuesDisabled() {
+        return this.isAudioBugCuesDisabled;
+    }
 
 }
